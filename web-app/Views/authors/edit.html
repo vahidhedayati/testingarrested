@@ -1,0 +1,46 @@
+
+<div data-ng-controller="AuthorsCtrl">
+    <h1>Authors Edit</h1>
+    <div data-ng-show="errors.showErrors" class="red">
+        <p data-ng-show="errors.showServerError">"Can not connect to the server, try later"</p>
+    </div>
+    <div>
+    <div>
+    <div>
+    <div>
+        <p></p>
+        <a class="btn btn-primary btn-primary" onclick="window.location.href = '#/authors/list'"><span class="glyphicon glyphicon-align-justify"></span>  List</a>
+        <a class="btn btn-primary btn-success" data-ng-hide="authors.id" data-ng-click="manualSaveAuthors()"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+        <a class="btn btn-primary btn-success" data-ng-show="authors.id" data-ng-click="manualSaveAuthors()"><span class="glyphicon glyphicon-floppy-disk"></span> Update</a>
+        <a class="btn btn-primary btn-danger" data-ng-show="authors.id"  data-ng-click="confirmDeleteAuthors()"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+        <p></p>
+    </div>
+    <div>
+    <div>
+    <div>
+    
+    
+    <div>
+        
+        <div class="fieldcontain">
+            <label for="firstName">
+                firstName
+            </label>
+            <input type="text" name="firstName" required="" data-ng-model='authors.firstName' />
+        </div>
+        
+        <div class="fieldcontain">
+            <label for="surName">
+                surName
+            </label>
+            <input type="text" name="surName" required="" data-ng-model='authors.surName' />
+        </div>
+        
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</div>

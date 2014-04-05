@@ -1,0 +1,27 @@
+<div class="container" data-ng-controller="UserCtrl"  data-ng-hide="appConfig.token!=''">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-2" >
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h5 class="text-center">
+                        SIGN UP</h5>
+                    <form class="form form-signup" role="form">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                <input type="text" name="username" data-ng-model="user.username" class="form-control" placeholder="Username" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                <input type="password" name="password" data-ng-model="user.passwordHash"  class="form-control" placeholder="Password" />
+                            </div>
+                        </div>
+                        <input class="btn btn-sm btn-primary btn-block"  type="submit" value="Sign in" data-ng-click="login()"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
