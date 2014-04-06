@@ -111,9 +111,3 @@ class BootStrap {
 Done
 
 
-Limitations:
-
-1. The relationship does not appear to be working or passed between authors and books - possibly using a true DB will get around this issue, since a refresh to main site also logs user back out.
-
-2. Your project name should not have - (dashes) for some reason an example project called arrested-test doing this exact task bypasses authentication - and does not allow any record manipluation, after a few tests it turned out to be related to dashes in project name.
- 
