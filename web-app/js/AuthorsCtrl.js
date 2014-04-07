@@ -18,7 +18,7 @@ function AuthorsCtrl(DAO, $rootScope)
 
     $rootScope.getAllAuthors = function () {
         //get all
-        DAO.query({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'authors', action: 'list'},
+        DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'authors', action: 'list'},
             function (result) {
                 $rootScope.authorss = result;
             },
@@ -44,7 +44,7 @@ function AuthorsCtrl(DAO, $rootScope)
     }
 
     $rootScope.saveAuthors = function () {
-        DAO.save({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.authors, controller:'authors', action:'save'},
+        DAO.save({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.authors, controller:'authors', action:'save'},
         function (result) {
             $rootScope.authors = result;
             $rootScope.flags.save = true;
@@ -59,7 +59,7 @@ function AuthorsCtrl(DAO, $rootScope)
 }
 
 $rootScope.updateAuthors = function () {
-    DAO.update({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.authors, controller:'authors', action:'update'},
+    DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.authors, controller:'authors', action:'update'},
     function (result) {
         $rootScope.flags.save = true;
     },
@@ -73,7 +73,7 @@ $rootScope.updateAuthors = function () {
 }
 
 $rootScope.editAuthors = function (authors){
-    DAO.get({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, id: authors.id, controller:'authors', action:'show'},
+    DAO.get({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, id: authors.id, controller:'authors', action:'show'},
 function (result) {
     $rootScope.authors = result;
     window.location.href = "#/authors/edit"
@@ -86,7 +86,7 @@ function (error) {
 }
 
 $rootScope.confirmDeleteAuthors = function () {
-    DAO.delete({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, id: $rootScope.authors.id, controller:'authors', action:'delete'},
+    DAO.delete({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, id: $rootScope.authors.id, controller:'authors', action:'delete'},
     function (result) {
         if (result.response == "Authors_deleted") {
             window.location.href = "#/authors/list"

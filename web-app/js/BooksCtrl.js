@@ -18,7 +18,7 @@ function BooksCtrl(DAO, $rootScope)
 
     $rootScope.getAllBooks = function () {
         //get all
-        DAO.query({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'books', action: 'list'},
+        DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'books', action: 'list'},
             function (result) {
                 $rootScope.bookss = result;
             },
@@ -44,7 +44,7 @@ function BooksCtrl(DAO, $rootScope)
     }
 
     $rootScope.saveBooks = function () {
-        DAO.save({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, controller:'books', action:'save'},
+        DAO.save({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, controller:'books', action:'save'},
         function (result) {
             $rootScope.books = result;
             $rootScope.flags.save = true;
@@ -59,7 +59,7 @@ function BooksCtrl(DAO, $rootScope)
 }
 
 $rootScope.updateBooks = function () {
-    DAO.update({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, controller:'books', action:'update'},
+    DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, controller:'books', action:'update'},
     function (result) {
         $rootScope.flags.save = true;
     },
@@ -73,7 +73,7 @@ $rootScope.updateBooks = function () {
 }
 
 $rootScope.editBooks = function (books){
-    DAO.get({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, id: books.id, controller:'books', action:'show'},
+    DAO.get({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, id: books.id, controller:'books', action:'show'},
 function (result) {
     $rootScope.books = result;
     window.location.href = "#/books/edit"
@@ -86,7 +86,7 @@ function (error) {
 }
 
 $rootScope.confirmDeleteBooks = function () {
-    DAO.delete({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, id: $rootScope.books.id, controller:'books', action:'delete'},
+    DAO.delete({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, id: $rootScope.books.id, controller:'books', action:'delete'},
     function (result) {
         if (result.response == "Books_deleted") {
             window.location.href = "#/books/list"
