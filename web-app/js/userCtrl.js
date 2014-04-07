@@ -2,13 +2,13 @@
 function UserCtrl($rootScope, DAO){
 
     if(!$rootScope.appConfig){
-        $rootScope.appConfig = {serverHost:'localhost:8080', appName:'testingarrested', token:''};
+        $rootScope.appConfig = {appName:'testingarrested', token:''};
         $rootScope.user = {username:'', passwordHash:''};
         $rootScope.errors = {forgotPassword:false, showErrors:false, showMessage:false, showFunctionError:false, showServerError:false, showPasswordError:false};
     }
 
     function initializeVariables(){
-        $rootScope.appConfig = {serverHost:'localhost:8080', appName:'testingarrested', token:''};
+        $rootScope.appConfig = {appName:'testingarrested', token:''};
         $rootScope.user = {username:'', passwordHash:''};
         $rootScope.errors = {forgotPassword:false, showErrors:false, showMessage:false, showFunctionError:false, showServerError:false, showPasswordError:false};
     }
@@ -18,7 +18,7 @@ function UserCtrl($rootScope, DAO){
     };
 
     $rootScope.login = function(){
-        DAO.save({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, controller:'auth', action:'login', username:$rootScope.user.username, passwordHash:$rootScope.user.passwordHash},
+        DAO.save({appName: $rootScope.appConfig.appName, controller:'auth', action:'login', username:$rootScope.user.username, passwordHash:$rootScope.user.passwordHash},
             function(result){
                 if(result.response == "bad_login"){
                     $rootScope.errors.showErrors = true;
@@ -38,7 +38,7 @@ function UserCtrl($rootScope, DAO){
     };
 
     $rootScope.logout = function(){
-        DAO.get({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller:'auth', action:'logout'},
+        DAO.get({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller:'auth', action:'logout'},
             function(result){
                 initializeVariables();
                 window.location.href="#/login"
@@ -50,7 +50,7 @@ function UserCtrl($rootScope, DAO){
     };
 
     $rootScope.register = function(){
-        DAO.save({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller:'user', action:'save', instance:$rootScope.user},
+        DAO.save({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller:'user', action:'save', instance:$rootScope.user},
             function(result){
                 if(result.response == "user_created"){
                     $rootScope.errors.showMessage = true;
@@ -68,7 +68,7 @@ function UserCtrl($rootScope, DAO){
     };
 
     $rootScope.updateProfile= function(){
-        DAO.update({serverHost: $rootScope.appConfig.serverHost, appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller:'user', action:'update', instance:$rootScope.user},
+        DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller:'user', action:'update', instance:$rootScope.user},
             function(result){
                 if(result.response == "user_not_updated"){
                     $rootScope.errors.showErrors = true;
