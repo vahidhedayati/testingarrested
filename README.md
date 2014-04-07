@@ -2,7 +2,7 @@
 
 BuildConfig.groovy
 ```
-compile ':arrested:1.5'
+compile ':arrested:1.6'
 ```
 
 ggts (ctrl alt shift g) or grails command line run: 
