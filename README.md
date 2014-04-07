@@ -2,22 +2,22 @@
 
 BuildConfig.groovy
 ```
-compile ':arrested:1.3'
+compile ':arrested:1.4'
 ```
 
-ctrl alt shift g 
+ggts (ctrl alt shift g) or grails command line run: 
 ```
 create-arrested-app
 
 ```
-or grails command:
+or from command line run:
 ```
 grails create-arrested-app
 ```
 
 
 
-ctrl alt shift g 
+ggts (ctrl alt shift g) or grails command line run: 
 ```
 create-domain-class Books
 
@@ -59,6 +59,7 @@ class Authors {
 		"${firstName}:${surName}"
 	}
 }
+```
 
 Create controllers:
 ```
@@ -74,7 +75,7 @@ create-arrested-view Authors
 
 
 BootStrap:
-```
+```groovy
 import org.apache.shiro.crypto.hash.Sha256Hash
 
 import arrested.ArrestedToken
