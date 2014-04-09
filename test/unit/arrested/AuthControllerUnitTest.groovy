@@ -7,7 +7,7 @@ import static org.junit.Assert.*
 import grails.test.mixin.*
 import grails.test.mixin.support.*
 import org.junit.*
-
+import org.apache.shiro.crypto.hash.Sha256Hash
 
 @TestFor(ArrestedUserController)
 @Mock([ArrestedUser,ArrestedToken])
@@ -24,7 +24,7 @@ class AuthControllerUnitTest {
         //Create User for test
         user = new ArrestedUser(
                 username: "user@test.me",
-                passwordHash: "admin",
+                passwordHash: new Sha256Hash("admin").toHex(),
                 dateCreated: new Date()
         ).save()
 
@@ -35,7 +35,7 @@ class AuthControllerUnitTest {
                 valid: true,
                 owner: user.id
         ).save(flush: true)
-        user.setToken(token)
+        user.setToken(token.id)
         user.save()
     }
 

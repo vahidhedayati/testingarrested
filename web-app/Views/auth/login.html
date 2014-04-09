@@ -15,7 +15,8 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                <input type="password" name="password" data-ng-model="user.passwordHash"  class="form-control" placeholder="Password" />
+                                <input type="text" name="preventAutoPass" id="preventAutoPass" style="display:none" />
+                                <input type="password" name="password" data-ng-model="user.passwordHash"  class="form-control" placeholder="Password" autocomplete="off"/>
                             </div>
                         </div>
                         <input class="btn btn-sm btn-primary btn-block"  type="submit" value="Sign in" data-ng-click="login()"/>

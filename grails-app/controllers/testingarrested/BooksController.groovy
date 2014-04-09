@@ -46,9 +46,19 @@ class BooksController extends ArrestedController {
         if (params.instance) {
             def data = JSON.parse(params.instance)
             Books instance = new Books() 
+                        if(data.attachment) instance.attachment = data.attachment
+                        
                         if(data.author) instance.author = testingarrested.Authors.get(data.author.id as Long)
                         
+                        if(data.content) instance.content = data.content
+                        
+                        if(data.displayOnMenu) instance.displayOnMenu = data.displayOnMenu
+                        
                         if(data.name) instance.name = data.name
+                        
+                        if(data.orderby) instance.orderby = data.orderby
+                        
+                        if(data.pricerange) instance.pricerange = data.pricerange
                         
             if(instance.save(flush: true)){
                 withFormat {
@@ -76,9 +86,19 @@ class BooksController extends ArrestedController {
             def data = JSON.parse(params.instance)
             Books instance = Books.get(data.id as Long)
             if(instance){ 
+                            if(data.attachment) instance.attachment = data.attachment
+                            
                             if(data.author) instance.author = testingarrested.Authors.get(data.author.id as Long)
                             
+                            if(data.content) instance.content = data.content
+                            
+                            if(data.displayOnMenu) instance.displayOnMenu = data.displayOnMenu
+                            
                             if(data.name) instance.name = data.name
+                            
+                            if(data.orderby) instance.orderby = data.orderby
+                            
+                            if(data.pricerange) instance.pricerange = data.pricerange
                             if(instance.save(flush: true)){
                     withFormat {
                         xml {

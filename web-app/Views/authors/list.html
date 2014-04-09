@@ -19,6 +19,8 @@
                         <thead>
                         <tr>
                             
+                            <th data-sortable="emailAddress">Email Address</th>
+                            
                             <th data-sortable="firstName">First Name</th>
                             
                             <th data-sortable="surName">Sur Name</th>
@@ -27,6 +29,8 @@
                         </thead>
                         <tbody>
                         <tr data-ng-repeat="instance in authorss" data-ng-click="editAuthors(instance)">
+                            
+                            <td>{{instance.emailAddress}}</td>
                             
                             <td>{{instance.firstName}}</td>
                             

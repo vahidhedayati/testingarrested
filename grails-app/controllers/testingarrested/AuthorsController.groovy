@@ -46,6 +46,8 @@ class AuthorsController extends ArrestedController {
         if (params.instance) {
             def data = JSON.parse(params.instance)
             Authors instance = new Authors() 
+                        if(data.emailAddress) instance.emailAddress = data.emailAddress
+                        
                         if(data.firstName) instance.firstName = data.firstName
                         
                         if(data.surName) instance.surName = data.surName
@@ -76,6 +78,8 @@ class AuthorsController extends ArrestedController {
             def data = JSON.parse(params.instance)
             Authors instance = Authors.get(data.id as Long)
             if(instance){ 
+                            if(data.emailAddress) instance.emailAddress = data.emailAddress
+                            
                             if(data.firstName) instance.firstName = data.firstName
                             
                             if(data.surName) instance.surName = data.surName

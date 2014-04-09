@@ -23,6 +23,13 @@
     <div>
         
         <div class="fieldcontain">
+            <label for="attachment">
+                attachment
+            </label>
+            <input type="file" id="attachment" data-ng-model='books.attachment'  name="attachment" />
+        </div>
+        
+        <div class="fieldcontain">
             <label for="author">
                 author
             </label>
@@ -30,10 +37,38 @@
         </div>
         
         <div class="fieldcontain">
+            <label for="content">
+                content
+            </label>
+            <input type="text" name="content" required="" data-ng-model='books.content' />
+        </div>
+        
+        <div class="fieldcontain">
+            <label for="displayOnMenu">
+                displayOnMenu
+            </label>
+            <input type="checkbox"  name="displayOnMenu" data-ng-model='books.displayOnMenu' />
+        </div>
+        
+        <div class="fieldcontain">
             <label for="name">
                 name
             </label>
             <input type="text" name="name" required="" data-ng-model='books.name' />
+        </div>
+        
+        <div class="fieldcontain">
+            <label for="orderby">
+                orderby
+            </label>
+            <input name="orderby" type="number" data-ng-model='books.orderby'  required=""/>
+        </div>
+        
+        <div class="fieldcontain">
+            <label for="pricerange">
+                pricerange
+            </label>
+            <input name="pricerange" type="number" data-ng-model='books.pricerange'  required=""/>
         </div>
         
     </div>
