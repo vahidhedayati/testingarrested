@@ -40,7 +40,7 @@
             <label for="content">
                 content
             </label>
-            <input type="text" name="content" required="" data-ng-model='books.content' />
+            <input type="text" name="content" maxlength="200" required="" data-ng-model='books.content' />
         </div>
         
         <div class="fieldcontain">
@@ -54,7 +54,7 @@
             <label for="name">
                 name
             </label>
-            <input type="text" name="name" required="" data-ng-model='books.name' />
+            <input type="text" name="name" maxlength="20" required="" data-ng-model='books.name' />
         </div>
         
         <div class="fieldcontain">
@@ -68,7 +68,7 @@
             <label for="pricerange">
                 pricerange
             </label>
-            <input name="pricerange" type="number" data-ng-model='books.pricerange'  required=""/>
+            <input name="pricerange" type="number" min="1" max="99" data-ng-model='books.pricerange'  required=""/>
         </div>
         
     </div>

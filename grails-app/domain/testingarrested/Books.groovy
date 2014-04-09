@@ -12,8 +12,11 @@ class Books {
 	//Authors author
 	static belongsTo = [ author: Authors]
 	static constraints = {
-		name(maxLength:200,unique:true, blank: false, nullable: false, size:5..20,)
+		content(maxSize: 200)
+		
+		name(maxLength:20,unique:true, blank: false, nullable: false, size:5..20,)
 		attachment(maxSize: 8388608, blank:false, minsize: 1) // 1MB
+		
 		pricerange min:1, max:99
 	}	
 	static mapping = {
