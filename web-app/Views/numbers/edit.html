@@ -1,0 +1,39 @@
+
+<div data-ng-controller="NumbersCtrl">
+    <h1>Numbers Edit</h1>
+    <div data-ng-show="errors.showErrors" class="red">
+        <p data-ng-show="errors.showServerError">"Can not connect to the server, try later"</p>
+    </div>
+    <div>
+    <div>
+    <div>
+    <div>
+        <p></p>
+        <a class="btn btn-primary btn-primary" onclick="window.location.href = '#/numbers/list'"><span class="glyphicon glyphicon-align-justify"></span>  List</a>
+        <a class="btn btn-primary btn-success" data-ng-hide="numbers.id" data-ng-click="manualSaveNumbers()"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+        <a class="btn btn-primary btn-success" data-ng-show="numbers.id" data-ng-click="manualSaveNumbers()"><span class="glyphicon glyphicon-floppy-disk"></span> Update</a>
+        <a class="btn btn-primary btn-danger" data-ng-show="numbers.id"  data-ng-click="confirmDeleteNumbers()"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+        <p></p>
+    </div>
+    <div>
+    <div>
+    <div>
+    
+    
+    <div>
+        
+        <div class="fieldcontain">
+            <label for="mynumber">
+                mynumber
+            </label>
+            <input name="mynumber" type="number" data-ng-model='numbers.mynumber'  required=""/>
+        </div>
+        
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</div>
