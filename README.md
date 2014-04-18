@@ -296,7 +296,7 @@ angular.module('services',['ngResource']).
 These files require no updating, userCtrl controls the calls from the html for authentication (views/auth/) and the booksctrl is the controller for edit/list.html in Views/books/(edit|list)
 
 
-#### html pages - understanding angularJS html5 adapatation
+#### html pages - understanding angularJS html5 adaptation
 
 
 #### edit.html
