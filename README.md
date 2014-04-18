@@ -443,7 +443,7 @@ Understanding list.html
 ```html
 data-ng-controller="NumbersCtrl" data-ng-init="getAllNumbers()"
 ```
-so it calls numbersCtrl in the js folder and initialises getAllNumbers as the page loads up
+The page calls numbersCtrl in the js folder and initialises getAllNumbers as the page loads up
 
 ```
 errors.showErrors 
@@ -466,13 +466,18 @@ When this hyperlink is clicked it runs the newNumbers function within NumbersCtr
 ```html
 <th data-sortable="firstNumber">First Number</th>
 ```
-So a sortable field called firstNumber
+A sortable field called firstNumber
 
 
 ```html
 <tr data-ng-repeat="instance in numberss" data-ng-click="editNumbers(instance)">
 ```
-So a angularJs tag ng-repeat this now loops through sql statement of instance in numberss, also on click runs editNumbers(instance)
+angularJs tag: ng-repeat  : This loops through an sql statement of
+``` 
+ instance in numberss
+ ```
+ It also provides an onclick which runs editNumbers(instance) on each table row, so clicking it will automatically end the user in edit mode.
+ 
 
 
 ```html
