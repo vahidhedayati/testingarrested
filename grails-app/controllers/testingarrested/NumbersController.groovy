@@ -46,7 +46,7 @@ class NumbersController extends ArrestedController {
         if (params.instance) {
             def data = JSON.parse(params.instance)
             Numbers instance = new Numbers() 
-                        if(data.mynumber) instance.mynumber = data.mynumber
+                        if(data.firstNumber) instance.firstNumber = data.firstNumber
                         
             if(instance.save(flush: true)){
                 withFormat {
@@ -61,6 +61,7 @@ class NumbersController extends ArrestedController {
                 }
             }
             else{
+				print "AAAA--------------"+instance
                 render409orEdit(instance)
             }
         }
@@ -74,7 +75,7 @@ class NumbersController extends ArrestedController {
             def data = JSON.parse(params.instance)
             Numbers instance = Numbers.get(data.id as Long)
             if(instance){ 
-                            if(data.mynumber) instance.mynumber = data.mynumber
+                            if(data.firstNumber) instance.firstNumber = data.firstNumber
                             if(instance.save(flush: true)){
                     withFormat {
                         xml {

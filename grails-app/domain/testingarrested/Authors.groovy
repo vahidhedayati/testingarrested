@@ -7,7 +7,7 @@ class Authors {
 	String emailAddress
 	static hasMany = [ books: Books]
 	static constraints = {
-		emailAddress(maxLength:50,email:true,unique:true)
+		emailAddress(minLength:5, maxLength:50,email:true,unique:true)
 
 	}
 	

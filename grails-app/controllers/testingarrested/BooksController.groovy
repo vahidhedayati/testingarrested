@@ -9,6 +9,7 @@ class BooksController extends ArrestedController {
     static allowedMethods = [show: "GET", list: "GET", save: "POST", update: "PUT", delete: "DELETE"]
 
     def show(Long id) {
+		println "WE ARE IN BOOOOKS"
         if(id){
             Books instance = Books.get(id)
             if(instance){
@@ -17,6 +18,7 @@ class BooksController extends ArrestedController {
                         render instance as XML
                     }
                     json {
+						println "SHOW-----------"+instance
                         render instance as JSON
                     }
                 }
@@ -37,6 +39,7 @@ class BooksController extends ArrestedController {
                 render instances as XML
             }
             json {
+				println "--------"+instances
                 render instances as JSON
             }
         }
@@ -46,10 +49,8 @@ class BooksController extends ArrestedController {
         if (params.instance) {
             def data = JSON.parse(params.instance)
             Books instance = new Books() 
-                        if(data.attachment) instance.attachment = data.attachment
-                        
                         if(data.author) instance.author = testingarrested.Authors.get(data.author.id as Long)
-                        
+                        println "----------"+testingarrested.Authors.get(data.author.id as Long)
                         if(data.content) instance.content = data.content
                         
                         if(data.displayOnMenu) instance.displayOnMenu = data.displayOnMenu
@@ -86,8 +87,6 @@ class BooksController extends ArrestedController {
             def data = JSON.parse(params.instance)
             Books instance = Books.get(data.id as Long)
             if(instance){ 
-                            if(data.attachment) instance.attachment = data.attachment
-                            
                             if(data.author) instance.author = testingarrested.Authors.get(data.author.id as Long)
                             
                             if(data.content) instance.content = data.content

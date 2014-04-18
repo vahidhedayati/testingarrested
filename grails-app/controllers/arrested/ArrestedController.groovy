@@ -26,7 +26,7 @@ class ArrestedController {
             }
             json {
                 response.status = 409
-				println instance.errors.allErrors.toString()
+				println "----------"+instance.errors.allErrors.toString()
                 render instance.errors.allErrors as JSON
             }
         }

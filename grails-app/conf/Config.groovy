@@ -112,9 +112,9 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
-		     debug 'org.hibernate.SQL'
+		   //  debug 'org.hibernate.SQL'
 		   //debug 'org.hibernate.transaction'
-		   trace 'org.hibernate.SQL'
+		   //trace 'org.hibernate.SQL'
 		   
-		   trace  'org.hibernate.type'
+		  // trace  'org.hibernate.type'
 }

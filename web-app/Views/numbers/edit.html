@@ -4,14 +4,16 @@
     <div data-ng-show="errors.showErrors" class="red">
         <p data-ng-show="errors.showServerError">"Can not connect to the server, try later"</p>
     </div>
+     <form name="numbersForm"  novalidate>
     <div>
     <div>
     <div>
     <div>
+   
         <p></p>
         <a class="btn btn-primary btn-primary" onclick="window.location.href = '#/numbers/list'"><span class="glyphicon glyphicon-align-justify"></span>  List</a>
-        <a class="btn btn-primary btn-success" data-ng-hide="numbers.id" data-ng-click="manualSaveNumbers()"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
-        <a class="btn btn-primary btn-success" data-ng-show="numbers.id" data-ng-click="manualSaveNumbers()"><span class="glyphicon glyphicon-floppy-disk"></span> Update</a>
+        <a class="btn btn-primary btn-success" data-ng-hide="numbers.id"  ng-disabled="numbersForm.$invalid" ng-enabled="!numbersForm.$invalid" data-ng-click="manualSaveNumbers()"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+        <a class="btn btn-primary btn-success" data-ng-show="numbers.id"  ng-disabled="numbersForm.$invalid" ng-enabled="!numbersForm.$invalid" data-ng-click="manualSaveNumbers()"><span class="glyphicon glyphicon-floppy-disk"></span> Update</a>
         <a class="btn btn-primary btn-danger" data-ng-show="numbers.id"  data-ng-click="confirmDeleteNumbers()"><span class="glyphicon glyphicon-trash"></span> Delete</a>
         <p></p>
     </div>
@@ -23,11 +25,15 @@
     <div>
         
         <div class="fieldcontain">
-            <label for="mynumber">
-                mynumber
+            <label for="firstNumber">
+                firstNumber
             </label>
-            <input name="mynumber" type="number" data-ng-model='numbers.mynumber'  required=""/>
+            <input name="firstNumber" type="number" min="4" max="10" data-ng-model='numbers.firstNumber'  required=""/>
+		<p ng-show="numbersForm.firstNumber.$error.required" class="help-block">required.</p>
+		<p ng-show="!numbersForm.firstNumber.$pristine && numbersForm.firstNumber.$invalid" class="help-block">invalid firstNumber min: 4 max: 10</p>
+		<p ng-show="numbersForm.firstNumber.$error.number" class="help-block">firstNumber is not valid.</p>
         </div>
+        
         
     </div>
     </div>
@@ -36,4 +42,5 @@
     </div>
     </div>
     </div>
+    </form>
 </div>

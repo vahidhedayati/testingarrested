@@ -3,7 +3,7 @@ dataSource {
     driverClassName = "org.h2.Driver"
     username = "sa"
     password = ""
-	logSql=true
+	//logSql=true
 }
 hibernate {
     cache.use_second_level_cache = true

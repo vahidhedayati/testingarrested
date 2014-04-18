@@ -1,7 +1,8 @@
 package testingarrested
 
 class Numbers {
-	Integer mynumber
+	Integer firstNumber
     static constraints = {
+		firstNumber min:4, max:10
     }
 }
