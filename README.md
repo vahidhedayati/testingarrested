@@ -2,7 +2,7 @@
 
 BuildConfig.groovy
 ```
-compile ':arrested:1.8'
+compile ':arrested:1.9'
 ```
 
 ggts (ctrl alt shift g) or grails command line run: 
@@ -294,6 +294,12 @@ These files require no updating, userCtrl controls the calls from the html for a
 Typical edit.html in /web-app/Views/{domainClass}/edit.html (since 1.9)
 
 ```
+
+<div data-ng-controller="AuthorsCtrl">
+    <h1>Authors Edit</h1>
+    <div data-ng-show="errors.showErrors" class="red">
+        <p data-ng-show="errors.showServerError">"Can not connect to the server, try later"</p>
+    </div>
  <form name="authorsForm"  novalidate>
         <p></p>
         <a class="btn btn-primary btn-primary" onclick="window.location.href = '#/authors/list'"><span class="glyphicon glyphicon-align-justify"></span>  List</a>
@@ -330,13 +336,86 @@ Typical edit.html in /web-app/Views/{domainClass}/edit.html (since 1.9)
         </div>
         
     </form>
+ </div>
 ```
 
-Lets try to explain what is going on above
+###Lets try to explain what is going on above
+
+```
+data-ng-controller="AuthorsCtrl"
+```
+This tells the html page to refer to AuthorsCtrl.js within web-app/js folder for all the things it needs to process
+
+```
+data-ng-show="errors.showErrors"
+data-ng-show="errors.showServerError"
+```
+Are set by your AuthorsCtrl.js when the actions on this page fail
+
+
+```
+<a class="btn btn-primary btn-primary" onclick="window.location.href = '#/authors/list'"><span class="glyphicon glyphicon-align-justify"></span>  List</a>
+<a class="btn btn-primary btn-success" data-ng-hide="authors.id"  ng-disabled="authorsForm.$invalid" ng-enabled="!authorsForm.$invalid" data-ng-click="manualSaveAuthors()"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+<a class="btn btn-primary btn-success" data-ng-show="authors.id"  ng-disabled="authorsForm.$invalid" ng-enabled="!authorsForm.$invalid" data-ng-click="manualSaveAuthors()"><span class="glyphicon glyphicon-floppy-disk"></span> Update</a>
+<a class="btn btn-primary btn-danger" data-ng-show="authors.id"  data-ng-click="confirmDeleteAuthors()"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+```   
+1.  shows list (if there is items to list)
+
+
+2.  data-ng-hide="authors.id"  ng-disabled="authorsForm.$invalid" ng-enabled="!authorsForm.$invalid" data-ng-click="manualSaveAuthors()"
+
+hide the id, i.e. new record disable option if form is invalid, enable it if valid, on click carry out manualSaveAuthors within controller, this since id is disabled calls save function
 
 
 
-So in a typical list.html:
+3. data-ng-show="authors.id"  ng-disabled="authorsForm.$invalid" ng-enabled="!authorsForm.$invalid" data-ng-click="manualSaveAuthors()"
+
+if there is id, i.e. update record disable option if form is invalid, enable it if valid, on click carry out manualSaveAuthors within controller, this since id is enabled calls update function
+
+
+
+4. data-ng-show="authors.id"  data-ng-click="confirmDeleteAuthors()"
+
+This calls delete confirmDeleteAuthors within controller
+
+
+
+```
+<input type="email" name="emailAddress" required="" data-ng-model='authors.emailAddress' />
+<p ng-show="authorsForm.emailAddress.$error.required" class="help-block">required.</p>
+<p ng-show="!authorsForm.emailAddress.$pristine && authorsForm.emailAddress.$invalid" class="help-block">invalid emailAddress</p>
+```
+So load up input type email required model is authors.emailAddress, the following lines are pre post validation, if required show required
+then pristine means if empty so if not empty and is invalid in the case of email has to be a valid email address show invalid Email address.
+
+
+
+Lets look at some number examples:
+
+```
+<p ng-show="!numbersForm.firstNumber.$pristine && numbersForm.firstNumber.$invalid" class="help-block">invalid firstNumber min: 4 max: 10</p>
+<p ng-show="numbersForm.firstNumber.$error.number" class="help-block">firstNumber is not valid.</p>
+```
+
+The invalid type also loads up what valid min max ranges are and ensures the user has put in a number i.e abc etc will cause is not valid message to popup
+
+
+Lets look at Strings minSize/maxSize:
+```
+<p ng-show="!booksForm.name.$pristine && booksForm.name.$invalid" class="help-block">invalid name min: 5  , max: 20</p>
+		<p ng-show="booksForm.name.$error.minlength" class="help-block">name is too short.</p>
+		<p ng-show="booksForm.name.$error.maxlength" class="help-block">name is too long.</p>
+```
+Again if not empty is is valid input - also matches minimum length as well as not above the set maxSize otherwise show nag the user with above users as they type :)
+
+		
+		   
+
+		
+
+
+
+### typical list.html:
 ```
 getAllBooks() - this lists all of the books - getAllBooks resides in : web-app/js/BookCtrl.js 
 ```
@@ -356,7 +435,7 @@ Each tr also does a loop like this:
 ```
 instance in bookss
 ```
-and displays its values
+and displays its values, this is how angularJs calls values:
 ```
  {{instance.content}}
 ```
