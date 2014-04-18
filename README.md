@@ -203,9 +203,20 @@ In short the above commands has updated some of the core methods your default gr
 Places to look for updates: Your overall application 
 ```
 views/index.gsp is now a template similar to your layouts/main.gsp page as per a default grails application
+views/layouts/_navbar.gsp - this now loads your navigation bar for your site 
 conf/ApplicationResource.groovy has been updated and is updated each time a new controller is created using create-arrested-controller.
 conf/arrested/SecurityFilters.groovy is created as per default create-arrested-app
 ```
+
+So by default the UrlMapping point to index, in index.gsp:
+
+```
+data-ng-view
+```
+
+This triggers AngularJS to take over, the actions of index.js are triggered which redirect to /login. This would happen to both authenticate and not authenticated users.
+If however the user has extra additional input on the url line to call a specific controller/action then remember the SecurityFilters.groovy, this is also filtering the user, so if not authenticated they are redirected back to login page.
+  
 
 Places to look for updates: each time you create new domainclasses controllers Views:
 
@@ -228,7 +239,6 @@ So by default when you run create-arrested-view Books this creates a web-app/Vie
 
 Lets dive deeper into what is going on above.
 
-edit.html typically controls creation/updates of your record, the list is to list/show record
 
 ####js/index.js
 So this adds the actions for the default CRUD generation to index.js - if you want to create your own custom actions this is where you need to update to define what/where etc.
@@ -488,6 +498,9 @@ How angularJs displays values within a loop {{value}}
 
 ### Conclusion
 Hopefully by now you will feel more comfortable with this plugin, enough so to be able to tweak your own default CRUD arrested application to do more than what it provides out of the package.
-You should know how to go about migrating REST to another host.
+There is probably a lot I have missed.
+
+There are some information out there on AngularJS [AngularJS 60 minutes on youtube](https://www.youtube.com/watch?v=i9MHigUZKEM) - there is also this pdf to download read.
+[Scotch.io angularJs](http://scotch.io/tag/angular-js)
 The other note is really in regards to the actual web-app folder, since as it is currently you should be able to even move this component out of this application and run in other applications etc.
 
