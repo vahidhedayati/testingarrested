@@ -480,3 +480,9 @@ So a angularJs tag ng-repeat this now loops through sql statement of instance in
 ```
 How angularJs displays values within a loop {{value}}
 
+
+### Conclusion
+Hopefully by now you will feel more comfortable with this plugin, enough so to be able to tweak your own default CRUD arrested application to do more than what it provides out of the package.
+You should know how to go about migrating REST to another host.
+The other note is really in regards to the actual web-app folder, since as it is currently you should be able to even move this component out of this application and run in other applications etc.
+
