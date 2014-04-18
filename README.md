@@ -1,7 +1,7 @@
 
 
 BuildConfig.groovy
-```
+```groovy
 compile ':arrested:1.9'
 ```
 
@@ -66,7 +66,7 @@ create-domain-class Authors
 ```
 
 domainClass Books.groovy:
-```
+```groovy
 package grails.arrested.tester
 
 class Books {
@@ -91,7 +91,7 @@ class Numbers {
 ```
 
 domainClass Authors.groovy:
-```
+```groovy
 package grails.arrested.tester
 
 class Authors {
@@ -233,7 +233,7 @@ edit.html typically controls creation/updates of your record, the list is to lis
 ####js/index.js
 So this adds the actions for the default CRUD generation to index.js - if you want to create your own custom actions this is where you need to update to define what/where etc.
 
-```
+```js
            when('/books/create', {templateUrl: 'Views/books/edit.html', controller: 'BooksCtrl'}).
             when('/books/edit', {templateUrl: 'Views/books/edit.html', controller: 'BooksCtrl'}).
             when('/books/list', {templateUrl: 'Views/books/list.html', controller: 'BooksCtrl'}).
@@ -243,7 +243,7 @@ So this adds the actions for the default CRUD generation to index.js - if you wa
 
 ####js/services.js
 Nothing to do here - this is your REST AngularJS controller telling it what to do for each type of rest call 
-```
+```js
 'use strict';
 angular.module('services',['ngResource']).
     factory('DAO', function($resource){
@@ -258,13 +258,13 @@ angular.module('services',['ngResource']).
     });            
 ```
 
-```
+```js
 return $resource('/:appName/:controller/:action',{
 ```
 You will notice above defined in the main call below, changed since 1.5 - pre 1.5
 It passes host information - this may be useful if you wanted to return to this model if you wanted to point the actual rest service to another host
 
-```
+```js
 'use strict';
 angular.module('services',['ngResource']).
     factory('DAO', function($resource){
@@ -293,8 +293,7 @@ These files require no updating, userCtrl controls the calls from the html for a
  
 Typical edit.html in /web-app/Views/{domainClass}/edit.html (since 1.9)
 
-```
-
+```html
 <div data-ng-controller="AuthorsCtrl">
     <h1>Authors Edit</h1>
     <div data-ng-show="errors.showErrors" class="red">
@@ -341,24 +340,25 @@ Typical edit.html in /web-app/Views/{domainClass}/edit.html (since 1.9)
 
 ###Lets try to explain what is going on above
 
-```
+```html
 data-ng-controller="AuthorsCtrl"
 ```
 This tells the html page to refer to AuthorsCtrl.js within web-app/js folder for all the things it needs to process
 
-```
+```html
 data-ng-show="errors.showErrors"
 data-ng-show="errors.showServerError"
 ```
 Are set by your AuthorsCtrl.js when the actions on this page fail
 
 
-```
+```html
 <a class="btn btn-primary btn-primary" onclick="window.location.href = '#/authors/list'"><span class="glyphicon glyphicon-align-justify"></span>  List</a>
 <a class="btn btn-primary btn-success" data-ng-hide="authors.id"  ng-disabled="authorsForm.$invalid" ng-enabled="!authorsForm.$invalid" data-ng-click="manualSaveAuthors()"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
 <a class="btn btn-primary btn-success" data-ng-show="authors.id"  ng-disabled="authorsForm.$invalid" ng-enabled="!authorsForm.$invalid" data-ng-click="manualSaveAuthors()"><span class="glyphicon glyphicon-floppy-disk"></span> Update</a>
 <a class="btn btn-primary btn-danger" data-ng-show="authors.id"  data-ng-click="confirmDeleteAuthors()"><span class="glyphicon glyphicon-trash"></span> Delete</a>
 ```   
+
 1.  shows list (if there is items to list)
 
 
@@ -380,7 +380,7 @@ This calls delete confirmDeleteAuthors within controller
 
 
 
-```
+```html
 <input type="email" name="emailAddress" required="" data-ng-model='authors.emailAddress' />
 <p ng-show="authorsForm.emailAddress.$error.required" class="help-block">required.</p>
 <p ng-show="!authorsForm.emailAddress.$pristine && authorsForm.emailAddress.$invalid" class="help-block">invalid emailAddress</p>
@@ -392,7 +392,7 @@ then pristine means if empty so if not empty and is invalid in the case of email
 
 Lets look at some number examples:
 
-```
+```html
 <p ng-show="!numbersForm.firstNumber.$pristine && numbersForm.firstNumber.$invalid" class="help-block">invalid firstNumber min: 4 max: 10</p>
 <p ng-show="numbersForm.firstNumber.$error.number" class="help-block">firstNumber is not valid.</p>
 ```
@@ -401,7 +401,7 @@ The invalid type also loads up what valid min max ranges are and ensures the use
 
 
 Lets look at Strings minSize/maxSize:
-```
+```html
 <p ng-show="!booksForm.name.$pristine && booksForm.name.$invalid" class="help-block">invalid name min: 5  , max: 20</p>
 		<p ng-show="booksForm.name.$error.minlength" class="help-block">name is too short.</p>
 		<p ng-show="booksForm.name.$error.maxlength" class="help-block">name is too long.</p>
@@ -416,28 +416,67 @@ Again if not empty is is valid input - also matches minimum length as well as no
 
 
 ### typical list.html:
-```
-getAllBooks() - this lists all of the books - getAllBooks resides in : web-app/js/BookCtrl.js 
-```
-which in turn calls list action from with BooksController within real applications controllers
-
-This lists each book as an instance:
-
-Further down within each Table Row it then calls:
-``` 
-editBooks(instance)
- editBooks resides in : web-app/js/BookCtrl.js 
-```
-This in turn calls show within BooksController in the real application
-So when you click on a table row it ends up in show ready for edit.
-
-Each tr also does a loop like this:
-```
-instance in bookss
-```
-and displays its values, this is how angularJs calls values:
-```
- {{instance.content}}
-```
+```html
+<div data-ng-controller="NumbersCtrl" data-ng-init="getAllNumbers()">
+    <h1>Numbers List</h1>
+    <div data-ng-show="errors.showErrors" class="red">
+        <p data-ng-show="errors.showServerError">"Can not connect to the server, try later"</p>
+    </div>
+       	<a class="btn btn-primary btn-primary" data-ng-click="newNumbers()"><span class="glyphicon glyphicon-plus"></span> New numbers</a>
+      <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+         <th data-sortable="firstNumber">First Number</th>
+       </tr>
+       </thead>
+       <tbody>
+        <tr data-ng-repeat="instance in numberss" data-ng-click="editNumbers(instance)">
+         <td>{{instance.firstNumber}}</td>
+        </tr>
+      </tbody>
+ 	</table>
+ </div>
+ ```
  
+Understanding list.html                 
+                
+```html
+data-ng-controller="NumbersCtrl" data-ng-init="getAllNumbers()"
+```
+so it calls numbersCtrl in the js folder and initialises getAllNumbers as the page loads up
+
+```
+errors.showErrors 
+errors.showServerError
+```
+Set by the controller when something has gone wrong
+
+```
+data-ng-click="newNumbers()"
+```
+When this hyperlink is clicked it runs the newNumbers function within NumbersCtrl,:
+```js
+ $rootScope.newNumbers = function () {
+    $rootScope.numbers = {};
+    window.location.href = "#/numbers/create"
+}
+```
+
+
+```html
+<th data-sortable="firstNumber">First Number</th>
+```
+So a sortable field called firstNumber
+
+
+```html
+<tr data-ng-repeat="instance in numberss" data-ng-click="editNumbers(instance)">
+```
+So a angularJs tag ng-repeat this now loops through sql statement of instance in numberss, also on click runs editNumbers(instance)
+
+
+```html
+<td>{{instance.firstNumber}}</td>
+```
+How angularJs displays values within a loop {{value}}
 
