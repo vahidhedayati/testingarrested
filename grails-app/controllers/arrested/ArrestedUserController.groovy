@@ -3,12 +3,13 @@ package arrested
 
 import grails.converters.JSON
 import grails.converters.XML
-
+import arrested.ArrestedController
+import arrested.ArrestedController
 import org.apache.shiro.crypto.hash.Sha256Hash
 
 class ArrestedUserController extends ArrestedController {
 
-    static allowedMethods = [show: "GET", list: "GET", save: "POST",  update: "PUT", delete: "DELETE"]
+    static allowedMethods = [show: "GET", list: "GET", save: "POST", update: "PUT", delete: "DELETE"]
 
     def show(String token) {
         if(token){
@@ -49,6 +50,7 @@ class ArrestedUserController extends ArrestedController {
             }
         }
     }
+
 	def save() {
 		if (params.instance) {
 			def data = JSON.parse(params.instance)
@@ -90,7 +92,7 @@ class ArrestedUserController extends ArrestedController {
 			}
 		}
 	}
-    
+
     def update(String token) {
         if(params.instance){
             def data = JSON.parse(params.instance)

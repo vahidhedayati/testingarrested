@@ -16,7 +16,7 @@
     <r:layoutResources />
 </head>
 <body>
-<div id="arrestedHeader" role="banner"><h1 id="h1Header">Arrested Plugin</h1></div>
+<div id="arrestedHeader" role="banner"><h1 id="h1Header"><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/></h1></div>
 <g:render template="/layouts/navbar"/>
 <g:layoutBody/>
 <div class="footer" role="contentinfo"></div>

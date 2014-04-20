@@ -7,9 +7,16 @@ import arrested.ArrestedController
 class BooksController extends ArrestedController {
 
     static allowedMethods = [show: "GET", list: "GET", save: "POST", update: "PUT", delete: "DELETE"]
-
+	def listing() { 
+		withFormat {
+			html {
+				render(view: "list")
+			}
+		}
+	}
+	def edit() {}
+	
     def show(Long id) {
-		println "WE ARE IN BOOOOKS"
         if(id){
             Books instance = Books.get(id)
             if(instance){
@@ -18,7 +25,6 @@ class BooksController extends ArrestedController {
                         render instance as XML
                     }
                     json {
-						println "SHOW-----------"+instance
                         render instance as JSON
                     }
                 }
@@ -39,7 +45,6 @@ class BooksController extends ArrestedController {
                 render instances as XML
             }
             json {
-				println "--------> Books.list(): "+instances
                 render instances as JSON
             }
         }
@@ -50,7 +55,7 @@ class BooksController extends ArrestedController {
             def data = JSON.parse(params.instance)
             Books instance = new Books() 
                         if(data.author) instance.author = testingarrested.Authors.get(data.author.id as Long)
-                        println "----------"+testingarrested.Authors.get(data.author.id as Long)
+                        
                         if(data.content) instance.content = data.content
                         
                         if(data.displayOnMenu) instance.displayOnMenu = data.displayOnMenu

@@ -2,7 +2,7 @@
 
 BuildConfig.groovy
 ```groovy
-compile ':arrested:1.9'
+compile ':arrested:1.10'
 ```
 
 ggts (ctrl alt shift g) or grails command line run: 
@@ -145,7 +145,19 @@ ApplicationResources.groovy updated
 This has now created content in web-app folder, inside two folders js and Views
 This now makes a complete site like you would get from a default grails site but now controlled from within these folders.
 
-If you now open edit.html for numbers you will see something like:
+
+### Since 1.10 html pages moved from
+``` 
+web-app/Views to grails-app/views/{domain}/(edit.gsp|list.gsp)
+web-app/Views to grails-app/views/auth/(login.gsp|signup.gsp)
+
+```
+This now means you can take advantage of grails gsp calls as well as angular calls 
+
+
+
+
+If you now open edit.gsp for numbers you will see something like:
 ```gsp
 <div class="fieldcontain">
             <label for="firstNumber">
@@ -190,6 +202,10 @@ class BootStrap {
     }
 }
 ```
+
+### Since 1.10 no need to add an account via bootstrap 
+you can now sign up from the main login page  
+
 
 #### Done, Welcome to your grails application now taken over by AngularJS which now interacts with your database using REST 
 
@@ -245,7 +261,7 @@ Views:
 ```
 All views are now created in:
  
-web-app/Views/{yourapp}/(edit.html|list.html) 
+web-app/Views/{yourapp}/(edit.html|list.html)  -> moved to grails-app/views/{domain}/(edit.gsp|list.gsp) 
 web-app/js/{ControllerNameCtrl.js|index.js|services.js|userCtrl.js} 
 ```
 
@@ -258,11 +274,12 @@ Lets dive deeper into what is going on above.
 So this adds the actions for the default CRUD generation to index.js - if you want to create your own custom actions this is where you need to update to define what/where etc.
 
 ```js
-           when('/books/create', {templateUrl: 'Views/books/edit.html', controller: 'BooksCtrl'}).
-            when('/books/edit', {templateUrl: 'Views/books/edit.html', controller: 'BooksCtrl'}).
-            when('/books/list', {templateUrl: 'Views/books/list.html', controller: 'BooksCtrl'}).
-            when('/books', {templateUrl: 'Views/books/list.html', controller: 'BooksCtrl'}).
+          when('/books/create', {templateUrl: '/testingarrested/books/edit', controller: 'BooksCtrl'}).
+            when('/books/edit', {templateUrl: '/testingarrested/books/edit', controller: 'BooksCtrl'}).
+            when('/books/list', {templateUrl: '/testingarrested/books/listing', controller: 'BooksCtrl'}).
+            when('/books', {templateUrl: '/testingarrested/books/listing', controller: 'BooksCtrl'}).
 ```
+It is now calling /testingarrested/books/edit which calls back books controller and loads up edit/listing gsp pages
 
 
 ####js/services.js
@@ -517,4 +534,5 @@ There is probably a lot I have missed.
 There are some information out there on AngularJS [AngularJS 60 minutes on youtube](https://www.youtube.com/watch?v=i9MHigUZKEM) - there is also this pdf to download read.
 [Scotch.io angularJs](http://scotch.io/tag/angular-js)
 The other note is really in regards to the actual web-app folder, since as it is currently you should be able to even move this component out of this application and run in other applications etc.
+
 

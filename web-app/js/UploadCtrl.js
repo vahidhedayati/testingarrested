@@ -42,33 +42,8 @@ function UploadCtrl(DAO, $rootScope)
             $rootScope.updateUpload();
         }
     }
-    
-    $rootScope.saveUpload = function(){
-    	  var f = document.getElementById('attachment').files[0],
-    	      r = new FileReader();
-    	  r.onloadend = function(e){
-    	   var data = e.target.result;
-    	  
-    	  
-    	
-    	  }
-    		  r.readAsBinaryString(f);
-    		  
-    		  DAO.saveFile({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.upload, file:r, controller:'upload', action:'save'},
-    			        function (result) {
-    			            $rootScope.upload = result;
-    			            $rootScope.flags.save = true;
-    			        },
-    			        function (error) {
-    			            $rootScope.flags.save = false;
-    			            $rootScope.errors.showErrors = true;
-    			            $rootScope.errors.showServerError = true;
-    			        }
-    			)
-    			    ;	  
-    	 
-    	}    
-    $rootScope.saveUpload1 = function () {
+
+    $rootScope.saveUpload = function () {
         DAO.save({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.upload, controller:'upload', action:'save'},
         function (result) {
             $rootScope.upload = result;
@@ -82,7 +57,6 @@ function UploadCtrl(DAO, $rootScope)
 )
     ;
 }
-    
 
 $rootScope.updateUpload = function () {
     DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.upload, controller:'upload', action:'update'},

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Welcome to Arrested</title>
+		<title><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/></title>
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;

@@ -7,7 +7,15 @@ import arrested.ArrestedController
 class UploadController extends ArrestedController {
 
     static allowedMethods = [show: "GET", list: "GET", save: "POST", update: "PUT", delete: "DELETE"]
-
+	def listing() { 
+		withFormat {
+			html {
+				render(view: "list")
+			}
+		}
+	}
+	def edit() {}
+	
     def show(Long id) {
         if(id){
             Upload instance = Upload.get(id)
@@ -44,9 +52,6 @@ class UploadController extends ArrestedController {
 
     def save() {
         if (params.instance) {
-			println "------"+params
-			println "----------"
-			
             def data = JSON.parse(params.instance)
             Upload instance = new Upload() 
                         if(data.attachment) instance.attachment = data.attachment

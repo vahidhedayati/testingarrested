@@ -7,7 +7,15 @@ import arrested.ArrestedController
 class AuthorsController extends ArrestedController {
 
     static allowedMethods = [show: "GET", list: "GET", save: "POST", update: "PUT", delete: "DELETE"]
-
+	def listing() { 
+		withFormat {
+			html {
+				render(view: "list")
+			}
+		}
+	}
+	def edit() {}
+	
     def show(Long id) {
         if(id){
             Authors instance = Authors.get(id)

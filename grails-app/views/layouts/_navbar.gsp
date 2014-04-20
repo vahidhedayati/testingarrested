@@ -11,7 +11,12 @@
                     </li>
                 </g:if>
             </g:each>
-        </ul>
+	 		<li class='controller'>
+<a data-ng-controller='UserCtrl' data-ng-click='logout()' title="${message(code: 'security.signoff.label', default: 'Log out')}">
+								<span class="glyphicon glyphicon-log-out"></span> <g:message code="security.signoff.label"/>
+							</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 
-    </div>
-</div>

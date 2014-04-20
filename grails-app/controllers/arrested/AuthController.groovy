@@ -3,13 +3,59 @@ package arrested
 
 import grails.converters.JSON
 import grails.converters.XML
-
+import arrested.ArrestedController
 import org.apache.shiro.crypto.hash.Sha256Hash
 
 class AuthController extends ArrestedController {
 
     static allowedMethods = [login: "POST", logout: "GET"]
-		
+
+	def showLogin() {
+		withFormat {
+			html {
+				render(view: "login")
+			}
+		}
+	}
+	def showSignup() {
+		withFormat {
+			html {
+				render(view: "signup")
+			}
+		}
+	}
+	def signup(String username, String passwordHash,String passwordConfirm){
+		if(username){
+			if((passwordHash&&passwordConfirm)&&(passwordHash.equals(passwordConfirm))){
+				ArrestedUser user = ArrestedUser.findByUsername(username)
+				if(!user){
+					ArrestedUser suser
+					ArrestedToken token
+					suser = new ArrestedUser(
+						username: username,
+						passwordHash: new Sha256Hash(password).toHex(),
+						dateCreated: new Date()
+					).save()
+					 //Create tokens for users
+					token = new ArrestedToken(
+						token: 'token',
+						valid: true,
+						owner: suser.id
+					).save(flush: true)
+					suser.setToken(token.id)
+					suser.save()
+				}
+				login(username,passwordHash)
+			}
+			else{
+				renderMissingParam("passwordHash")
+			}
+		}
+		else{
+			renderMissingParam("username")
+		}
+	}
+
     def login(String username, String passwordHash){
         if(username){
             if(passwordHash){

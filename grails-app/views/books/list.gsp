@@ -31,14 +31,12 @@
                             
                             <th data-sortable="pricerange">Pricerange</th>
                             
-                            
-                            
                         </tr>
                         </thead>
                         <tbody>
                         <tr data-ng-repeat="instance in bookss" data-ng-click="editBooks(instance)">
                             
-                            <td > <a data-ng-controller="AuthorsCtrl"  data-ng-click="editAuthors(instance.author)" >{{instance.author.firstName}}</a></td>
+                            <td>{{instance.author}}</td>
                             
                             <td>{{instance.content}}</td>
                             

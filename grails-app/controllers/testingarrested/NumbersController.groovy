@@ -7,7 +7,15 @@ import arrested.ArrestedController
 class NumbersController extends ArrestedController {
 
     static allowedMethods = [show: "GET", list: "GET", save: "POST", update: "PUT", delete: "DELETE"]
-
+	def listing() { 
+		withFormat {
+			html {
+				render(view: "list")
+			}
+		}
+	}
+	def edit() {}
+	
     def show(Long id) {
         if(id){
             Numbers instance = Numbers.get(id)
@@ -61,7 +69,6 @@ class NumbersController extends ArrestedController {
                 }
             }
             else{
-				print "AAAA--------------"+instance
                 render409orEdit(instance)
             }
         }
