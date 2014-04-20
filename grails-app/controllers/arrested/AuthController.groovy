@@ -3,13 +3,13 @@ package arrested
 
 import grails.converters.JSON
 import grails.converters.XML
-import arrested.ArrestedController
+
 import org.apache.shiro.crypto.hash.Sha256Hash
 
 class AuthController extends ArrestedController {
 
     static allowedMethods = [login: "POST", logout: "GET"]
-
+		
     def login(String username, String passwordHash){
         if(username){
             if(passwordHash){

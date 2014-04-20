@@ -195,6 +195,20 @@ class BootStrap {
 
 If you are new to both technologies this will at first appear to be a mind bending experience but I am hoping to get you all the more familiar with how this is all working
 
+## Modification to auto generated select boxes: (edit.html)
+```html
+	<select id="author" name="author.id" data-ng-model='books.author' data-ng-controller="AuthorsCtrl" data-ng-init="getAllAuthors()" ng-options="c.id for c in authorss" required="" class="many-to-one"/>
+  	<select id="author" name="author.id" data-ng-model='books.author.id' data-ng-controller="AuthorsCtrl" data-ng-init="getAllAuthors()" ng-options="c.id as c.firstName for c in authorss" required="" class="many-to-one"/> 
+```
+The first select box is what is auto generated, secondary is what was changed in order to display another field for selection
+
+
+## Modification to auto generated parent calls within list.html
+```html
+ <td>{{instance.author}}</td>
+ <td><a data-ng-controller="AuthorsCtrl"  data-ng-click="editAuthors(instance.author)" >{{instance.author.id}}</a></td>
+```
+Again first is what was auto generated, second was my attempt to get it to display /edit id
 
 ## Looking underneath the hood:
 

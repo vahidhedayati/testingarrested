@@ -3,13 +3,12 @@ package arrested
 
 import grails.converters.JSON
 import grails.converters.XML
-import arrested.ArrestedController
-import arrested.ArrestedController
+
 import org.apache.shiro.crypto.hash.Sha256Hash
 
 class ArrestedUserController extends ArrestedController {
 
-    static allowedMethods = [show: "GET", list: "GET", save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [show: "GET", list: "GET", save: "POST",  update: "PUT", delete: "DELETE"]
 
     def show(String token) {
         if(token){
@@ -50,36 +49,48 @@ class ArrestedUserController extends ArrestedController {
             }
         }
     }
-
-    def save() {
-        if (params.instance) {
-            def data = JSON.parse(params.instance)
-            if (ArrestedUser.findByUsername(data.username as String)) {
-                renderConflict("Username used")
-            } else {
-                ArrestedUser user = new ArrestedUser(username:data.username, passwordHash: new Sha256Hash(data.passwordHash as String).toHex())
-                if(user.save(flush: true)){
-                    withFormat {
-                        xml {
-                            response.status = 200
-                            render user.toObject() as XML
-                        }
-                        json {
-                            response.status = 200
-                            render user.toObject() as JSON
-                        }
-                    }
-                }
-                else{
-                    render409orEdit(user)
-                }
-            }
-        }
-        else{
-            renderMissingParam("user")
-        }
-    }
-
+	def save() {
+		if (params.instance) {
+			def data = JSON.parse(params.instance)
+			String username=data.username
+			String passwordHash=data.passwordHash
+			String passwordConfirm=data.passwordConfirm
+			if(username){
+				if((passwordHash&&passwordConfirm)&&(passwordHash.equals(passwordConfirm))){
+					if (ArrestedUser.findByUsername(username)) {
+						renderConflict("Username used")
+					} else {
+						ArrestedUser user = new ArrestedUser( username:username, passwordHash: new Sha256Hash(passwordHash).toHex() )
+						user.save(flush: true)
+						
+						ArrestedToken token = new ArrestedToken( token: 'token',	valid: true, owner: user.id )
+						token.save(flush: true)
+						user.setToken(token.id)
+						if(user.save(flush: true)){
+							withFormat {
+								xml {
+									response.status = 200
+									render user.toObject() as XML
+								}
+								json {
+									response.status = 200
+									render user.toObject() as JSON
+								}
+							}
+						}else{
+							render409orEdit(user)
+						}
+					}
+					
+				}else{
+					renderMissingParam("passwordHash")
+				}
+			}else{
+				renderMissingParam("username")
+			}
+		}
+	}
+    
     def update(String token) {
         if(params.instance){
             def data = JSON.parse(params.instance)
