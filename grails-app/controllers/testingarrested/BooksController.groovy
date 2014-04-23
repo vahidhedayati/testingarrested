@@ -51,6 +51,8 @@ class BooksController extends ArrestedController {
     }
 
     def save() {
+		
+		
         if (params.instance) {
             def data = JSON.parse(params.instance)
             Books instance = new Books() 

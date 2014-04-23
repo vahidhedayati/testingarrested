@@ -16,6 +16,20 @@ or from command line run:
 grails create-arrested-app
 ```
 
+If you get something like:
+```
+@ line 7, column 1.
+   import org.apache.shiro.crypto.hash.Sha256Hash
+   ^
+```
+run:
+```
+grails install-plugin shiro
+```
+
+try again
+
+
 This will show something like:
 ```
 | Created file grails-app/domain/arrested/ArrestedToken.groovy
