@@ -184,12 +184,12 @@ import arrested.ArrestedUser
 class BootStrap {
 
    def init = { servletContext ->
-	ArrestedUser user,user1
-		ArrestedToken token,token1
+	ArrestedUser user
+		ArrestedToken token
 		
 		user = new ArrestedUser(
-			username: "me@domain.com",
-			passwordHash: new Sha256Hash("password").toHex(),
+			username: "admin",
+			passwordHash: new Sha256Hash("admin").toHex(),
 			dateCreated: new Date()
 		).save()
 		
