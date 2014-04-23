@@ -25,6 +25,7 @@ class ArrestedController {
                 render instance.errors.allErrors as XML
             }
             json {
+				
                 response.status = 409
                 render instance.errors.allErrors as JSON
             }
@@ -32,6 +33,7 @@ class ArrestedController {
     }
 
     def renderConflict(conflict){
+		
         withFormat{
             xml {
                 response.status = 409
@@ -39,6 +41,7 @@ class ArrestedController {
             }
             json {
                 response.status = 409
+				println "-------------"+conflict
                 render conflict
             }
         }

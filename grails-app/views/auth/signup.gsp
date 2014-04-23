@@ -10,11 +10,15 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                <input type="text" name="username" data-ng-model="user.username" class="form-control" ng-minlength="4" ng-maxlength="10"  placeholder="${message(code: 'security.username.label', default: 'Username')}" required="" />
+                                <input type="text" name="username" data-ng-model="user.username" class="form-control" ng-minlength="4" ng-maxlength="50"   placeholder="${message(code: 'security.username.label', default: 'Username')}"   />
                                 <p ng-show="signUpForm1.username.$error.required" class="help-block"><g:message code="default.required.label" args="['username']" default="Username is required"/></p>
 								<p ng-show="!signUpForm1.username.$pristine && signUpForm1.username.$invalid" class="help-block"><g:message code="default.invalid.label" args="['username']" default="Invalid Username"/></p>
 								<p ng-show="signUpForm1.username.$error.minlength" class="help-block"><g:message code="default.minlength.label" args="['username']" default="Username too short"/></p>
 								<p ng-show="signUpForm1.username.$error.maxlength" class="help-block"><g:message code="default.maxlength.label" args="['username']" default="Username too long"/></p>
+								<p ng-show="signUpForm1.username.$error.uniqueEmail" class="help-block"><g:message code="default.mm.label" args="['username']" default="Username is mm"/></p>
+								<p ng-show="signUpForm1.username.$error.unique-email" class="help-block"><g:message code="default.smm.label" args="['username']" default="Username is smm"/></p>
+								<p ng-show="signUpForm1.username.$error.unique" class="help-block"><g:message code="default.smm.label" args="['username']" default="Username is usmm"/></p>
+                            
                             </div>
                         </div>
                         <div class="form-group">

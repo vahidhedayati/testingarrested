@@ -11,6 +11,9 @@ class ArrestedUserController extends ArrestedController {
 
     static allowedMethods = [show: "GET", list: "GET", save: "POST", update: "PUT", delete: "DELETE"]
 
+	def lookup() { 
+		println "------------"+params
+	}
     def show(String token) {
         if(token){
             ArrestedToken arrestedToken = ArrestedToken.findByToken(token)

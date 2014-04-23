@@ -46,3 +46,4 @@ testingarrested.directive('passwordMatch', [function () {
 	}
 	};
 }]);
+

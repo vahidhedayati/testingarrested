@@ -1,3 +1,12 @@
+         
+
+    <div data-ng-show="errors.showErrors" class="red">
+       
+            <div ng-repeat="error in errors.errorMessages">
+                <strong>Warning 2:</strong> <span ng-bind="error"></span>
+            </div>
+       
+    </div>
 <div class="container" data-ng-controller="UserCtrl"  data-ng-hide="appConfig.token!=''">
     <div class="row">
         <div class="col-md-6 col-md-offset-2" >

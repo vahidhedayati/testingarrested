@@ -1,8 +1,9 @@
+grails create-app demo
 
 
 BuildConfig.groovy
 ```groovy
-compile ':arrested:1.10'
+compile ':arrested:1.12'
 ```
 
 ggts (ctrl alt shift g) or grails command line run: 
@@ -55,19 +56,17 @@ Each time you create a domainClass and create-arrested-controller domainClass a 
 
 
 
-
-ggts (ctrl alt shift g) or grails command line run: 
 ```
-create-domain-class Books
+grails create-domain-class demo.Books
 
 
-create-domain-class Authors
+grails create-domain-class demo.Authors
 
 ```
 
 domainClass Books.groovy:
 ```groovy
-package grails.arrested.tester
+package demo
 
 class Books {
 	
@@ -81,18 +80,11 @@ class Books {
 	}
 }
 
-class Numbers {
-	Integer firstNumber
-    static constraints = {
-		firstNumber min:1, max:99
-    }
-}
-
 ```
 
 domainClass Authors.groovy:
 ```groovy
-package grails.arrested.tester
+package demo
 
 class Authors {
 	String firstName
@@ -110,8 +102,8 @@ class Authors {
 
 Create controllers:
 ```
-create-arrested-controller Books
-create-arrested-controller Authors
+grails create-arrested-controller Books
+grails create-arrested-controller Authors
 ```
 
 Typical output from creating controllers :
@@ -126,8 +118,8 @@ Typical output from creating controllers :
 
 Create views:
 ```
-create-arrested-view Books
-create-arrested-view Authors
+grails create-arrested-view Books
+grails create-arrested-view Authors
 ```
 
 Typical output from view creation:
