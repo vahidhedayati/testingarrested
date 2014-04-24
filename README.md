@@ -1,5 +1,12 @@
-grails create-app demo
 
+## You can watch this video to help understand what you are about to do : [arrested website video](https://www.youtube.com/watch?v=popG4gucZ0Y)
+
+
+Step 1: create a grails application
+
+```
+grails create-app demo
+```
 
 BuildConfig.groovy
 ```groovy
