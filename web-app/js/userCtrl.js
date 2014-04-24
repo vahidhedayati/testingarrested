@@ -4,17 +4,17 @@ function UserCtrl($rootScope, DAO){
     if(!$rootScope.appConfig){
         $rootScope.appConfig = {appName:'testingarrested', token:''};
         $rootScope.user = {username:'', passwordHash:''};
-        $rootScope.errors = {forgotPassword:false, showErrors:true,  showMissage:'', errorMessages:'', showMessage:true, showFunctionError:true, showServerError:true, showPasswordError:true};
+        $rootScope.errors = {forgotPassword:false, showErrors:true,  showMessage:true, showFunctionError:true, showServerError:true, showPasswordError:true};
     }
 
     function initializeVariables(){
         $rootScope.appConfig = {appName:'testingarrested', token:''};
         $rootScope.user = {username:'', passwordHash:''};
-        $rootScope.errors = {forgotPassword:false, showErrors:true, showMissage:'',errorMessages:'', showMessage:true, showFunctionError:true, showServerError:true, showPasswordError:true};
+        $rootScope.errors = {forgotPassword:false, showErrors:true,  showMessage:true, showFunctionError:true, showServerError:true, showPasswordError:true};
    }
 
     $rootScope.errorValidation = function(){
-    	 $rootScope.errors = {forgotPassword:false, showErrors:true, showMissage:'', errorMessages:'', showMessage:true, showFunctionError:true, showServerError:true, showPasswordError:true};
+    	 $rootScope.errors = {forgotPassword:false, showErrors:true,  showMessage:true, showFunctionError:true, showServerError:true, showPasswordError:true};
     };
 
     $rootScope.signup = function(){
@@ -45,9 +45,7 @@ function UserCtrl($rootScope, DAO){
                 if(result.response == "bad_login"){
                     $rootScope.errors.showErrors = true;
                     $rootScope.errors.showFunctionError = true;
-                   // $rootScope.errors.showMissage='bad login'+result;
-                   // $rootScope.errors.showMessage='bad login'+result;
-                    $rootScope.errors.errorMessages.push('bad login'+result);
+                    $rootScope.errors.errorMessages.push('bad login'+result.status+'--'+result.content);
 
 
                 }
@@ -61,9 +59,7 @@ function UserCtrl($rootScope, DAO){
             function(error){
                 $rootScope.errors.showErrors = true;
                 $rootScope.errors.showServerError = true;
-                $rootScope.errors.errorMessages.push('Error : '+error);
-               // $rootScope.errors.showMissage='Error'+result+'---'+error;
-               // $rootScope.errors.showMessage='Error'+result+'---'+error;
+                $rootScope.errors.errorMessages.push('Error : '+error.status+'--'+error.data);
             });
     };
 

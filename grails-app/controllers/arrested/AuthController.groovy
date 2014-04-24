@@ -83,15 +83,15 @@ class AuthController extends ArrestedController {
                         }
                     }
                     else{
-                        renderConflict("Username and/or password incorrect")
+                        renderConflict("${message(code: 'default.usernamepassword.invalid.label', default: 'Username and/or password incorrect')}")
                     }
                 }
                 else{
-                    renderConflict("Username and/or password incorrect")
+                    renderConflict("${message(code: 'default.usernamepassword.invalid.label', default: 'Username and/or password incorrect')}")
                 }
             }
             else{
-                renderMissingParam("passwordHash")
+                renderMissingParam("${message(code: 'default.passwordmissing.invalid.label', default: 'PasswordHash missing')}")
             }
         }
         else{

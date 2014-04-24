@@ -51,11 +51,11 @@ class ArrestedController {
         withFormat{
             xml {
                 response.status = 412
-                render param+" expected"
+                render param
             }
             json {
                 response.status = 412
-                render param+" expected"
+                render param
             }
         }
     }
