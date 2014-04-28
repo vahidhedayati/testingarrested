@@ -10,7 +10,7 @@ grails create-app demo
 
 BuildConfig.groovy
 ```groovy
-compile ':arrested:1.12'
+compile ':arrested:1.13'
 ```
 
 ggts (ctrl alt shift g) or grails command line run: 
@@ -22,20 +22,6 @@ or from command line run:
 ```
 grails create-arrested-app
 ```
-
-If you get something like:
-```
-@ line 7, column 1.
-   import org.apache.shiro.crypto.hash.Sha256Hash
-   ^
-```
-run:
-```
-grails install-plugin shiro
-```
-
-try again
-
 
 This will show something like:
 ```
@@ -121,7 +107,17 @@ class Authors {
 }
 ```
 
-Create controllers:
+
+
+# From 1.12 controller/view generation done in one command
+> grails arrested DomainClassName
+```
+grails arrested Books
+grails arrested Authors
+```
+
+
+Create controllers (pre 1.12) : 
 ```
 grails create-arrested-controller Books
 grails create-arrested-controller Authors
@@ -137,7 +133,7 @@ Typical output from creating controllers :
 ```
 
 
-Create views:
+Create views (pre 1.12) :
 ```
 grails create-arrested-view Books
 grails create-arrested-view Authors

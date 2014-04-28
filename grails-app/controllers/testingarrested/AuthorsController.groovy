@@ -30,11 +30,12 @@ class AuthorsController extends ArrestedController {
                 }
             }
             else{
-                renderNotFound(id, "Authors")
+				renderNotFound(id, "${message(code: 'default.Authors.notfound.label', default:'Authors not found')}")
+				
             }
         }
         else{
-            renderMissingParam("id")
+            renderMissingParam("${message(code: 'default.id.missing.label', default: 'id missing')}")
         }
     }
 
@@ -51,15 +52,16 @@ class AuthorsController extends ArrestedController {
     }
 
     def save() {
-        if (params.instance) {
-            def data = JSON.parse(params.instance)
-            Authors instance = new Authors() 
-                        if(data.emailAddress) instance.emailAddress = data.emailAddress
-                        
-                        if(data.firstName) instance.firstName = data.firstName
-                        
-                        if(data.surName) instance.surName = data.surName
-                        
+		if (request.JSON.instance) {
+			def data = request.JSON.instance
+			Authors instance = new Authors() 
+						if(data.emailAddress) instance.emailAddress = data.emailAddress
+						
+						if(data.firstName) instance.firstName = data.firstName
+						
+						if(data.surName) instance.surName = data.surName
+						
+
             if(instance.save(flush: true)){
                 withFormat {
                     xml {
@@ -77,7 +79,7 @@ class AuthorsController extends ArrestedController {
             }
         }
         else{
-            renderMissingParam("Authors")
+			renderMissingParam("${message(code: 'default.Authors.missing.label', default: 'Authors missing')}")
         }
     }
 
@@ -108,11 +110,11 @@ class AuthorsController extends ArrestedController {
                 }
             }
             else{
-                renderNotFound(data.id, "Authors")
+				renderNotFound(data.id, "${message(code: 'default.Authors.notfound.label', default: 'Authors not found')}")
             }
         }
         else{
-            renderMissingParam("Authors")
+			renderMissingParam("${message(code: 'default.Authors.missing.label', default: 'Authors missing')}")
         }
     }
 
@@ -124,20 +126,20 @@ class AuthorsController extends ArrestedController {
                 withFormat {
                     xml {
                         response.status = 200
-                        render "Authors deleted"
+						render "${message(code: 'default.Authors.deleted.label', default: 'Authors deleted')}"
                     }
                     json {
                         response.status = 200
-                        render "Authors deleted"
+						render "${message(code: 'default.Authors.deleted.label', default: 'Authors deleted')}"
                     }
                 }
             }
             else{
-                renderNotFound(id, "Authors")
+				renderNotFound(id, "${message(code: 'default.Authors.notfound.label', default: 'Authors not found')}")
             }
         }
         else{
-            renderMissingParam("id")
+			renderMissingParam("${message(code: 'default.id.missing.label', default: 'id missing')}")
         }
     }
 }

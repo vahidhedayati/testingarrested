@@ -24,37 +24,6 @@ class AuthController extends ArrestedController {
 			}
 		}
 	}
-	def signup(String username, String passwordHash,String passwordConfirm){
-		if(username){
-			if((passwordHash&&passwordConfirm)&&(passwordHash.equals(passwordConfirm))){
-				ArrestedUser user = ArrestedUser.findByUsername(username)
-				if(!user){
-					ArrestedUser suser
-					ArrestedToken token
-					suser = new ArrestedUser(
-						username: username,
-						passwordHash: new Sha256Hash(password).toHex(),
-						dateCreated: new Date()
-					).save()
-					 //Create tokens for users
-					token = new ArrestedToken(
-						token: 'token',
-						valid: true,
-						owner: suser.id
-					).save(flush: true)
-					suser.setToken(token.id)
-					suser.save()
-				}
-				login(username,passwordHash)
-			}
-			else{
-				renderMissingParam("passwordHash")
-			}
-		}
-		else{
-			renderMissingParam("username")
-		}
-	}
 
     def login(String username, String passwordHash){
         if(username){
@@ -87,15 +56,15 @@ class AuthController extends ArrestedController {
                     }
                 }
                 else{
-                    renderConflict("${message(code: 'default.usernamepassword.invalid.label', default: 'Username and/or password incorrect')}")
+                   renderConflict("${message(code: 'default.usernamepassword.invalid.label', default: 'Username and/or password incorrect')}")
                 }
             }
             else{
-                renderMissingParam("${message(code: 'default.passwordmissing.invalid.label', default: 'PasswordHash missing')}")
+                renderMissingParam("${message(code: 'default.password.missing.label', default: 'PasswordHash missing')}")
             }
         }
         else{
-            renderMissingParam("username")
+            renderMissingParam("${message(code: 'default.username.missing.label', default: 'Username missing')}")
         }
     }
 
@@ -109,23 +78,23 @@ class AuthController extends ArrestedController {
                     arrestedToken.save(flush: true)
                     withFormat{
                         xml {
-                            render "Logout successfully"
+                            render "${message(code: 'default.logout.success.label', default: 'Logout successfully')}"
                         }
                         json  {
-                            render "Logout successfully"
+                            render "${message(code: 'default.logout.success.label', default: 'Logout successfully')}"
                         }
                     }
                 }
                 else{
-                    renderNotFound("", "User")
+                    renderNotFound("", "${message(code: 'default.user.notfound.label', default: 'User not found')}")
                 }
             }
             else{
-                renderNotFound("", "Token")
+                renderNotFound("", "${message(code: 'default.token.notfound.label', default: 'Token not found')}")
             }
         }
         else{
-            renderMissingParam("token")
+            renderMissingParam("${message(code: 'default.token.missing.label', default: 'Token missing')}")
         }
     }
 }

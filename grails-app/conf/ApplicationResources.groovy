@@ -14,10 +14,9 @@ modules = {
     angularControllers {
         dependsOn 'ngRoute'
         resource url:'js/userCtrl.js'
-        resource url:'js/AuthorsCtrl.js'
-        resource url:'js/UploadCtrl.js'
         resource url:'js/NumbersCtrl.js'
         resource url:'js/BooksCtrl.js'
+        resource url:'js/AuthorsCtrl.js'
     }
 
     ngRoute {

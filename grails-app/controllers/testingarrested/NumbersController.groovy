@@ -30,11 +30,12 @@ class NumbersController extends ArrestedController {
                 }
             }
             else{
-                renderNotFound(id, "Numbers")
+				renderNotFound(id, "${message(code: 'default.Numbers.notfound.label', default:'Numbers not found')}")
+				
             }
         }
         else{
-            renderMissingParam("id")
+            renderMissingParam("${message(code: 'default.id.missing.label', default: 'id missing')}")
         }
     }
 
@@ -51,11 +52,12 @@ class NumbersController extends ArrestedController {
     }
 
     def save() {
-        if (params.instance) {
-            def data = JSON.parse(params.instance)
-            Numbers instance = new Numbers() 
-                        if(data.firstNumber) instance.firstNumber = data.firstNumber
-                        
+		if (request.JSON.instance) {
+			def data = request.JSON.instance
+			Numbers instance = new Numbers() 
+						if(data.firstNumber) instance.firstNumber = data.firstNumber
+						
+
             if(instance.save(flush: true)){
                 withFormat {
                     xml {
@@ -73,7 +75,7 @@ class NumbersController extends ArrestedController {
             }
         }
         else{
-            renderMissingParam("Numbers")
+			renderMissingParam("${message(code: 'default.Numbers.missing.label', default: 'Numbers missing')}")
         }
     }
 
@@ -100,11 +102,11 @@ class NumbersController extends ArrestedController {
                 }
             }
             else{
-                renderNotFound(data.id, "Numbers")
+				renderNotFound(data.id, "${message(code: 'default.Numbers.notfound.label', default: 'Numbers not found')}")
             }
         }
         else{
-            renderMissingParam("Numbers")
+			renderMissingParam("${message(code: 'default.Numbers.missing.label', default: 'Numbers missing')}")
         }
     }
 
@@ -116,20 +118,20 @@ class NumbersController extends ArrestedController {
                 withFormat {
                     xml {
                         response.status = 200
-                        render "Numbers deleted"
+						render "${message(code: 'default.Numbers.deleted.label', default: 'Numbers deleted')}"
                     }
                     json {
                         response.status = 200
-                        render "Numbers deleted"
+						render "${message(code: 'default.Numbers.deleted.label', default: 'Numbers deleted')}"
                     }
                 }
             }
             else{
-                renderNotFound(id, "Numbers")
+				renderNotFound(id, "${message(code: 'default.Numbers.notfound.label', default: 'Numbers not found')}")
             }
         }
         else{
-            renderMissingParam("id")
+			renderMissingParam("${message(code: 'default.id.missing.label', default: 'id missing')}")
         }
     }
 }

@@ -30,11 +30,12 @@ class BooksController extends ArrestedController {
                 }
             }
             else{
-                renderNotFound(id, "Books")
+				renderNotFound(id, "${message(code: 'default.Books.notfound.label', default:'Books not found')}")
+				
             }
         }
         else{
-            renderMissingParam("id")
+            renderMissingParam("${message(code: 'default.id.missing.label', default: 'id missing')}")
         }
     }
 
@@ -51,23 +52,22 @@ class BooksController extends ArrestedController {
     }
 
     def save() {
-		
-		
-        if (params.instance) {
-            def data = JSON.parse(params.instance)
-            Books instance = new Books() 
-                        if(data.author) instance.author = testingarrested.Authors.get(data.author.id as Long)
-                        
-                        if(data.content) instance.content = data.content
-                        
-                        if(data.displayOnMenu) instance.displayOnMenu = data.displayOnMenu
-                        
-                        if(data.name) instance.name = data.name
-                        
-                        if(data.orderby) instance.orderby = data.orderby
-                        
-                        if(data.pricerange) instance.pricerange = data.pricerange
-                        
+		if (request.JSON.instance) {
+			def data = request.JSON.instance
+			Books instance = new Books() 
+						if(data.author) instance.author = testingarrested.Authors.get(data.author.id as Long)
+						
+						if(data.content) instance.content = data.content
+						
+						if(data.displayOnMenu) instance.displayOnMenu = data.displayOnMenu
+						
+						if(data.name) instance.name = data.name
+						
+						if(data.orderby) instance.orderby = data.orderby
+						
+						if(data.pricerange) instance.pricerange = data.pricerange
+						
+
             if(instance.save(flush: true)){
                 withFormat {
                     xml {
@@ -85,7 +85,7 @@ class BooksController extends ArrestedController {
             }
         }
         else{
-            renderMissingParam("Books")
+			renderMissingParam("${message(code: 'default.Books.missing.label', default: 'Books missing')}")
         }
     }
 
@@ -122,11 +122,11 @@ class BooksController extends ArrestedController {
                 }
             }
             else{
-                renderNotFound(data.id, "Books")
+				renderNotFound(data.id, "${message(code: 'default.Books.notfound.label', default: 'Books not found')}")
             }
         }
         else{
-            renderMissingParam("Books")
+			renderMissingParam("${message(code: 'default.Books.missing.label', default: 'Books missing')}")
         }
     }
 
@@ -138,20 +138,20 @@ class BooksController extends ArrestedController {
                 withFormat {
                     xml {
                         response.status = 200
-                        render "Books deleted"
+						render "${message(code: 'default.Books.deleted.label', default: 'Books deleted')}"
                     }
                     json {
                         response.status = 200
-                        render "Books deleted"
+						render "${message(code: 'default.Books.deleted.label', default: 'Books deleted')}"
                     }
                 }
             }
             else{
-                renderNotFound(id, "Books")
+				renderNotFound(id, "${message(code: 'default.Books.notfound.label', default: 'Books not found')}")
             }
         }
         else{
-            renderMissingParam("id")
+			renderMissingParam("${message(code: 'default.id.missing.label', default: 'id missing')}")
         }
     }
 }

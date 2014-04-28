@@ -10,8 +10,8 @@ class BootStrap {
 		ArrestedToken token,token1
 		
 		user = new ArrestedUser(
-			username: "me@domain.com",
-			passwordHash: new Sha256Hash("password").toHex(),
+			username: "admin",
+			passwordHash: new Sha256Hash("admin").toHex(),
 			dateCreated: new Date()
 		).save()
 		
