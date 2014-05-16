@@ -16,7 +16,9 @@ class ArrestedUser {
         lastUpdated nullable: true
         token nullable: true
     }
-
+	
+	//static hasMany = [roles: ArrestedRole, permissions: String]
+	
     def toObject(){
         return [id: id,
                 username: username,

@@ -135,16 +135,7 @@ class BooksController extends ArrestedController {
             Books instance = Books.get(id)
             if (instance){
                 instance.delete(flush: true)
-                withFormat {
-                    xml {
-                        response.status = 200
-						render "${message(code: 'default.Books.deleted.label', default: 'Books deleted')}"
-                    }
-                    json {
-                        response.status = 200
-						render "${message(code: 'default.Books.deleted.label', default: 'Books deleted')}"
-                    }
-                }
+              	renderSuccess(id, "${message(code: 'default.Books.deleted.label', default: 'Books deleted')}")
             }
             else{
 				renderNotFound(id, "${message(code: 'default.Books.notfound.label', default: 'Books not found')}")

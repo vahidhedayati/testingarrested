@@ -6,6 +6,7 @@ testingarrested.config([
         $routeProvider.
             when('/login', {templateUrl: '/testingarrested/auth/showLogin', controller: 'UserCtrl'}).
             when('/signup', {templateUrl: '/testingarrested/auth/showSignup', controller: 'UserCtrl'}).
+            when('/updateinfo', {templateUrl: '/testingarrested/auth/showUpdateInfo', controller: 'UserCtrl'}).
             when('/numbers/create', {templateUrl: '/testingarrested/numbers/edit', controller: 'NumbersCtrl'}).
             when('/numbers/edit', {templateUrl: '/testingarrested/numbers/edit', controller: 'NumbersCtrl'}).
             when('/numbers/list', {templateUrl: '/testingarrested/numbers/listing', controller: 'NumbersCtrl'}).

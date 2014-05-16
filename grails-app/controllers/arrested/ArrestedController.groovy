@@ -44,6 +44,19 @@ class ArrestedController {
         }
     }
 
+	def renderSuccess(id, value) {
+		withFormat{
+			xml {
+				response.status = 200
+				render id+' '+value
+			}
+			json {
+				response.status = 200
+				render id+' '+value
+			}
+		}
+	}
+	
     def renderMissingParam(param){
         withFormat{
             xml {

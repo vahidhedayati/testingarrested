@@ -115,16 +115,7 @@ class NumbersController extends ArrestedController {
             Numbers instance = Numbers.get(id)
             if (instance){
                 instance.delete(flush: true)
-                withFormat {
-                    xml {
-                        response.status = 200
-						render "${message(code: 'default.Numbers.deleted.label', default: 'Numbers deleted')}"
-                    }
-                    json {
-                        response.status = 200
-						render "${message(code: 'default.Numbers.deleted.label', default: 'Numbers deleted')}"
-                    }
-                }
+              	renderSuccess(id, "${message(code: 'default.Numbers.deleted.label', default: 'Numbers deleted')}")
             }
             else{
 				renderNotFound(id, "${message(code: 'default.Numbers.notfound.label', default: 'Numbers not found')}")

@@ -10,7 +10,7 @@ grails create-app demo
 
 BuildConfig.groovy
 ```groovy
-compile ':arrested:1.13'
+compile ':arrested:1.16'
 ```
 
 ggts (ctrl alt shift g) or grails command line run: 
@@ -78,13 +78,25 @@ package demo
 class Books {
 	
 	String name
-	Authors author
-    static constraints = {
-    }
-	
+	String content
+	Integer orderby
+	Integer pricerange
+	Boolean displayOnMenu=false
+	static belongsTo = [ author: Authors]
+	static constraints = {
+		name(minLength: 5, maxLength:20,unique:true, blank: false, nullable: false, size:5..20,)	
+		pricerange min:4, max:10
+	}	
+	static mapping = {
+		content type: 'text'
+		orderby defaultValue: 1
+		displayOnMenu defaultValue: false
+		
+	}
 	String toString() {
 		"${name}"
 	}
+
 }
 
 ```
@@ -94,11 +106,15 @@ domainClass Authors.groovy:
 package demo
 
 class Authors {
+
 	String firstName
 	String surName
+	String emailAddress
 	static hasMany = [ books: Books]
-    static constraints = {
-    }
+	static constraints = {
+		emailAddress(minLength:5, maxLength:50,email:true,unique:true)
+
+	}
 	
 	
 	String toString() {
@@ -115,6 +131,7 @@ class Authors {
 grails arrested Books
 grails arrested Authors
 ```
+There is a bug with this process - when run from within ggts - the controllers/test units end up in default package - will look into this for 1.17 release. - if running from within ggts then use below commands, if grails command line then above will work
 
 
 Create controllers (pre 1.12) : 

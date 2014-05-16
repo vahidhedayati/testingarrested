@@ -15,28 +15,30 @@
                     <form name="signUpForm1"  class="form form-signup" role="form" novalidate>
                         
  				 	<div class="form-group">
-                    <div  class="control-group" ng-class="{'has-error': signUpForm1.username.$invalid && (signUpForm1.password.$dirty || signUpForm1.password.$pristine), 'has-success': !signUpForm1.username.$invalid && signUpForm1.username.$dirty && !signUpForm1.username.$pristine}" >
-                    <div class="input-group">
+                        <div class="input-group">
                     	<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                         <input type="text" name="username" data-ng-model="user.username" class="form-control" ng-minlength="4" ng-maxlength="40" placeholder="${message(code: 'security.username.label', default: 'Username')}" required="required" />
-						<span ng-show="!signUpForm1.username.$pristine && signUpForm1.username.$invalid" class="help-inline"><g:message code="default.invalid.label" args="['username']" default="Invalid Username"/></span>
-						<span ng-show="signUpForm1.username.$error.minlength" class="help-inline"><g:message code="default.minlength.label" args="['username']" default="Username too short"/></span>
-						<span ng-show="signUpForm1.username.$error.maxlength" class="help-inline"><g:message code="default.maxlength.label" args="['username']" default="Username too long"/></span>
-					</div>
-                    </div>
+						 <div class="error" ng-show="signUpForm1.username.$dirty && signUpForm1.username.$invalid">
+                        	<small class="error" ng-show="signUpForm1.username.$error.required"><g:message code="default.required.label" args="['username']" default="Required Username"/></small>
+							<small class="error" ng-show="signUpForm1.username.$invalid"><g:message code="default.invalid.label" args="['username']" default="Invalid Username"/></small>
+							<small class="error" ng-show="signUpForm1.username.$error.minlength"><g:message code="default.minlength.label" args="['username']" default="Username too short"/></small>
+							<small class="error" ng-show="signUpForm1.username.$error.maxlength"><g:message code="default.maxlength.label" args="['username']" default="Username too long"/></small>
+						</div>
+				    </div>
                     </div>
 
 
 	                <div class="form-group">
-	                <div  class="control-group" ng-class="{'has-error': (signUpForm1.password.$invalid ) && (signUpForm1.password.$dirty || signUpForm1.password.$pristine),  'has-success': !signUpForm1.password.$invalid && signUpForm1.password.$dirty&&!signUpForm1.password.$pristine  }" >
-					<div class="input-group">
+	               	<div class="input-group">
                      	<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                         <input type="text" name="preventAutoPass" id="preventAutoPass" style="display:none" />
-                        <input type="password" name="password" data-ng-model="user.passwordHash"     ng-maxlength="10" class="form-control" ng-minlength="1" placeholder="${message(code: 'security.password.label', default: 'Password')}" autocomplete="off" required="required"/>
-						<span ng-show="!signUpForm1.password.$pristine && signUpForm1.password.$invalid" class="help-inline"><g:message code="default.invalid.label" args="['password']" default="Invalid password"/></span>
-						<span ng-show="signUpForm1.password.$error.maxlength" class="help-inline"><g:message code="default.maxlength.label" args="['password']" default="Password too long"/></span>
-						
-					</div>
+                        <input type="password" name="password" data-ng-model="user.passwordHash" ng-minlength="4" ng-maxlength="10" class="form-control"  placeholder="${message(code: 'security.password.label', default: 'Password')}" autocomplete="off" required="required"/>
+						 <div class="error" ng-show="signUpForm1.password.$dirty && signUpForm1.password.$invalid">
+                        	<small class="error" ng-show="signUpForm1.password.$error.required"><g:message code="default.required.label" args="['password']" default="Required password"/></small>
+						 	<small class="error" ng-show="!signUpForm1.password.$pristine && signUpForm1.password.$invalid"><g:message code="default.invalid.label" args="['password']" default="Invalid password"/></small>
+							<small class="error" ng-show="signUpForm1.password.$error.minlength"><g:message code="default.minlength.label" args="['password']" default="Password too short"/></small>
+							<small class="error" ng-show="signUpForm1.password.$error.maxlength"><g:message code="default.maxlength.label" args="['password']" default="Password too long"/></small>	
+						</div>
                     </div>
 			  		</div>
 			  		

@@ -1,3 +1,4 @@
+
 #h1Header {
     font-size: 2.25em !important;
     text-align: center !important;
@@ -6,8 +7,11 @@
 .nav {
     min-height: 30px !important;
 }
+.clear{
+     clear: both;
+}
 #arrestedHeader{
-    background-color: #C8CCBE;
+	margin-top: 3em;
 }
 .footer{
     background: #C8CCBE !important;
@@ -24,6 +28,59 @@ body {
     max-width: 100% !important;
 }
 
+table {
+  border-collapse: separate;
+  border-spacing: 0 5px;
+}
+
+thead th {
+  background-color: #006DCC;
+  color: white;
+}
+
+
+th:hover, tr:hover {
+	background: #62A9FF;
+}
+
+th.sortable a {
+	background-position: right;
+	background-repeat: no-repeat;
+	padding-right: 1.1em;
+}
+
+th.asc a {
+	background-image: url(../images/skin/sorted_asc.gif);
+}
+
+th.desc a {
+	background-image: url(../images/skin/sorted_desc.gif);
+}
+
+.odd {
+	background: #f7f7f7;
+}
+
+.even {
+	background: #ffffff;
+}
+
+
+tbody td {
+  background-color: #EEEEEE;
+}
+
+tr td:first-child,
+tr th:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+tr td:last-child,
+tr th:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
 .left-inner-addon {
 	position: relative;
 }
@@ -47,4 +104,65 @@ body {
 	padding: 10px 12px;
 	pointer-events: none;
 }
+fieldset,
+.property-list {
+	margin: 0.6em 1.25em 0 1.25em;
+	padding: 0.3em 1.8em 1.25em;
+	position: relative;
+	zoom: 1;
+	border: none;
+}
+.property-list .fieldcontain {
+	list-style: none;
+	overflow: hidden;
+	zoom: 1;
+}
+.fieldcontain {
+	margin-top: 1em;
+}
+.fieldcontain label,
+.fieldcontain .property-label {
+	color: #666666;
+	text-align: right;
+	width: 25%;
+}
+.fieldcontain .property-label {
+	float: left;
+}
+.fieldcontain .property-value {
+	display: block;
+	margin-left: 27%;
+}
+.required-indicator {
+	color: #48802C;
+	display: inline-block;
+	font-weight: bold;
+	margin-left: 0.3em;
+	position: relative;
+	top: 0.1em;
+}
+.define-spinner {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline; 
+	width: 32px; 
+	padding: 0.35em;
+}
+.selected, .selected a {
+  background: #AAA;
+}
+.homeLogo {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline; 
+	margin-top: 0.30em;
+}
+.ng-pristine { 	border: 1px solid green; }
+.ng-dirty { border: 1px solid orange; }
+.ng-invalid.ng-dirty { border: 1px solid red; }
+.ng-valid.ng-dirty { border: 1px solid green; }
+input.ng-invalid-minlength.ng-dirty { border: 1px solid blue; }
+input.ng-invalid-maxlength.ng-dirty { border: 1px solid yellow; }
+input.ng-invalid { border: 1px solid red; }
+input.ng-valid { border: 1px solid green;}
 

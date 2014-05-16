@@ -123,16 +123,7 @@ class AuthorsController extends ArrestedController {
             Authors instance = Authors.get(id)
             if (instance){
                 instance.delete(flush: true)
-                withFormat {
-                    xml {
-                        response.status = 200
-						render "${message(code: 'default.Authors.deleted.label', default: 'Authors deleted')}"
-                    }
-                    json {
-                        response.status = 200
-						render "${message(code: 'default.Authors.deleted.label', default: 'Authors deleted')}"
-                    }
-                }
+              	renderSuccess(id, "${message(code: 'default.Authors.deleted.label', default: 'Authors deleted')}")
             }
             else{
 				renderNotFound(id, "${message(code: 'default.Authors.notfound.label', default: 'Authors not found')}")

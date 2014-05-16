@@ -9,7 +9,13 @@ import org.apache.shiro.crypto.hash.Sha256Hash
 class AuthController extends ArrestedController {
 
     static allowedMethods = [login: "POST", logout: "GET"]
-
+	def showUpdateInfo() {
+		withFormat {
+			html {
+				render(view: "update")
+			}
+		}
+	}
 	def showLogin() {
 		withFormat {
 			html {
