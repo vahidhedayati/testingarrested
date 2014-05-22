@@ -1,6 +1,7 @@
 
 ## You can watch this video to help understand what you are about to do : [arrested website video](https://www.youtube.com/watch?v=popG4gucZ0Y)
 
+### For screen shots check out https://github.com/vahidhedayati/testingarrested/wiki
 
 Step 1: create a grails application
 
