@@ -23,6 +23,7 @@ function BooksCtrl(DAO, $rootScope)
 
 	$rootScope.getAllBooks = function () {
 		//get all
+		$rootScope.errors.errorMessages=[];
 		DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'books', action: 'list'},
 		$rootScope.loading=true,
 		function (result) {
@@ -58,6 +59,7 @@ function BooksCtrl(DAO, $rootScope)
 	}
 
 	$rootScope.saveBooks = function () {
+		$rootScope.errors.errorMessages=[];
 		DAO.save({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, controller:'books', action:'save'},
 		function (result) {
 			$rootScope.books = result;
@@ -75,6 +77,7 @@ function BooksCtrl(DAO, $rootScope)
 	}
 
 	$rootScope.updateBooks = function () {
+		$rootScope.errors.errorMessages=[];
 		DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, controller:'books', action:'update'},
 		$rootScope.loading=true,
 		function (result) {
@@ -93,6 +96,7 @@ function BooksCtrl(DAO, $rootScope)
 	}
 
 	$rootScope.editBooks = function (books){
+		$rootScope.errors.errorMessages=[];
 		DAO.get({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, id: books.id, controller:'books', action:'show'},
 		$rootScope.loading=true,
 		function (result) {
@@ -110,6 +114,7 @@ function BooksCtrl(DAO, $rootScope)
 	}
 
 	$rootScope.confirmDeleteBooks = function () {
+		$rootScope.errors.errorMessages=[];
 		DAO.delete({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, id: $rootScope.books.id, controller:'books', action:'delete'},
 		$rootScope.loading=true,
 		function (result) {

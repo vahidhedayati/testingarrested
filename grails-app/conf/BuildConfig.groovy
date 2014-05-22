@@ -92,8 +92,8 @@ grails.project.dependency.resolution = {
 		
 		//compile ":rest:0.7"
 	
-		compile ":arrested:1.16"
+		//compile ":arrested:1.16"
 		
     }
 }
-//grails.plugin.location.'arrested' = "../grails-arrested-plugin"
+grails.plugin.location.'arrested' = "../grails-arrested-plugin"

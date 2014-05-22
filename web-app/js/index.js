@@ -6,7 +6,9 @@ testingarrested.config([
         $routeProvider.
             when('/login', {templateUrl: '/testingarrested/auth/showLogin', controller: 'UserCtrl'}).
             when('/signup', {templateUrl: '/testingarrested/auth/showSignup', controller: 'UserCtrl'}).
-            when('/updateinfo', {templateUrl: '/testingarrested/auth/showUpdateInfo', controller: 'UserCtrl'}).
+            when('/updatepassword', {templateUrl: '/testingarrested/auth/showUpdatePassword', controller: 'UserCtrl'}).
+            when('/updateusername', {templateUrl: '/testingarrested/auth/showUpdateUsername', controller: 'UserCtrl'}).
+            when('/confirmupdate', {templateUrl: '/testingarrested/auth/showUpdated', controller: 'UserCtrl'}).
             when('/numbers/create', {templateUrl: '/testingarrested/numbers/edit', controller: 'NumbersCtrl'}).
             when('/numbers/edit', {templateUrl: '/testingarrested/numbers/edit', controller: 'NumbersCtrl'}).
             when('/numbers/list', {templateUrl: '/testingarrested/numbers/listing', controller: 'NumbersCtrl'}).
@@ -22,6 +24,8 @@ testingarrested.config([
             otherwise({redirectTo: '/login'});
     }
 ]);
+
+// Password matching directive
 testingarrested.directive('passwordMatch', [function () {
 	return {
 	restrict: 'A',
@@ -43,3 +47,22 @@ testingarrested.directive('passwordMatch', [function () {
 	}
 	};
 }]);
+//uniqueUsername directive
+testingarrested.directive('uniqueUsername', ["$http", function($http){
+    return{
+        require: 'ngModel',
+			link: function (scope, element, attrs, ctrl) {
+            	element.bind('blur', function (e) {
+               	 if (!ctrl || !element.val()) return;
+                	var currentValue = element.val();
+					$http.put('auth/lookup', {username: currentValue}).success(function (res) {
+					ctrl.$setValidity('uniquser', true);
+				}).error(function (res) {
+					ctrl.$setValidity('uniquser', false);
+				});
+				});
+			}	
+    };
+}]);
+
+

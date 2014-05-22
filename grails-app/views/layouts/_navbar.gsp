@@ -16,20 +16,12 @@
 		</div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
     	<ul class="nav navbar-nav">
-			<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-            	<g:if test="${!(c.fullName.contains('DbdocController')||c.fullName.contains('ArrestedUser')||c.fullName.contains('ArrestedController')||c.fullName.contains('AuthController'))}">
-                	<li class="controller">
-                    	<a onclick='window.location.href="#/${c.logicalPropertyName}/list"' title="${message(code: 'default.'+c.name+'.update', default: ''+c.name+'')}">
-							<g:message code="default.${c.name}.label"  default="${c.name}"/>
-                        </a>
-                     </li>
-                  </g:if>
-              </g:each>
+			<li class="controller">
+				<div id="h2Header"><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/></div>
+			</li>
          </ul>
-
-
          <ul  class="nav navbar-nav navbar-right" >
-         	<li  class="dropdown">
+         	<li  class="dropdown controller">
 				<a class="dropdown-toggle" role="button" data-toggle="dropdown">
 					<span id="userMessage">
 						<span class="glyphicon glyphicon-user"></span>
@@ -38,14 +30,20 @@
 					 	<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu" role="menu">
-					<li ><i class="fa fa-gear icon-color"></i>
-						<a onclick='window.location.href="#/updateinfo"' title="${message(code: 'default.userdetails.update', default: 'Update info')}">
-							<g:message code="default.userdetails.update"  default="Update info"/>	
+					<li>
+						<a class="fa fa-gear icon-color" onclick='window.location.href="#/updateusername"' title="${message(code: 'default.username.update', default: 'Update Username')}">
+							<g:message code="default.username.update"  default="Update Username"/>	
+                        </a>
+					</li>
+
+					<li>
+						<a class="fa fa-gear icon-color" onclick='window.location.href="#/updatepassword"' title="${message(code: 'default.password.update', default: 'Update password')}">
+							<g:message code="default.password.update"  default="Update Password"/>	
                         </a>
 					</li>
 				</ul>
 			</li>
-			<li>
+			<li class="controller">
 				<a data-ng-controller='UserCtrl' data-ng-click='logout()' title="${message(code: 'security.signoff.label', default: 'Log out')}">
 					<span class="glyphicon glyphicon-log-out"></span> <g:message code="security.signoff.label" default="Sign Off"/>
 				</a>

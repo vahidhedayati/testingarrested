@@ -52,12 +52,20 @@ class ArrestedUserController extends ArrestedController {
     }
 
 	def save(){
-		def data = request.JSON
-
-		String username=data.username as String
-		String passwordHash=data.passwordHash as String
-		String passwordConfirm=data.passwordConfirm as String
-
+		def data=request.JSON
+		if (!data) {
+			instance=JSON.parse(params)
+		}
+		String username,passwordHash,passwordConfirm
+		if (data) {
+			username=data.username as String
+			passwordHash=data.passwordHash as String
+			passwordConfirm=data.passwordConfirm as String
+		}else{
+			username=params.username
+			passwordHash=params.passwordHash
+			passwordConfirm=params.passwordConfirm
+		}
 		if(username){
 			if((passwordHash&&passwordConfirm)&&(passwordHash.equals(passwordConfirm))){
 				if (ArrestedUser.findByUsername(username)) {
@@ -93,9 +101,111 @@ class ArrestedUserController extends ArrestedController {
 		}
 	}
 	
-    def update(String token) {
-		def data = request.JSON
+	def updateUsername(String token) {
 		def instance=request.JSON.instance
+		if (!instance) {
+			instance=JSON.parse(params.instance)
+		}
+		if(instance.username){
+			if(token){
+				ArrestedToken arrestedToken = ArrestedToken.findByToken(token)
+				if(arrestedToken){
+					ArrestedUser user = ArrestedUser.findByToken(arrestedToken.id)
+					if(user){
+						if (user.username != instance.username && ArrestedUser.findByUsername(instance.username as String)){
+							renderConflict("${message(code: 'default.username.used.label', default: 'Username already in use')}")
+						
+						} else if (user.username == instance.username){
+							renderConflict("${message(code: 'default.own.username.label', default: 'Can not set username to existing username')}")
+						} else {
+							user.properties = instance
+							if(user.save(flush: true)){
+								withFormat {
+									xml {
+										response.status = 200
+										render user.toObject() as XML
+									}
+									json {
+										response.status = 200
+										render user.toObject() as JSON
+									}
+								}
+							}
+							else{
+								render409orEdit(user)
+							}
+						}
+					}
+					else{
+						renderNotFound(data.id, "${message(code: 'default.user.notfound.label', default: 'User not found')}")
+					}
+				}
+				else{
+					renderNotFound("", "${message(code: 'default.token.notfound.label', default: 'Token not found')}")
+				}
+			}
+			else{
+				renderMissingParam("${message(code: 'default.token.missing.label', default: 'Token missing')}")
+			}
+		}
+		else{
+			renderMissingParam("${message(code: 'default.username.missing.label', default: 'Username missing')}")
+		}
+	}
+	
+	def updatePassword(String token) {
+		def instance=request.JSON.instance
+		if (!instance) {
+			instance=JSON.parse(params.instance)
+		}
+		if(instance.passwordHash){
+			if(token){
+				ArrestedToken arrestedToken = ArrestedToken.findByToken(token)
+				if(arrestedToken){
+					ArrestedUser user = ArrestedUser.findByToken(arrestedToken.id)
+					if(user){
+							instance.username=user.username
+							instance.passwordHash=new Sha256Hash(instance.passwordHash).toHex()
+							user.properties = instance
+							if(user.save(flush: true)){
+								withFormat {
+									xml {
+										response.status = 200
+										render user.toObject() as XML
+									}
+									json {
+										response.status = 200
+										render user.toObject() as JSON
+									}
+								}
+							}
+							else{
+								render409orEdit(user)
+							}
+					}
+					else{
+						renderNotFound(data.id, "${message(code: 'default.user.notfound.label', default: 'User not found')}")
+					}
+				}
+				else{
+					renderNotFound("", "${message(code: 'default.token.notfound.label', default: 'Token not found')}")
+				}
+			}
+			else{
+				renderMissingParam("${message(code: 'default.token.missing.label', default: 'Token missing')}")
+			}
+		}
+		else{
+			renderMissingParam("${message(code: 'default.username.missing.label', default: 'Username missing')}")
+		}
+	}
+
+	
+    def update(String token) {
+		def instance=request.JSON.instance
+		if (!instance) {
+			instance=JSON.parse(params.instance)
+		}
         if(instance.username){
             if(token){
                 ArrestedToken arrestedToken = ArrestedToken.findByToken(token)

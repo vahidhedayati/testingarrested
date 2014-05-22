@@ -16,14 +16,11 @@
 </head>
 <body>
 <g:render template="/layouts/navbar"/>
-<div class="clear"></div>
-<p></p>
 <div id="Content" class="container">
-<div id="arrestedHeader" role="banner"><h1 id="h1Header"><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/></h1></div>
+<g:render template="/layouts/controllers"/>
 <g:layoutBody/>
 </div>
 <div class="footer" role="contentinfo"></div>
-<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 <r:layoutResources />
 </body>
 </html>

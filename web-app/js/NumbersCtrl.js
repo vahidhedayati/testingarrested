@@ -23,6 +23,7 @@ function NumbersCtrl(DAO, $rootScope)
 
 	$rootScope.getAllNumbers = function () {
 		//get all
+		$rootScope.errors.errorMessages=[];
 		DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'numbers', action: 'list'},
 		$rootScope.loading=true,
 		function (result) {
@@ -58,6 +59,7 @@ function NumbersCtrl(DAO, $rootScope)
 	}
 
 	$rootScope.saveNumbers = function () {
+		$rootScope.errors.errorMessages=[];
 		DAO.save({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.numbers, controller:'numbers', action:'save'},
 		function (result) {
 			$rootScope.numbers = result;
@@ -75,6 +77,7 @@ function NumbersCtrl(DAO, $rootScope)
 	}
 
 	$rootScope.updateNumbers = function () {
+		$rootScope.errors.errorMessages=[];
 		DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.numbers, controller:'numbers', action:'update'},
 		$rootScope.loading=true,
 		function (result) {
@@ -93,6 +96,7 @@ function NumbersCtrl(DAO, $rootScope)
 	}
 
 	$rootScope.editNumbers = function (numbers){
+		$rootScope.errors.errorMessages=[];
 		DAO.get({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.numbers, id: numbers.id, controller:'numbers', action:'show'},
 		$rootScope.loading=true,
 		function (result) {
@@ -110,6 +114,7 @@ function NumbersCtrl(DAO, $rootScope)
 	}
 
 	$rootScope.confirmDeleteNumbers = function () {
+		$rootScope.errors.errorMessages=[];
 		DAO.delete({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.numbers, id: $rootScope.numbers.id, controller:'numbers', action:'delete'},
 		$rootScope.loading=true,
 		function (result) {

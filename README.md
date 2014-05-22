@@ -10,7 +10,7 @@ grails create-app demo
 
 BuildConfig.groovy
 ```groovy
-compile ':arrested:1.16'
+compile ':arrested:1.18'
 ```
 
 ggts (ctrl alt shift g) or grails command line run: 
@@ -131,7 +131,6 @@ class Authors {
 grails arrested Books
 grails arrested Authors
 ```
-There is a bug with this process - when run from within ggts - the controllers/test units end up in default package - will look into this for 1.17 release. - if running from within ggts then use below commands, if grails command line then above will work
 
 
 Create controllers (pre 1.12) : 

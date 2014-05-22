@@ -23,6 +23,7 @@ function AuthorsCtrl(DAO, $rootScope)
 
 	$rootScope.getAllAuthors = function () {
 		//get all
+		$rootScope.errors.errorMessages=[];
 		DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'authors', action: 'list'},
 		$rootScope.loading=true,
 		function (result) {
@@ -58,6 +59,7 @@ function AuthorsCtrl(DAO, $rootScope)
 	}
 
 	$rootScope.saveAuthors = function () {
+		$rootScope.errors.errorMessages=[];
 		DAO.save({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.authors, controller:'authors', action:'save'},
 		function (result) {
 			$rootScope.authors = result;
@@ -75,6 +77,7 @@ function AuthorsCtrl(DAO, $rootScope)
 	}
 
 	$rootScope.updateAuthors = function () {
+		$rootScope.errors.errorMessages=[];
 		DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.authors, controller:'authors', action:'update'},
 		$rootScope.loading=true,
 		function (result) {
@@ -93,6 +96,7 @@ function AuthorsCtrl(DAO, $rootScope)
 	}
 
 	$rootScope.editAuthors = function (authors){
+		$rootScope.errors.errorMessages=[];
 		DAO.get({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.authors, id: authors.id, controller:'authors', action:'show'},
 		$rootScope.loading=true,
 		function (result) {
@@ -110,6 +114,7 @@ function AuthorsCtrl(DAO, $rootScope)
 	}
 
 	$rootScope.confirmDeleteAuthors = function () {
+		$rootScope.errors.errorMessages=[];
 		DAO.delete({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.authors, id: $rootScope.authors.id, controller:'authors', action:'delete'},
 		$rootScope.loading=true,
 		function (result) {

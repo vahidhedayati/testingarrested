@@ -9,13 +9,27 @@ import org.apache.shiro.crypto.hash.Sha256Hash
 class AuthController extends ArrestedController {
 
     static allowedMethods = [login: "POST", logout: "GET"]
-	def showUpdateInfo() {
+	
+	def showUpdatePassword() {
 		withFormat {
 			html {
 				render(view: "update")
 			}
 		}
 	}
+	
+	def showUpdated() {
+		renderSuccess("","${message(code: 'default.details.updated.label', default: 'Information has been updated')}")
+	}
+	
+	def showUpdateUsername() {
+		withFormat {
+			html {
+				render(view: "update-username")
+			}
+		}
+	}
+	
 	def showLogin() {
 		withFormat {
 			html {
@@ -23,6 +37,7 @@ class AuthController extends ArrestedController {
 			}
 		}
 	}
+	
 	def showSignup() {
 		withFormat {
 			html {
@@ -30,7 +45,24 @@ class AuthController extends ArrestedController {
 			}
 		}
 	}
-
+	
+	def lookup(){
+		def data=request.JSON
+		if (!data) {
+			instance=JSON.parse(params)
+		}
+		String username=data.username as String
+		if(username){
+			if (ArrestedUser.findByUsername(username)) {
+				renderConflict("${message(code: 'default.username.used.label', default: 'Username already in use')}")
+			} else {
+				renderSuccess("0","${message(code: 'default.username.available.label', default: 'Username available')}")
+			}
+		} else {
+			renderMissingParam("${message(code: 'default.username.missing.label', default: 'Username missing')}")
+		}
+	}
+		
     def login(String username, String passwordHash){
         if(username){
             if(passwordHash){

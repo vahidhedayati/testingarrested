@@ -10,7 +10,6 @@ modules = {
         resource url:'http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js'
         resource url:'http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css'
         resource url:'http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'
-        resource url:'http://cdn.jsdelivr.net/foundation/5.1.1/css/foundation.min.css'
     }
 
     angularControllers {

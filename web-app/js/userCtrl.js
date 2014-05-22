@@ -33,6 +33,7 @@ function UserCtrl($rootScope, DAO){
     */	 
  
     $rootScope.signup = function(){
+    	$rootScope.errors.errorMessages=[];
         DAO.save({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller:'arrestedUser', action:'save' , username:$rootScope.user.username, passwordHash:$rootScope.user.passwordHash, passwordConfirm:$rootScope.user.passwordConfirm},
         $rootScope.loading=true,
         function(result){
@@ -51,6 +52,7 @@ function UserCtrl($rootScope, DAO){
     };
     
     $rootScope.login = function(){
+    	$rootScope.errors.errorMessages=[];
         DAO.save({appName: $rootScope.appConfig.appName, controller:'auth', action:'login', username:$rootScope.user.username, passwordHash:$rootScope.user.passwordHash},
         $rootScope.loading=true,
         function(result){
@@ -69,6 +71,7 @@ function UserCtrl($rootScope, DAO){
     };
 
     $rootScope.logout = function(){
+    	$rootScope.errors.errorMessages=[];
         DAO.get({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller:'auth', action:'logout'},
         $rootScope.loading=true,
         function(result){
@@ -86,8 +89,40 @@ function UserCtrl($rootScope, DAO){
 	};
 
    
-
+	 $rootScope.updatePassword= function(){
+		 $rootScope.errors.errorMessages=[];
+	        DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller:'arrestedUser', action:'updatePassword', instance:$rootScope.user},
+        	$rootScope.loading=true,
+        	function(result){
+                	$rootScope.user = result;
+                	$rootScope.loading=false;
+                	window.location.href="#/confirmupdate"
+            },
+            function(error){
+                $rootScope.errors.showErrors = true;
+                $rootScope.errors.showServerError = true;
+                $rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
+                $rootScope.loading=false;
+            });
+    };
+    $rootScope.updateUsername= function(){
+    	$rootScope.errors.errorMessages=[];
+        DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller:'arrestedUser', action:'updateUsername', instance:$rootScope.user},
+    	$rootScope.loading=true,
+    	function(result){
+            	$rootScope.user = result;
+            	$rootScope.loading=false;
+            	window.location.href="#/confirmupdate"
+        },
+        function(error){
+            $rootScope.errors.showErrors = true;
+            $rootScope.errors.showServerError = true;
+            $rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
+            $rootScope.loading=false;
+        });
+    };
     $rootScope.updateProfile= function(){
+    	$rootScope.errors.errorMessages=[];
         DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller:'arrestedUser', action:'update', instance:$rootScope.user},
         	$rootScope.loading=true,
         	function(result){

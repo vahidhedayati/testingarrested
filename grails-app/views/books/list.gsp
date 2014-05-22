@@ -36,11 +36,10 @@
                             
                             <th data-sortable="pricerange">Pricerange</th>
                             
-                            <th><g:message code="default.actions.label"  default="Actions"/></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="instance in (bookss|orderBy:'id':true|filter:search)">
+                        <tr data-ng-repeat="instance in (bookss|orderBy:'id':true|filter:search)" data-ng-click="editBooks(instance)">
                             
                             <td>{{instance.author}}</td>
                             
@@ -54,9 +53,6 @@
                             
                             <td>{{instance.pricerange}}</td>
                             
-                            <td>
-                            <a class="btn btn-mini btn-success" data-ng-show="books.id"  title="${message(code: 'default.update.label',args:['Books'], default: 'Update')}" data-ng-click="editBooks(instance)"><span class="glyphicon glyphicon-floppy-disk"></span><g:message code="default.update.label" args="['Books']" default="Update"/></a>
-                            </td>
                         </tr>
                         </tbody>
                     </table>

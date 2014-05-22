@@ -26,17 +26,13 @@
                             
                             <th data-sortable="firstNumber">First Number</th>
                             
-                            <th><g:message code="default.actions.label"  default="Actions"/></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="instance in (numberss|orderBy:'id':true|filter:search)">
+                        <tr data-ng-repeat="instance in (numberss|orderBy:'id':true|filter:search)" data-ng-click="editNumbers(instance)">
                             
                             <td>{{instance.firstNumber}}</td>
                             
-                            <td>
-                            <a class="btn btn-mini btn-success" data-ng-show="numbers.id"  title="${message(code: 'default.update.label',args:['Numbers'], default: 'Update')}" data-ng-click="editNumbers(instance)"><span class="glyphicon glyphicon-floppy-disk"></span><g:message code="default.update.label" args="['Numbers']" default="Update"/></a>
-                            </td>
                         </tr>
                         </tbody>
                     </table>

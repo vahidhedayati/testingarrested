@@ -30,11 +30,10 @@
                             
                             <th data-sortable="surName">Sur Name</th>
                             
-                            <th><g:message code="default.actions.label"  default="Actions"/></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="instance in (authorss|orderBy:'id':true|filter:search)">
+                        <tr data-ng-repeat="instance in (authorss|orderBy:'id':true|filter:search)" data-ng-click="editAuthors(instance)">
                             
                             <td>{{instance.emailAddress}}</td>
                             
@@ -42,9 +41,6 @@
                             
                             <td>{{instance.surName}}</td>
                             
-                            <td>
-                            <a class="btn btn-mini btn-success" data-ng-show="authors.id"  title="${message(code: 'default.update.label',args:['Authors'], default: 'Update')}" data-ng-click="editAuthors(instance)"><span class="glyphicon glyphicon-floppy-disk"></span><g:message code="default.update.label" args="['Authors']" default="Update"/></a>
-                            </td>
                         </tr>
                         </tbody>
                     </table>
