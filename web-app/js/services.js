@@ -1,5 +1,5 @@
 'use strict';
-angular.module('services',['ngResource']).
+angular.module('services',['ngResource','ngTable']).
     factory('DAO', function($resource){
         return $resource('/:appName/:controller/:action',{
             format:'json', callback:'JSON_CALLBACK'},{

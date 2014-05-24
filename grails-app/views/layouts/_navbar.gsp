@@ -1,5 +1,4 @@
-
-		<nav id="Navbar" class="navbar navbar-fixed-top navbar-inverse" role="navigation" data-ng-show="appConfig.token!=''">
+<nav id="Navbar" class="navbar navbar-fixed-top navbar-inverse" role="navigation" data-ng-show="appConfig.token!=''">
 		<div class="container-fluid" data-ng-controller="UserCtrl" >
 	
 	    <div class="navbar-header">
@@ -10,7 +9,7 @@
 	           	<span class="icon-bar"></span>
 			</button>
 			<div class="define-spinner">
-				<div ng-show="loading"><i class="fa fa-spinner fa-2x fa-spin fa-inverse"></i></div>
+				<div ng-show="loadingSite"><i class="fa fa-spinner fa-2x fa-spin fa-inverse"></i></div>
 			</div>
 			<a class="homeLogo" href="#/"><i class="fa fa-home fa-2x icon-color fa-inverse"></i></a>
 		</div>
@@ -53,4 +52,3 @@
 		</div>
 	</div>
 </nav>
-

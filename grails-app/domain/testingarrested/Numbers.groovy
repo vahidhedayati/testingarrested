@@ -3,6 +3,6 @@ package testingarrested
 class Numbers {
 	Integer firstNumber
     static constraints = {
-		firstNumber min:4, max:10
+		firstNumber min:1, max:50
     }
 }

@@ -52,11 +52,15 @@ class ArrestedUserController extends ArrestedController {
     }
 
 	def save(){
+		String username
+		String passwordHash
+		String passwordConfirm
+		
 		def data=request.JSON
-		if (!data) {
-			instance=JSON.parse(params)
-		}
-		String username,passwordHash,passwordConfirm
+		/*if (!data) {
+			data=JSON.parse(params)
+		}*/
+		
 		if (data) {
 			username=data.username as String
 			passwordHash=data.passwordHash as String
@@ -66,6 +70,7 @@ class ArrestedUserController extends ArrestedController {
 			passwordHash=params.passwordHash
 			passwordConfirm=params.passwordConfirm
 		}
+		
 		if(username){
 			if((passwordHash&&passwordConfirm)&&(passwordHash.equals(passwordConfirm))){
 				if (ArrestedUser.findByUsername(username)) {

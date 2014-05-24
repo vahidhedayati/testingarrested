@@ -39,9 +39,9 @@
             <label class="control-label" for="firstNumber">
                 firstNumber
             </label>
-            <div class="input-group"><input class="form-control" name="firstNumber" type="number" min="4" max="10" data-ng-model='numbers.firstNumber'  required="required"/>
+            <div class="input-group"><input class="form-control" name="firstNumber" type="number" min="1" max="50" data-ng-model='numbers.firstNumber'  required="required"/>
 		<div class="error" ng-show="numbersForm.firstNumber.$dirty && numbersForm.firstNumber.$invalid">
-		<small class="error" ng-show="!numbersForm.firstNumber.$pristine && numbersForm.firstNumber.$invalid"><g:message code="default.invalid.label" args="['firstNumber']" default="Invalid firstNumber "/> <g:message code="default.min.label" args="['4']" default=" min: 4 "/><g:message code="default.max.label" args="['10']" default=" max: 10 "/></small>
+		<small class="error" ng-show="!numbersForm.firstNumber.$pristine && numbersForm.firstNumber.$invalid"><g:message code="default.invalid.label" args="['firstNumber']" default=" Invalid firstNumber : "/> <g:message code="default.min.label" args="['1']" default=" min: 1 "/><g:message code="default.max.label" args="['50']" default=" max: 50 "/></small>
 		<small class="error" ng-show="numbersForm.firstNumber.$error.number"><g:message code="default.invalid.number.label" args="['firstNumber']" default=" Invalid firstNumber "/></small></div></div>
         </div>
         

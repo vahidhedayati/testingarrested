@@ -10,7 +10,6 @@
 	
         <div>
             <p></p>
-             <input type="search" placeholder="${message(code:'default.filter.label', default:'Filter results')}" ng-model="search"/>
              <a class="btn btn-primary btn-primary" data-ng-click="newAuthors()"><span class="glyphicon glyphicon-plus"></span><g:message code="default.new.label" args="['authors']" default="New authors"/></a>
             <p></p>
         </div>
@@ -18,32 +17,37 @@
             <div>
                 <div>
                     
-					
-					
-                    <table class="table table-condensed table-striped table-responsive table-hover">
-                        <thead>
-                        <tr>
+					<button ng-click="tableParams.reload()" class="btn btn-default">Reload</button>
+    				<button ng-click="tableParams.sorting({})" class="btn btn-default">Clear sorting</button> 
+					<div loading-container="tableParams.settings().$loading">
+                    <table class="table"  ng-table="tableParams" show-filter="true">
+                     
+                        <tr  data-ng-repeat="instance in authorss"   data-ng-click="editAuthors(instance)">
+                        	
                             
-                            <th data-sortable="emailAddress">Email Address</th>
+                            	
+                             		<td data-sortable="'emailAddress'" filter="{ 'emailAddress': 'text' }"  data-title="'emailAddress'"  >
+                            	
+                            	{{instance.emailAddress}}
+                            </td>
                             
-                            <th data-sortable="firstName">First Name</th>
+                            	
+                            		<td data-sortable="'firstName'"  data-title="'firstName'"  >
+                            	
+                            	{{instance.firstName}}
+                            </td>
                             
-                            <th data-sortable="surName">Sur Name</th>
+                            	
+                            		<td data-sortable="'surName'"  data-title="'surName'"  >
+                            	
+                            	{{instance.surName}}
+                            </td>
                             
                         </tr>
-                        </thead>
-                        <tbody>
-                        <tr data-ng-repeat="instance in (authorss|orderBy:'id':true|filter:search)" data-ng-click="editAuthors(instance)">
-                            
-                            <td>{{instance.emailAddress}}</td>
-                            
-                            <td>{{instance.firstName}}</td>
-                            
-                            <td>{{instance.surName}}</td>
-                            
-                        </tr>
-                        </tbody>
+                      
                     </table>
+                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import org.apache.shiro.crypto.hash.Sha256Hash
 
+import testingarrested.Numbers
 import arrested.ArrestedToken
 import arrested.ArrestedUser
 
@@ -24,8 +25,13 @@ class BootStrap {
 		user.setToken(token.id)
 		user.save()
 		
-    
+		for (i in 1..40) { 
+			Numbers.findOrSaveWhere(firstNumber: i)
+		}
+				
     }
+   	
     def destroy = {
     }
 }
+

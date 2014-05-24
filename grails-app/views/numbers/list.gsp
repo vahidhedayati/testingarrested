@@ -10,7 +10,6 @@
 	
         <div>
             <p></p>
-             <input type="search" placeholder="${message(code:'default.filter.label', default:'Filter results')}" ng-model="search"/>
              <a class="btn btn-primary btn-primary" data-ng-click="newNumbers()"><span class="glyphicon glyphicon-plus"></span><g:message code="default.new.label" args="['numbers']" default="New numbers"/></a>
             <p></p>
         </div>
@@ -18,24 +17,25 @@
             <div>
                 <div>
                     
-					
-					
-                    <table class="table table-condensed table-striped table-responsive table-hover">
-                        <thead>
-                        <tr>
+					<button ng-click="tableParams.reload()" class="btn btn-default">Reload</button>
+    				<button ng-click="tableParams.sorting({})" class="btn btn-default">Clear sorting</button> 
+					<div loading-container="tableParams.settings().$loading">
+                    <table class="table"  ng-table="tableParams" show-filter="true">
+                     
+                        <tr  data-ng-repeat="instance in numberss"   data-ng-click="editNumbers(instance)">
+                        	
                             
-                            <th data-sortable="firstNumber">First Number</th>
+                            	
+                             		<td data-sortable="'firstNumber'" filter="{ 'firstNumber': 'text' }"  data-title="'firstNumber'"  >
+                            	
+                            	{{instance.firstNumber}}
+                            </td>
                             
                         </tr>
-                        </thead>
-                        <tbody>
-                        <tr data-ng-repeat="instance in (numberss|orderBy:'id':true|filter:search)" data-ng-click="editNumbers(instance)">
-                            
-                            <td>{{instance.firstNumber}}</td>
-                            
-                        </tr>
-                        </tbody>
+                      
                     </table>
+                    </div>
+                    
                 </div>
             </div>
         </div>

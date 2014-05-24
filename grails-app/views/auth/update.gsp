@@ -23,9 +23,9 @@
                      	<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                         <input type="text" name="preventAutoPass" id="preventAutoPass" style="display:none" />
                         <input type="password" name="password" data-ng-model="user.passwordHash"   ng-pattern="/^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W]).*$/"  ng-maxlength="10" class="form-control" ng-minlength="1" placeholder="${message(code: 'security.password.label', default: 'Password')}" autocomplete="off" required="required"/>
-						<span ng-show="!signUpForm1.password.$pristine && signUpForm1.password.$invalid" class="help-inline"><g:message code="default.invalid.label" args="['password']" default="Invalid password"/></span>
-						<span ng-show="signUpForm1.password.$error.maxlength" class="help-inline"><g:message code="default.maxlength.label" args="['password']" default="Password too long"/></span>
-						<span ng-show="signUpForm1.password.$error.pattern" class="help-inline"><g:message code="default.password.pattern.label" args="['password']" default="password must be 8 characters, at least 1 uppercase character and 1 digit or special character."/></span>
+						<span ng-show="!signUpForm1.password.$pristine && signUpForm1.password.$invalid" class="help-inline"><g:message code="default.invalid.label" args="['password']" default=" Invalid password : "/></span>
+						<span ng-show="signUpForm1.password.$error.maxlength" class="help-inline"><g:message code="default.maxlength.label" args="['password']" default=" Password too long "/></span>
+						<span ng-show="signUpForm1.password.$error.pattern" class="help-inline"><g:message code="default.password.pattern.label" args="['password']" default=" Password must be 8 characters, at least 1 uppercase character and 1 digit or special character. "/></span>
 					</div>
                     </div>
 			  		</div>
@@ -36,9 +36,9 @@
                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                         <input type="text" name="preventAutoPass" id="preventAutoPass" style="display:none" />
                         <input type="password" name="passwordConfirm" data-ng-model="user.passwordConfirm"   password-match="user.passwordHash" class="form-control"  ng-maxlength="10" placeholder="${message(code: 'security.password.confirm.label', default: 'Confirm Password')}" autocomplete="off" required="required"/>
-						<span ng-show="!signUpForm1.passwordConfirm.$pristine && signUpForm1.username.$invalid" class="help-inline"><g:message code="default.invalid.label" args="['passwordConfirm']" default="Invalid passwordConfirm"/></span>
-						<span ng-show="signUpForm1.passwordConfirm.$error.maxlength" class="help-inline"><g:message code="default.maxlength.label" args="['passwordConfirm']" default="Password too long"/></span>
-						<span ng-show="signUpForm1.passwordConfirm.$error.unique && signUpForm1.passwordConfirm.$dirty" class="help-inline"><g:message code="default.password.unique.label" args="['password']" default="Password confirmation does not match Password"/></span>
+						<span ng-show="!signUpForm1.passwordConfirm.$pristine && signUpForm1.username.$invalid" class="help-inline"><g:message code="default.invalid.label" args="['passwordConfirm']" default=" Invalid confirmation : "/></span>
+						<span ng-show="signUpForm1.passwordConfirm.$error.maxlength" class="help-inline"><g:message code="default.maxlength.label" args="['passwordConfirm']" default=" Confirmation too long "/></span>
+						<span ng-show="signUpForm1.passwordConfirm.$error.unique && signUpForm1.passwordConfirm.$dirty" class="help-inline"><g:message code="default.password.unique.label" args="['password']" default=" Confirmation does not match Password "/></span>
                    </div>
                    </div>
                    </div>

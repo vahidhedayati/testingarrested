@@ -41,7 +41,7 @@
             </label>
             <div class="input-group"><input type="email" class="form-control" name="emailAddress" required="required" data-ng-model='authors.emailAddress' />
 		<div class="error" ng-show="authorsForm.emailAddress.$dirty && authorsForm.emailAddress.$invalid">
-		<small class="error" ng-show="!authorsForm.emailAddress.$pristine && authorsForm.emailAddress.$invalid"><g:message code="default.invalid.label" args="['emailAddress']" default="Invalid emailAddress "/> </small></div></div>
+		<small class="error" ng-show="!authorsForm.emailAddress.$pristine && authorsForm.emailAddress.$invalid"><g:message code="default.invalid.label" args="['emailAddress']" default=" Invalid emailAddress : "/> </small></div></div>
         </div>
         
         <div class="form-group">
@@ -50,7 +50,7 @@
             </label>
             <div class="input-group"><input type="text" class="form-control" name="firstName" required="required" data-ng-model='authors.firstName' />
 		<div class="error" ng-show="authorsForm.firstName.$dirty && authorsForm.firstName.$invalid">
-		<small class="error" ng-show="!authorsForm.firstName.$pristine && authorsForm.firstName.$invalid"><g:message code="default.invalid.label" args="['firstName']" default="Invalid firstName "/> </small></div></div>
+		<small class="error" ng-show="!authorsForm.firstName.$pristine && authorsForm.firstName.$invalid"><g:message code="default.invalid.label" args="['firstName']" default=" Invalid firstName : "/> </small></div></div>
         </div>
         
         <div class="form-group">
@@ -59,7 +59,7 @@
             </label>
             <div class="input-group"><input type="text" class="form-control" name="surName" required="required" data-ng-model='authors.surName' />
 		<div class="error" ng-show="authorsForm.surName.$dirty && authorsForm.surName.$invalid">
-		<small class="error" ng-show="!authorsForm.surName.$pristine && authorsForm.surName.$invalid"><g:message code="default.invalid.label" args="['surName']" default="Invalid surName "/> </small></div></div>
+		<small class="error" ng-show="!authorsForm.surName.$pristine && authorsForm.surName.$invalid"><g:message code="default.invalid.label" args="['surName']" default=" Invalid surName : "/> </small></div></div>
         </div>
         
         

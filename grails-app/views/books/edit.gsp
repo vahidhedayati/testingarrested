@@ -48,7 +48,7 @@
             </label>
             <div class="input-group"><input type="text" class="form-control" name="content" required="required" data-ng-model='books.content' />
 		<div class="error" ng-show="booksForm.content.$dirty && booksForm.content.$invalid">
-		<small class="error" ng-show="!booksForm.content.$pristine && booksForm.content.$invalid"><g:message code="default.invalid.label" args="['content']" default="Invalid content "/> </small></div></div>
+		<small class="error" ng-show="!booksForm.content.$pristine && booksForm.content.$invalid"><g:message code="default.invalid.label" args="['content']" default=" Invalid content : "/> </small></div></div>
         </div>
         
         <div class="form-group">
@@ -64,12 +64,12 @@
             </label>
             <div class="input-group"><input type="text" class="form-control" name="name" ng-minlength="5" ng-maxlength="20" required="required" data-ng-model='books.name' />
 		<div class="error" ng-show="booksForm.name.$dirty && booksForm.name.$invalid">
-		<small class="error" ng-show="!booksForm.name.$pristine && booksForm.name.$invalid"><g:message code="default.invalid.label" args="['name']" default="Invalid name "/> <g:message code="default.minSize.label" args="['5']" default=" minSize: 5 "/>
+		<small class="error" ng-show="!booksForm.name.$pristine && booksForm.name.$invalid"><g:message code="default.invalid.label" args="['name']" default=" Invalid name : "/> <g:message code="default.minSize.label" args="['5']" default=" minSize: 5 "/>
 <g:message code="default.maxSize.label" args="['20']" default=" maxSize: 20 "/>
 </small>
-		<small class="error" ng-show="booksForm.name.$error.minlength"><g:message code="default.short.label" args="['name']" default=" name too short"/></small>
+		<small class="error" ng-show="booksForm.name.$error.minlength"><g:message code="default.short.label" args="['name']" default=" name too short "/></small>
 
-		<small class="error" ng-show="booksForm.name.$error.maxlength"><g:message code="default.long.label" args="['name']" default=" name too long"/></small>
+		<small class="error" ng-show="booksForm.name.$error.maxlength"><g:message code="default.long.label" args="['name']" default=" name too long "/></small>
 </div></div>
         </div>
         
@@ -79,7 +79,7 @@
             </label>
             <div class="input-group"><input class="form-control" name="orderby" type="number" data-ng-model='books.orderby'  required="required"/>
 		<div class="error" ng-show="booksForm.orderby.$dirty && booksForm.orderby.$invalid">
-		<small class="error" ng-show="!booksForm.orderby.$pristine && booksForm.orderby.$invalid"><g:message code="default.invalid.label" args="['orderby']" default="Invalid orderby "/> </small>
+		<small class="error" ng-show="!booksForm.orderby.$pristine && booksForm.orderby.$invalid"><g:message code="default.invalid.label" args="['orderby']" default=" Invalid orderby : "/> </small>
 		<small class="error" ng-show="booksForm.orderby.$error.number"><g:message code="default.invalid.number.label" args="['orderby']" default=" Invalid orderby "/></small></div></div>
         </div>
         
@@ -89,7 +89,7 @@
             </label>
             <div class="input-group"><input class="form-control" name="pricerange" type="number" min="4" max="10" data-ng-model='books.pricerange'  required="required"/>
 		<div class="error" ng-show="booksForm.pricerange.$dirty && booksForm.pricerange.$invalid">
-		<small class="error" ng-show="!booksForm.pricerange.$pristine && booksForm.pricerange.$invalid"><g:message code="default.invalid.label" args="['pricerange']" default="Invalid pricerange "/> <g:message code="default.min.label" args="['4']" default=" min: 4 "/><g:message code="default.max.label" args="['10']" default=" max: 10 "/></small>
+		<small class="error" ng-show="!booksForm.pricerange.$pristine && booksForm.pricerange.$invalid"><g:message code="default.invalid.label" args="['pricerange']" default=" Invalid pricerange : "/> <g:message code="default.min.label" args="['4']" default=" min: 4 "/><g:message code="default.max.label" args="['10']" default=" max: 10 "/></small>
 		<small class="error" ng-show="booksForm.pricerange.$error.number"><g:message code="default.invalid.number.label" args="['pricerange']" default=" Invalid pricerange "/></small></div></div>
         </div>
         

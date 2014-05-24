@@ -1,5 +1,5 @@
 'use strict';
-function BooksCtrl(DAO, $rootScope)
+function BooksCtrl(DAO, $rootScope, $filter, ngTableParams)
 {
 	if ($rootScope.appConfig) {
 		if (!$rootScope.appConfig.token!='') {
@@ -8,11 +8,9 @@ function BooksCtrl(DAO, $rootScope)
 	}
 
 	$rootScope.flags = {save: false};
-	
-	$rootScope.errors = {loading: false, showErrors: false, showServerError: false,errorMessages:[]};
-	
+	$rootScope.errors = {loadingSite: false, showErrors: false, showServerError: false,errorMessages:[]};
 	$rootScope.errorValidation = function(){
-	   $rootScope.errors = {loading: true};
+	   $rootScope.errors = {loadingSite: true};
 	};
 	
 	if(!$rootScope.books){
@@ -21,32 +19,75 @@ function BooksCtrl(DAO, $rootScope)
 		$rootScope.books = {};
 	}
 
+	
 	$rootScope.getAllBooks = function () {
 		//get all
 		$rootScope.errors.errorMessages=[];
+		$rootScope.tableParams = new ngTableParams({
+	            page: 1,            // show first page
+	            count: 10,           // count per page
+	            sorting: {
+	                id : 'desc' // initial sorting
+	            }
+	     }, {
+	     getData: function($defer, params) {
+		 DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'books', action: 'list'},	
+		 	$rootScope.loadingSite=true,
+		 	function (result) {
+			 	var putIt  = params.sorting() ? $filter('orderBy')(result, params.orderBy()): id;
+			 	params.total(putIt.length);
+                $defer.resolve(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+		        $rootScope.bookss = putIt;
+                $rootScope.loadingSite=false;   
+		    },
+		    function (error) {
+		        $rootScope.errors.showErrors = true;
+		        $rootScope.errors.showServerError = true;
+		        $rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
+		        $rootScope.loadingSite=false;
+		     });
+		        }
+		    });
+	
+	};
+	 
+	 
+	$rootScope.getAll1Books = function () {
+		//get all
+		$rootScope.errors.errorMessages=[];
 		DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'books', action: 'list'},
-		$rootScope.loading=true,
+		$rootScope.loadingSite=true,
 		function (result) {
 			$rootScope.bookss = result;
-			$rootScope.loading=false;   
+			$rootScope.tableParams = new ngTableParams({
+		         page: 1,            // show first page
+		         count: 10           // count per page
+		     }, {
+		    	 total: result.length, // length of data
+		         getData: function($defer, params) {
+		             $defer.resolve(result.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+		         }
+		     });
+			$rootScope.loadingSite=false;   
+			
 		},
 		function (error) {
 			$rootScope.errors.showErrors = true;
 			$rootScope.errors.showServerError = true;
 			$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
-			$rootScope.loading=false;
+			$rootScope.loadingSite=false;
 		});
 	};
 
 	$rootScope.newBooks = function () {
-		$rootScope.loading=true;
+		$rootScope.loadingSite=true;
 		$rootScope.books = {};
-		$rootScope.loading=false;
+		$rootScope.loadingSite=false;
 		window.location.href = "#/books/create"		
 	}
 
 	$rootScope.manualSaveBooks = function () {
-		$rootScope.loading=true;
+		$rootScope.loadingSite=true;
 		$rootScope.flags.save = false;
 		if ($rootScope.books.id == undefined)
 		{
@@ -64,7 +105,7 @@ function BooksCtrl(DAO, $rootScope)
 		function (result) {
 			$rootScope.books = result;
 			$rootScope.flags.save = true;
-			$rootScope.loading=false;
+			$rootScope.loadingSite=false;
 
 		},
 		function (error) {
@@ -72,18 +113,18 @@ function BooksCtrl(DAO, $rootScope)
 			$rootScope.errors.showErrors = true;
 			$rootScope.errors.showServerError = true;
 			$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
-			$rootScope.loading=false;   
+			$rootScope.loadingSite=false;   
 		});
 	}
 
 	$rootScope.updateBooks = function () {
 		$rootScope.errors.errorMessages=[];
 		DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, controller:'books', action:'update'},
-		$rootScope.loading=true,
+		$rootScope.loadingSite=true,
 		function (result) {
 			$rootScope.bookss = result;
 			$rootScope.flags.save = true;
-			$rootScope.loading=false;
+			$rootScope.loadingSite=false;
 			window.location.href = "#/books/list"
 		},
 		function (error) {
@@ -91,43 +132,43 @@ function BooksCtrl(DAO, $rootScope)
 			$rootScope.errors.showErrors = true;
 			$rootScope.errors.showServerError = true;
 			$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
-			$rootScope.loading=false;
+			$rootScope.loadingSite=false;
 		});
 	}
 
 	$rootScope.editBooks = function (books){
 		$rootScope.errors.errorMessages=[];
 		DAO.get({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, id: books.id, controller:'books', action:'show'},
-		$rootScope.loading=true,
+		$rootScope.loadingSite=true,
 		function (result) {
 			$rootScope.books = result;
 			$rootScope.flags.save = true;
-			$rootScope.loading=false;
+			$rootScope.loadingSite=false;
 			window.location.href = "#/books/edit"
 		},
 		function (error) {
 			$rootScope.errors.showErrors = true;
 			$rootScope.errors.showServerError = true;
 			$rootScope.errors.errorMessages.push('Error: '+error.status+' '+error.data);
-			$rootScope.loading=false;
+			$rootScope.loadingSite=false;
 		});
 	}
 
 	$rootScope.confirmDeleteBooks = function () {
 		$rootScope.errors.errorMessages=[];
 		DAO.delete({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, id: $rootScope.books.id, controller:'books', action:'delete'},
-		$rootScope.loading=true,
+		$rootScope.loadingSite=true,
 		function (result) {
 			//$rootScope.bookss = result;
 			$rootScope.flags.save = true;
-			$rootScope.loading=false;
+			$rootScope.loadingSite=false;
 			window.location.href = "#/books/list"
 		},
 		function (error) {
 			$rootScope.errors.showErrors = true;
 			$rootScope.errors.showServerError = true;
 			$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
-			$rootScope.loading=false;
+			$rootScope.loadingSite=false;
 		});
 	}
 }
