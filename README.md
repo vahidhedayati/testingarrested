@@ -11,7 +11,7 @@ grails create-app demo
 
 BuildConfig.groovy
 ```groovy
-compile ':arrested:1.18'
+compile ':arrested:1.19'
 ```
 
 ggts (ctrl alt shift g) or grails command line run: 
@@ -228,6 +228,9 @@ class BootStrap {
     }
 }
 ```
+
+### Since 1.19 ngTable module added 
+This now supports pagination (1.19 currently still has issues with filtering)
 
 ### Since 1.10 no need to add an account via bootstrap 
 you can now sign up from the main login page  
