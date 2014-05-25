@@ -1,5 +1,5 @@
 'use strict';
-function BooksCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
+function NumbersCtrl(DAO, $rootScope,$scope, $filter, ngTableParams)
 {
 	if ($rootScope.appConfig) {
 		if (!$rootScope.appConfig.token!='') {
@@ -13,12 +13,12 @@ function BooksCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 	   $rootScope.errors = {loadingSite: true};
 	};
 	
-	if(!$rootScope.books){
+	if(!$rootScope.numbers){
 		$rootScope.filter = ""
-		$rootScope.bookss = [];
-		$rootScope.books = {};
+		$rootScope.numberss = [];
+		$rootScope.numbers = {};
 	}
-
+	/*
 	$rootScope.tableParams = new ngTableParams({
         page: 1,            // show first page
         count: 10,           // count per page
@@ -27,14 +27,14 @@ function BooksCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
         }
 	}, {
 		getData: function($defer, params) {
-			DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'books', action: 'list'},	
+			DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'numbers', action: 'list'},	
 				$rootScope.loadingSite=true,
 					function (result) {
-						$rootScope.bookss=result;
-						var putIt  = params.sorting() ? $filter('orderBy')($rootScope.bookss, params.orderBy()): id;
+					$scope.result=result;
+						var putIt  = params.sorting() ? $filter('orderBy')($scope.result, params.orderBy()): $scope.result;
 						params.total(putIt.length);
 						$defer.resolve(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-						$rootScope.bookss=(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+						$rootScope.numberss = $scope.result;
 						$rootScope.loadingSite=false;   
 					},
 					function (error) {
@@ -45,29 +45,31 @@ function BooksCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 					});
       	}
     });
-	// @deprecated
-	$rootScope.getAllBooks = function () {
+    */
+	
+	
+	$rootScope.getAllNumbers = function () {
 		//get all
+		
 		$rootScope.errors.errorMessages=[];
-		 DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'books', action: 'list'},	
-		 	$rootScope.loadingSite=true,
-		 	function (result) {
-			 	$rootScope.tableParams = new ngTableParams({
-			 		page: 1,            // show first page
-			 		count: 10,           // count per page
-			 		sorting: {
-			 			id : 'desc' // initial sorting
-			 		}
-			 	}, {
-			 		total: result.length,
-			 		getData: function($defer, params) {
-			 			$rootScope.bookss  = params.sorting() ? $filter('orderBy')(result, params.orderBy()): id;
-			 			//params.total(putIt.length);
-			 			$defer.resolve($rootScope.bookss.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-			 			$rootScope.bookss=($rootScope.bookss.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-			 		}
-			 	});
-		        $rootScope.loadingSite=false;   
+		DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'numbers', action: 'list'},	
+			 	$rootScope.loadingSite=true,
+			 	function (result) {
+			$scope.result=result;
+		$rootScope.tableParams = new ngTableParams({
+	            page: 1,            // show first page
+	            count: 10,           // count per page
+	            sorting: {
+	                id : 'desc' // initial sorting
+	            }
+	     }, {
+	     getData: function($defer, params) {
+		 
+	    	 $rootScope.numberss  = params.sorting() ? $filter('orderBy')($scope.result, params.orderBy()): id;
+			 	params.total($rootScope.numberss.length);
+                $defer.resolve($rootScope.numberss.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+		       
+                $rootScope.loadingSite=false;   
 		    },
 		    function (error) {
 		        $rootScope.errors.showErrors = true;
@@ -75,17 +77,19 @@ function BooksCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 		        $rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
 		        $rootScope.loadingSite=false;
 		     });
-		       
+		        }
+		    });
+	
 	};
 	 
-	/*
-	$rootScope.getAllOldBooks = function () {
+	/* 
+	$rootScope.getAllOldNumbers = function () {
 		//get all
 		$rootScope.errors.errorMessages=[];
-		DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'books', action: 'list'},
+		DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'numbers', action: 'list'},
 		$rootScope.loadingSite=true,
 		function (result) {
-			$rootScope.bookss = result;
+			$rootScope.numberss = result;
 			$rootScope.loadingSite=false;   
 			
 		},
@@ -96,32 +100,32 @@ function BooksCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 			$rootScope.loadingSite=false;
 		});
 	};
-	 */
-	$rootScope.newBooks = function () {
+*/
+	$rootScope.newNumbers = function () {
 		$rootScope.loadingSite=true;
-		$rootScope.books = {};
+		$rootScope.numbers = {};
 		$rootScope.loadingSite=false;
-		window.location.href = "#/books/create"		
+		window.location.href = "#/numbers/create"		
 	}
 
-	$rootScope.manualSaveBooks = function () {
+	$rootScope.manualSaveNumbers = function () {
 		$rootScope.loadingSite=true;
 		$rootScope.flags.save = false;
-		if ($rootScope.books.id == undefined)
+		if ($rootScope.numbers.id == undefined)
 		{
-			$rootScope.saveBooks();
+			$rootScope.saveNumbers();
 		}
 		else
 		{
-			$rootScope.updateBooks();
+			$rootScope.updateNumbers();
 		}
 	}
 
-	$rootScope.saveBooks = function () {
+	$rootScope.saveNumbers = function () {
 		$rootScope.errors.errorMessages=[];
-		DAO.save({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, controller:'books', action:'save'},
+		DAO.save({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.numbers, controller:'numbers', action:'save'},
 		function (result) {
-			$rootScope.books = result;
+			$rootScope.numbers = result;
 			$rootScope.flags.save = true;
 			$rootScope.loadingSite=false;
 
@@ -135,15 +139,15 @@ function BooksCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 		});
 	}
 
-	$rootScope.updateBooks = function () {
+	$rootScope.updateNumbers = function () {
 		$rootScope.errors.errorMessages=[];
-		DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, controller:'books', action:'update'},
+		DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.numbers, controller:'numbers', action:'update'},
 		$rootScope.loadingSite=true,
 		function (result) {
-			$rootScope.bookss = result;
+			$rootScope.numberss = result;
 			$rootScope.flags.save = true;
 			$rootScope.loadingSite=false;
-			window.location.href = "#/books/list"
+			window.location.href = "#/numbers/list"
 		},
 		function (error) {
 			$rootScope.flags.save = false;
@@ -154,15 +158,15 @@ function BooksCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 		});
 	}
 
-	$rootScope.editBooks = function (books){
+	$rootScope.editNumbers = function (numbers){
 		$rootScope.errors.errorMessages=[];
-		DAO.get({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, id: books.id, controller:'books', action:'show'},
+		DAO.get({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.numbers, id: numbers.id, controller:'numbers', action:'show'},
 		$rootScope.loadingSite=true,
 		function (result) {
-			$rootScope.books = result;
+			$rootScope.numbers = result;
 			$rootScope.flags.save = true;
 			$rootScope.loadingSite=false;
-			window.location.href = "#/books/edit"
+			window.location.href = "#/numbers/edit"
 		},
 		function (error) {
 			$rootScope.errors.showErrors = true;
@@ -172,15 +176,15 @@ function BooksCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 		});
 	}
 
-	$rootScope.confirmDeleteBooks = function () {
+	$rootScope.confirmDeleteNumbers = function () {
 		$rootScope.errors.errorMessages=[];
-		DAO.delete({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.books, id: $rootScope.books.id, controller:'books', action:'delete'},
+		DAO.delete({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.numbers, id: $rootScope.numbers.id, controller:'numbers', action:'delete'},
 		$rootScope.loadingSite=true,
 		function (result) {
-			//$rootScope.bookss = result;
+			//$rootScope.numberss = result;
 			$rootScope.flags.save = true;
 			$rootScope.loadingSite=false;
-			window.location.href = "#/books/list"
+			window.location.href = "#/numbers/list"
 		},
 		function (error) {
 			$rootScope.errors.showErrors = true;

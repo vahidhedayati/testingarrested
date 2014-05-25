@@ -1,5 +1,5 @@
 
-<div data-ng-controller="NumbersCtrl" data-ng-init="getAllNumbers()">
+<div data-ng-controller="NumbersCtrl" >
     <h1>Numbers List</h1>
  	<div data-ng-show="errors.showErrors" class="red">
 		<div ng-repeat="error in errors.errorMessages">

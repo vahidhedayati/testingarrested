@@ -1,5 +1,5 @@
 'use strict';
-var testingarrested = angular.module('testingarrested', ['services','ngRoute','ngTable']);
+var testingarrested = angular.module('testingarrested', ['services','ngRoute']);
 testingarrested.config([
     '$routeProvider',
     function($routeProvider) {

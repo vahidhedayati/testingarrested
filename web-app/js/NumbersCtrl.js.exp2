@@ -18,7 +18,76 @@ function NumbersCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 		$rootScope.numberss = [];
 		$rootScope.numbers = {};
 	}
-
+	/*
+	$scope.tableParams = new ngTableParams({
+        page: 1,            // show first page
+        count: 10,           // count per page
+        sorting: {
+            id : 'desc' // initial sorting
+        }
+	}, {
+		getData: function($defer, params) {
+			DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'numbers', action: 'list'},	
+				$rootScope.loadingSite=true,
+					function (result) {
+						$scope.numberss=result;
+						var putIt  = params.sorting() ? $filter('orderBy')(result, params.orderBy()): id;
+						params.total(putIt.length);
+						$defer.resolve(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+						$scope.numberss=putIt.slice((params.page() - 1) * params.count(), params.page() * params.count());
+						$rootScope.loadingSite=false;   
+					},
+					function (error) {
+						$rootScope.errors.showErrors = true;
+						$rootScope.errors.showServerError = true;
+						$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
+						$rootScope.loadingSite=false;
+					});
+      	}
+    });*/
+	
+	 //total: $rootScope.numberss.length,
+	$rootScope.getAllNumbers = function () {
+		//get all
+		
+		$rootScope.errors.errorMessages=[];
+		 DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'numbers', action: 'list'},	
+				 	$rootScope.loadingSite=true,
+				 	function (result) {
+			 $scope.result = result;
+				
+			 $scope.tableParams = new ngTableParams({
+	            page: 1,            // show first page
+	            count: 10,           // count per page
+	            sorting: {
+	                id : 'desc' // initial sorting
+	            }
+	     }, {
+	    	total: $scope.result.length,
+	     getData: function($defer, params) {
+			 	var putIt  = params.sorting() ? $filter('orderBy')( $scope.result, params.orderBy()): id;
+			 	params.total(putIt.length);
+			 	   $defer.resolve(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+			 	// $rootScope.numberss = sendIt;
+			 	//$rootScope.numberss=putIt.slice((params.page() - 1) * params.count(), params.page() * params.count());
+			 	//$defer.resolve(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+				
+		        //$rootScope.numberss = putIt;
+	     }
+	     });
+		 
+                $rootScope.loadingSite=false;   
+		    },
+		    function (error) {
+		        $rootScope.errors.showErrors = true;
+		        $rootScope.errors.showServerError = true;
+		        $rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
+		        $rootScope.loadingSite=false;
+		     });
+		       
+	};
+	
+	/*
 	$rootScope.tableParams = new ngTableParams({
         page: 1,            // show first page
         count: 10,           // count per page
@@ -34,7 +103,6 @@ function NumbersCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 						var putIt  = params.sorting() ? $filter('orderBy')($rootScope.numberss, params.orderBy()): id;
 						params.total(putIt.length);
 						$defer.resolve(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-						$rootScope.numberss=(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 						$rootScope.loadingSite=false;   
 					},
 					function (error) {
@@ -45,29 +113,27 @@ function NumbersCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 					});
       	}
     });
-	// @deprecated
-	$rootScope.getAllNumbers = function () {
+	*/
+	
+	$rootScope.getAll22Numbers = function () {
 		//get all
 		$rootScope.errors.errorMessages=[];
+		$rootScope.tableParams = new ngTableParams({
+	            page: 1,            // show first page
+	            count: 10,           // count per page
+	            sorting: {
+	                id : 'desc' // initial sorting
+	            }
+	     }, {
+	     getData: function($defer, params) {
 		 DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'numbers', action: 'list'},	
 		 	$rootScope.loadingSite=true,
 		 	function (result) {
-			 	$rootScope.tableParams = new ngTableParams({
-			 		page: 1,            // show first page
-			 		count: 10,           // count per page
-			 		sorting: {
-			 			id : 'desc' // initial sorting
-			 		}
-			 	}, {
-			 		total: result.length,
-			 		getData: function($defer, params) {
-			 			$rootScope.numberss  = params.sorting() ? $filter('orderBy')(result, params.orderBy()): id;
-			 			//params.total(putIt.length);
-			 			$defer.resolve($rootScope.numberss.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-			 			$rootScope.numberss=($rootScope.numberss.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-			 		}
-			 	});
-		        $rootScope.loadingSite=false;   
+			 $rootScope.numberss = result;
+			 	var putIt  = params.sorting() ? $filter('orderBy')($rootScope.numberss, params.orderBy()): id;
+			 	params.total(putIt.length);
+                $defer.resolve(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                $rootScope.loadingSite=false;   
 		    },
 		    function (error) {
 		        $rootScope.errors.showErrors = true;
@@ -75,8 +141,10 @@ function NumbersCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 		        $rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
 		        $rootScope.loadingSite=false;
 		     });
-		       
-	};
+		        }
+		    });
+	
+	}
 	 
 	/*
 	$rootScope.getAllOldNumbers = function () {
@@ -96,7 +164,7 @@ function NumbersCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 			$rootScope.loadingSite=false;
 		});
 	};
-	 */
+*/
 	$rootScope.newNumbers = function () {
 		$rootScope.loadingSite=true;
 		$rootScope.numbers = {};

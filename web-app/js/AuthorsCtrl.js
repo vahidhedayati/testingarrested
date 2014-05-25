@@ -1,5 +1,5 @@
 'use strict';
-function AuthorsCtrl(DAO, $rootScope, $filter, ngTableParams)
+function AuthorsCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 {
 	if ($rootScope.appConfig) {
 		if (!$rootScope.appConfig.token!='') {
@@ -19,26 +19,55 @@ function AuthorsCtrl(DAO, $rootScope, $filter, ngTableParams)
 		$rootScope.authors = {};
 	}
 
-	
+	$rootScope.tableParams = new ngTableParams({
+        page: 1,            // show first page
+        count: 10,           // count per page
+        sorting: {
+            id : 'desc' // initial sorting
+        }
+	}, {
+		getData: function($defer, params) {
+			DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'authors', action: 'list'},	
+				$rootScope.loadingSite=true,
+					function (result) {
+						$rootScope.authorss=result;
+						var putIt  = params.sorting() ? $filter('orderBy')($rootScope.authorss, params.orderBy()): id;
+						params.total(putIt.length);
+						$defer.resolve(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+						$rootScope.authorss=(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+						$rootScope.loadingSite=false;   
+					},
+					function (error) {
+						$rootScope.errors.showErrors = true;
+						$rootScope.errors.showServerError = true;
+						$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
+						$rootScope.loadingSite=false;
+					});
+      	}
+    });
+	// @deprecated
 	$rootScope.getAllAuthors = function () {
 		//get all
 		$rootScope.errors.errorMessages=[];
-		$rootScope.tableParams = new ngTableParams({
-	            page: 1,            // show first page
-	            count: 10,           // count per page
-	            sorting: {
-	                id : 'desc' // initial sorting
-	            }
-	     }, {
-	     getData: function($defer, params) {
 		 DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'authors', action: 'list'},	
 		 	$rootScope.loadingSite=true,
 		 	function (result) {
-			 	var putIt  = params.sorting() ? $filter('orderBy')(result, params.orderBy()): id;
-			 	params.total(putIt.length);
-                $defer.resolve(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-		        $rootScope.authorss = putIt;
-                $rootScope.loadingSite=false;   
+			 	$rootScope.tableParams = new ngTableParams({
+			 		page: 1,            // show first page
+			 		count: 10,           // count per page
+			 		sorting: {
+			 			id : 'desc' // initial sorting
+			 		}
+			 	}, {
+			 		total: result.length,
+			 		getData: function($defer, params) {
+			 			$rootScope.authorss  = params.sorting() ? $filter('orderBy')(result, params.orderBy()): id;
+			 			//params.total(putIt.length);
+			 			$defer.resolve($rootScope.authorss.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+			 			$rootScope.authorss=($rootScope.authorss.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+			 		}
+			 	});
+		        $rootScope.loadingSite=false;   
 		    },
 		    function (error) {
 		        $rootScope.errors.showErrors = true;
@@ -46,28 +75,17 @@ function AuthorsCtrl(DAO, $rootScope, $filter, ngTableParams)
 		        $rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
 		        $rootScope.loadingSite=false;
 		     });
-		        }
-		    });
-	
+		       
 	};
 	 
-	 
-	$rootScope.getAll1Authors = function () {
+	/*
+	$rootScope.getAllOldAuthors = function () {
 		//get all
 		$rootScope.errors.errorMessages=[];
 		DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'authors', action: 'list'},
 		$rootScope.loadingSite=true,
 		function (result) {
 			$rootScope.authorss = result;
-			$rootScope.tableParams = new ngTableParams({
-		         page: 1,            // show first page
-		         count: 10           // count per page
-		     }, {
-		    	 total: result.length, // length of data
-		         getData: function($defer, params) {
-		             $defer.resolve(result.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-		         }
-		     });
 			$rootScope.loadingSite=false;   
 			
 		},
@@ -78,7 +96,7 @@ function AuthorsCtrl(DAO, $rootScope, $filter, ngTableParams)
 			$rootScope.loadingSite=false;
 		});
 	};
-
+	 */
 	$rootScope.newAuthors = function () {
 		$rootScope.loadingSite=true;
 		$rootScope.authors = {};
