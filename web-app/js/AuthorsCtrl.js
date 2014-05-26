@@ -14,7 +14,7 @@ function AuthorsCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 	};
 	
 	if(!$rootScope.authors){
-		$rootScope.filter = ""
+		//$rootScope.filter = ""
 		$rootScope.authorss = [];
 		$rootScope.authors = {};
 	}
