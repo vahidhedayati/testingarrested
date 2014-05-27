@@ -37,14 +37,14 @@
         
         <div class="form-group">
             <label class="control-label" for="author">
-                author
+                author 
             </label>
             <select id="author" name="author.id" data-ng-model='books.author' data-ng-controller="AuthorsCtrl" data-ng-init="getAllAuthors()" ng-options="c.id for c in authorss track by c.id" required="" class="many-to-one"/>
         </div>
         
         <div class="form-group">
             <label class="control-label" for="content">
-                content
+                content 
             </label>
             <div class="input-group"><input type="text" class="form-control" name="content" required="required" data-ng-model='books.content' />
 		<div class="error" ng-show="booksForm.content.$dirty && booksForm.content.$invalid">
@@ -53,14 +53,14 @@
         
         <div class="form-group">
             <label class="control-label" for="displayOnMenu">
-                displayOnMenu
+                displayOnMenu 
             </label>
             <input type="checkbox"  name="displayOnMenu" data-ng-model='books.displayOnMenu' />
         </div>
         
         <div class="form-group">
             <label class="control-label" for="name">
-                name
+                name 
             </label>
             <div class="input-group"><input type="text" class="form-control" name="name" ng-minlength="5" ng-maxlength="20" required="required" data-ng-model='books.name' />
 		<div class="error" ng-show="booksForm.name.$dirty && booksForm.name.$invalid">
@@ -75,7 +75,7 @@
         
         <div class="form-group">
             <label class="control-label" for="orderby">
-                orderby
+                orderby 
             </label>
             <div class="input-group"><input class="form-control" name="orderby" type="number" data-ng-model='books.orderby'  required="required"/>
 		<div class="error" ng-show="booksForm.orderby.$dirty && booksForm.orderby.$invalid">
@@ -85,7 +85,7 @@
         
         <div class="form-group">
             <label class="control-label" for="pricerange">
-                pricerange
+                pricerange 
             </label>
             <div class="input-group"><input class="form-control" name="pricerange" type="number" min="4" max="10" data-ng-model='books.pricerange'  required="required"/>
 		<div class="error" ng-show="booksForm.pricerange.$dirty && booksForm.pricerange.$invalid">

@@ -37,7 +37,7 @@
         
         <div class="form-group">
             <label class="control-label" for="emailAddress">
-                emailAddress
+                emailAddress 
             </label>
             <div class="input-group"><input type="email" class="form-control" name="emailAddress" required="required" data-ng-model='authors.emailAddress' />
 		<div class="error" ng-show="authorsForm.emailAddress.$dirty && authorsForm.emailAddress.$invalid">
@@ -46,7 +46,7 @@
         
         <div class="form-group">
             <label class="control-label" for="firstName">
-                firstName
+                firstName 
             </label>
             <div class="input-group"><input type="text" class="form-control" name="firstName" required="required" data-ng-model='authors.firstName' />
 		<div class="error" ng-show="authorsForm.firstName.$dirty && authorsForm.firstName.$invalid">
@@ -55,7 +55,7 @@
         
         <div class="form-group">
             <label class="control-label" for="surName">
-                surName
+                surName 
             </label>
             <div class="input-group"><input type="text" class="form-control" name="surName" required="required" data-ng-model='authors.surName' />
 		<div class="error" ng-show="authorsForm.surName.$dirty && authorsForm.surName.$invalid">

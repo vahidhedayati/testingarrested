@@ -37,7 +37,7 @@
         
         <div class="form-group">
             <label class="control-label" for="firstNumber">
-                firstNumber
+                firstNumber 
             </label>
             <div class="input-group"><input class="form-control" name="firstNumber" type="number" min="1" max="50" data-ng-model='numbers.firstNumber'  required="required"/>
 		<div class="error" ng-show="numbersForm.firstNumber.$dirty && numbersForm.firstNumber.$invalid">
