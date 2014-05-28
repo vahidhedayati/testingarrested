@@ -26,7 +26,7 @@
                         	
                             
                             	
-                             		<td data-sortable="'firstNumber'" filter="{ 'firstNumber': 'text' }"  data-title="'firstNumber'"  >
+                             		<td data-sortable="'firstNumber'" filter="{'firstNumber':'text'}"  data-title="'firstNumber'"  >
                             	
                             	{{instance.firstNumber}}
                             </td>

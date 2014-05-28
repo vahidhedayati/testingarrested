@@ -26,7 +26,7 @@
                         	
                             
                             	
-                             		<td data-sortable="'emailAddress'" filter="{ 'emailAddress': 'text' }"  data-title="'emailAddress'"  >
+                             		<td data-sortable="'emailAddress'" filter="{'emailAddress':'text'}"  data-title="'emailAddress'"  >
                             	
                             	{{instance.emailAddress}}
                             </td>

@@ -26,7 +26,7 @@
                         	
                             
                             	
-                             		<td data-sortable="'author'" filter="{ 'author': 'text' }"  data-title="'author'"  >
+                             		<td data-sortable="'author'" filter="{'author':'text'}"  data-title="'author'"  >
                             	
                             	{{instance.author}}
                             </td>
