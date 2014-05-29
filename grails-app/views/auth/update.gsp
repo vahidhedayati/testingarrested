@@ -11,7 +11,7 @@
         <div class="col-md-6 col-md-offset-2" >
             <div class="panel panel-default">
                 <div class="panel-body">
-                  <h1 class="text-center"><g:message code="default.update.title" args="['Password']"/></h1>
+                  <h1 id="h1Header"><g:message code="default.update.title" args="['Password']"/></h1></div>
                   
                     <form name="signUpForm1"  class="form form-signup" role="form" novalidate>
  	

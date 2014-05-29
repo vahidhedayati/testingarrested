@@ -11,7 +11,27 @@
         <div class="col-md-6 col-md-offset-2" >
             <div class="panel panel-default">
                 <div class="panel-body">
-                <h1 class="text-center"><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/></h1>
+                 <g:set var="lang" value="${session.'org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE' ?: org.springframework.web.servlet.support.RequestContextUtils.getLocale(request).toString().substring(0,2)}"/>
+				<nav id="Navbar" class="navbar  navbar-inverse" role="navigation" >
+				<ul class="nav navbar-nav">
+					<li class="dropdown controller">
+                    	<a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">
+                         ${lang.toString()}
+                         </a>
+                       	 <ul class="dropdown-menu dropdown-menu-dark" role="menu">
+                         	<li><a class="fa fa-language icon-color" title="English" data-ng-model="lang" data-ng-click="setLang('en')">
+                               <g:message code="language.en" default="en"/>
+                            </a></li>
+                            <li><a class="fa fa-language icon-color" title="German"  data-ng-model="lang" data-ng-click="setLang('de')">
+                               <g:message code="language.de" default="de"/>
+                             </a></li>
+                         </ul>
+                      </li>
+                      <li class="controller">
+						<div id="h2Header"><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/> </div>
+					</li>
+				</ul>
+				</nav>
                     <h5 class="text-center">
                     <a class="btn btn-sm btn-primary btn-block" onclick="window.location.href = '#/login'" title="${message(code: 'security.signin.label', default: 'Sign in')}"><span class="glyphicon glyphicon-log-in"></span> <g:message code="security.signin.label"  default="Sign in"/></a>
                     </h5>

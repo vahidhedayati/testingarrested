@@ -50,22 +50,6 @@
 					</li>
 				</ul>
 			</li>
-
-
-					<li class="dropdown controller">
-						<a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">
-							${lang.toString()}
-						</a>
-						<ul class="dropdown-menu dropdown-menu-dark" role="menu">
-							<li><a class="fa fa-language icon-color" title="English" data-ng-model="lang" data-ng-click="setLang('en')">
-							<g:message code="language.en" default="en"/> 
-							</a></li>
-							<li><a class="fa fa-language icon-color" title="German"  data-ng-model="lang" data-ng-click="setLang('de')">
-							<g:message code="language.de" default="de"/> 
-							</a></li>
-						</ul>
-					</li>
-			
 			<li class="controller">
 				<a data-ng-controller='UserCtrl' data-ng-click='logout()' title="${message(code: 'security.signoff.label', default: 'Log out')}">
 					<span class="glyphicon glyphicon-log-out"></span> <g:message code="security.signoff.label" default="Sign Off"/>
