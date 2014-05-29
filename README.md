@@ -11,7 +11,7 @@ grails create-app demo
 
 BuildConfig.groovy
 ```groovy
-compile ':arrested:1.20'
+compile ':arrested:1.26'
 ```
 
 ggts (ctrl alt shift g) or grails command line run: 

@@ -73,8 +73,8 @@ grails.project.dependency.resolution = {
         //compile ":less-asset-pipeline:1.7.0"
         //compile ":coffee-asset-pipeline:1.7.0"
         //compile ":handlebars-asset-pipeline:1.3.0.3"
-	//compile ":arrested:1.21"
+	compile ":arrested:1.26"
     }
 }
-grails.plugin.location.'arrested' = "../grails-arrested-plugin"
+//grails.plugin.location.'arrested' = "../grails-arrested-plugin"
 
