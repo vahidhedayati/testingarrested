@@ -32,6 +32,7 @@ function NumbersCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 					function (result) {
 						$rootScope.numberss=result;
 						var putIt  = params.sorting() ? $filter('orderBy')($rootScope.numberss, params.orderBy()): id;
+						putIt = params.filter ? $filter('filter')( putIt, params.filter()) :  putIt;
 						params.total(putIt.length);
 						$defer.resolve(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 						$rootScope.numberss=(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));

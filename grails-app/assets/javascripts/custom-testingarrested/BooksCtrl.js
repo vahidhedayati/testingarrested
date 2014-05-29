@@ -32,6 +32,7 @@ function BooksCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 					function (result) {
 						$rootScope.bookss=result;
 						var putIt  = params.sorting() ? $filter('orderBy')($rootScope.bookss, params.orderBy()): id;
+						putIt = params.filter ? $filter('filter')( putIt, params.filter()) :  putIt;
 						params.total(putIt.length);
 						$defer.resolve(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 						$rootScope.bookss=(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));

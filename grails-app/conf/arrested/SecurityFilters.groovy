@@ -5,16 +5,6 @@ class SecurityFilters {
     def filters = {
         arrested(uri: "/**/#/**") {
             before = {
-				
-				// Small "logging" filter for controller & actions
-				if (log.infoEnabled) {
-					if (!params.password ) {
-						log.info(!params.controller ? '/: ' + params : params.controller +"."+(params.action ?: "index")+": "+params)
-					}else{
-						log.info (params.controller+","+params.action+":"+params?.username)
-					}
-				}
-				
                 if(controllerName == 'auth' || (controllerName == 'arrestedUser' && actionName == 'save') || (!controllerName && !actionName)){
                     return true
                 }

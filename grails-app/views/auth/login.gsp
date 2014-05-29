@@ -4,12 +4,12 @@
 	</div>
 </div>
 <div data-ng-controller="UserCtrl"  data-ng-hide="appConfig.token!=''">
-<div id="arrestedHeader" role="banner"><h1 id="h1Header"><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/></h1></div>
 <div class="container" >
     <div class="row">
         <div class="col-md-6 col-md-offset-2" >
             <div class="panel panel-default">
                 <div class="panel-body">
+                <h1 class="text-center"><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/></h1>
                     <h5 class="text-center">
                     <a class="btn btn-sm btn-primary btn-block btn-danger" title="${message(code: 'security.register.label', default: 'Register')}" onclick="window.location.href = '#/signup'"><span class="glyphicon glyphicon-user"></span> <g:message code="security.register.label"  default="Register"/></a>
                     </h5>

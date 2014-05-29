@@ -1,5 +1,6 @@
 <nav id="Navbar" class="navbar navbar-fixed-top navbar-inverse" role="navigation" data-ng-show="appConfig.token!=''">
 		<div class="container-fluid" data-ng-controller="UserCtrl" >
+	<g:set var="lang" value="${session.'org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE' ?: org.springframework.web.servlet.support.RequestContextUtils.getLocale(request).toString().substring(0,2)}"/>
 	
 	    <div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -16,10 +17,18 @@
 		<div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
     	<ul class="nav navbar-nav">
 			<li class="controller">
-				<div id="h2Header"><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/></div>
+				<div id="h2Header"><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/> </div>
 			</li>
+			
          </ul>
          <ul  class="nav navbar-nav navbar-right" >
+         
+	
+         	<li class="controller">
+         		<a class="fa  fa-clock-o icon-color">
+         		{{clock.now}}
+         		</a>
+         	</li>
          	<li  class="dropdown controller">
 				<a class="dropdown-toggle" role="button" data-toggle="dropdown">
 					<span id="userMessage">
@@ -28,13 +37,12 @@
 						</span>
 					 	<b class="caret"></b>
 				</a>
-				<ul class="dropdown-menu" role="menu">
+				<ul class="dropdown-menu dropdown-menu-dark" role="menu">
 					<li>
 						<a class="fa fa-gear icon-color" onclick='window.location.href="#/updateusername"' title="${message(code: 'default.username.update', default: 'Update Username')}">
 							<g:message code="default.username.update"  default="Update Username"/>	
                         </a>
 					</li>
-
 					<li>
 						<a class="fa fa-gear icon-color" onclick='window.location.href="#/updatepassword"' title="${message(code: 'default.password.update', default: 'Update password')}">
 							<g:message code="default.password.update"  default="Update Password"/>	
@@ -42,11 +50,29 @@
 					</li>
 				</ul>
 			</li>
+
+
+					<li class="dropdown controller">
+						<a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">
+							${lang.toString()}
+						</a>
+						<ul class="dropdown-menu dropdown-menu-dark" role="menu">
+							<li><a class="fa fa-language icon-color" title="English" data-ng-model="lang" data-ng-click="setLang('en')">
+							<g:message code="language.en" default="en"/> 
+							</a></li>
+							<li><a class="fa fa-language icon-color" title="German"  data-ng-model="lang" data-ng-click="setLang('de')">
+							<g:message code="language.de" default="de"/> 
+							</a></li>
+						</ul>
+					</li>
+			
 			<li class="controller">
 				<a data-ng-controller='UserCtrl' data-ng-click='logout()' title="${message(code: 'security.signoff.label', default: 'Log out')}">
 					<span class="glyphicon glyphicon-log-out"></span> <g:message code="security.signoff.label" default="Sign Off"/>
 				</a>
 			</li>
+			
+		
 			
 		</ul>
 		</div>

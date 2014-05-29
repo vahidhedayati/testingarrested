@@ -32,6 +32,7 @@ function AuthorsCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 					function (result) {
 						$rootScope.authorss=result;
 						var putIt  = params.sorting() ? $filter('orderBy')($rootScope.authorss, params.orderBy()): id;
+						putIt = params.filter ? $filter('filter')( putIt, params.filter()) :  putIt;
 						params.total(putIt.length);
 						$defer.resolve(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 						$rootScope.authorss=(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));

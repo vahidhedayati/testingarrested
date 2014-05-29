@@ -6,12 +6,12 @@
 
 
 <div data-ng-controller="UserCtrl"  data-ng-show="appConfig.token!=''">
-<div id="arrestedHeader" role="banner"><h1 id="h1Header"><g:message code="default.update.title" args="['Username']"/></h1></div>
 <div class="container" >
    <div class="row">
         <div class="col-md-6 col-md-offset-2" >
             <div class="panel panel-default">
                 <div class="panel-body">
+                <h1 class="text-center"><g:message code="default.update.title" args="['Username']"/></h1>
                   
                     <form name="signUpForm1"  class="form form-signup" role="form" novalidate>
  	

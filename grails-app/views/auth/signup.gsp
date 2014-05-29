@@ -5,12 +5,13 @@
 </div>
 
 <div data-ng-controller="UserCtrl"  data-ng-hide="appConfig.token!=''">
-<div id="arrestedHeader" role="banner"><h1 id="h1Header"><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/></h1></div>
+
 <div class="container" >
     <div class="row">
         <div class="col-md-6 col-md-offset-2" >
             <div class="panel panel-default">
                 <div class="panel-body">
+                <h1 class="text-center"><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/></h1>
                     <h5 class="text-center">
                     <a class="btn btn-sm btn-primary btn-block" onclick="window.location.href = '#/login'" title="${message(code: 'security.signin.label', default: 'Sign in')}"><span class="glyphicon glyphicon-log-in"></span> <g:message code="security.signin.label"  default="Sign in"/></a>
                     </h5>
