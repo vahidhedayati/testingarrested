@@ -1,25 +1,25 @@
 'use strict';
-function AuthorsCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
+function AuthorsCtrl(DAO, $scope, $filter, ngTableParams)
 {
-	if ($rootScope.appConfig) {
-		if (!$rootScope.appConfig.token!='') {
+	if ($scope.appConfig) {
+		if (!$scope.appConfig.token!='') {
 			window.location.href = "#/login"
 		}
 	}
 
-	$rootScope.flags = {save: false};
-	$rootScope.errors = {loadingSite: false, showErrors: false, showServerError: false,errorMessages:[]};
-	$rootScope.errorValidation = function(){
-	   $rootScope.errors = {loadingSite: true};
+	$scope.flags = {save: false};
+	$scope.errors = {loadingSite: false, showErrors: false, showServerError: false,errorMessages:[]};
+	$scope.errorValidation = function(){
+	   $scope.errors = {loadingSite: true};
 	};
 	
-	if(!$rootScope.authors){
-		$rootScope.filter = ""
-		$rootScope.authorss = [];
-		$rootScope.authors = {};
+	if(!$scope.authors){
+		$scope.filter = ""
+		$scope.authorss = [];
+		$scope.authors = {};
 	}
 
-	$rootScope.tableParams = new ngTableParams({
+	$scope.tableParams = new ngTableParams({
         page: 1,            // show first page
         count: 10,           // count per page
         sorting: {
@@ -27,167 +27,136 @@ function AuthorsCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
         }
 	}, {
 		getData: function($defer, params) {
-			DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'authors', action: 'list'},	
-				$rootScope.loadingSite=true,
+			DAO.query({appName: $scope.appConfig.appName, token: $scope.appConfig.token, controller: 'authors', action: 'list'},	
+				$scope.loadingSite=true,
 					function (result) {
-						$rootScope.authorss=result;
-						var putIt  = params.sorting() ? $filter('orderBy')($rootScope.authorss, params.orderBy()): id;
+						$scope.authorss=result;
+						var putIt  = params.sorting() ? $filter('orderBy')($scope.authorss, params.orderBy()): id;
 						putIt = params.filter ? $filter('filter')( putIt, params.filter()) :  putIt;
 						params.total(putIt.length);
 						$defer.resolve(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-						$rootScope.authorss=(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-						$rootScope.loadingSite=false;   
+						$scope.authorss=(putIt.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+						$scope.loadingSite=false;   
 					},
 					function (error) {
-						$rootScope.errors.showErrors = true;
-						$rootScope.errors.showServerError = true;
-						$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
-						$rootScope.loadingSite=false;
+						$scope.errors.showErrors = true;
+						$scope.errors.showServerError = true;
+						$scope.errors.errorMessages.push(''+error.status+' '+error.data);
+						$scope.loadingSite=false;
 					});
       	}
     });
-	// @deprecated
-	$rootScope.getAllAuthors = function () {
+	
+	//Required for dependency lookup 
+	$scope.getAllAuthors = function () {
 		//get all
-		$rootScope.errors.errorMessages=[];
-		 DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'authors', action: 'list'},	
-		 	$rootScope.loadingSite=true,
-		 	function (result) {
-			 	$rootScope.tableParams = new ngTableParams({
-			 		page: 1,            // show first page
-			 		count: 10,           // count per page
-			 		sorting: {
-			 			id : 'desc' // initial sorting
-			 		}
-			 	}, {
-			 		total: result.length,
-			 		getData: function($defer, params) {
-			 			$rootScope.authorss  = params.sorting() ? $filter('orderBy')(result, params.orderBy()): id;
-			 			//params.total(putIt.length);
-			 			$defer.resolve($rootScope.authorss.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-			 			$rootScope.authorss=($rootScope.authorss.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-			 		}
-			 	});
-		        $rootScope.loadingSite=false;   
-		    },
-		    function (error) {
-		        $rootScope.errors.showErrors = true;
-		        $rootScope.errors.showServerError = true;
-		        $rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
-		        $rootScope.loadingSite=false;
-		     });
-		       
-	};
-	 
-	/*
-	$rootScope.getAllOldAuthors = function () {
-		//get all
-		$rootScope.errors.errorMessages=[];
-		DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'authors', action: 'list'},
-		$rootScope.loadingSite=true,
+		$scope.errors.errorMessages=[];
+		DAO.query({appName: $scope.appConfig.appName, token: $scope.appConfig.token, controller: 'authors', action: 'list'},
+		$scope.loadingSite=true,
 		function (result) {
-			$rootScope.authorss = result;
-			$rootScope.loadingSite=false;   
+			$scope.authorss = result;
+			$scope.loadingSite=false;   
 			
 		},
 		function (error) {
-			$rootScope.errors.showErrors = true;
-			$rootScope.errors.showServerError = true;
-			$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
-			$rootScope.loadingSite=false;
+			$scope.errors.showErrors = true;
+			$scope.errors.showServerError = true;
+			$scope.errors.errorMessages.push(''+error.status+' '+error.data);
+			$scope.loadingSite=false;
 		});
 	};
-	 */
-	$rootScope.newAuthors = function () {
-		$rootScope.loadingSite=true;
-		$rootScope.authors = {};
-		$rootScope.loadingSite=false;
-		window.location.href = "#/authors/create"		
+	 
+	
+	$scope.newAuthors = function () {
+		$scope.loadingSite=true;
+		$scope.authors = {};
+		$scope.loadingSite=false;
+		window.location.href = "#/authors/create"
 	}
 
-	$rootScope.manualSaveAuthors = function () {
-		$rootScope.loadingSite=true;
-		$rootScope.flags.save = false;
-		if ($rootScope.authors.id == undefined)
+	$scope.manualSaveAuthors = function () {
+		$scope.loadingSite=true;
+		$scope.flags.save = false;
+		if ($scope.authors.id == undefined)
 		{
-			$rootScope.saveAuthors();
+			$scope.saveAuthors();
 		}
 		else
 		{
-			$rootScope.updateAuthors();
+			$scope.updateAuthors();
 		}
 	}
 
-	$rootScope.saveAuthors = function () {
-		$rootScope.errors.errorMessages=[];
-		DAO.save({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.authors, controller:'authors', action:'save'},
+	$scope.saveAuthors = function () {
+		$scope.errors.errorMessages=[];
+		DAO.save({appName: $scope.appConfig.appName, token: $scope.appConfig.token, instance:$scope.authors, controller:'authors', action:'save'},
 		function (result) {
-			$rootScope.authors = result;
-			$rootScope.flags.save = true;
-			$rootScope.loadingSite=false;
+			$scope.authors = result;
+			$scope.flags.save = true;
+			$scope.loadingSite=false;
 
 		},
 		function (error) {
-			$rootScope.flags.save = false;
-			$rootScope.errors.showErrors = true;
-			$rootScope.errors.showServerError = true;
-			$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
-			$rootScope.loadingSite=false;   
+			$scope.flags.save = false;
+			$scope.errors.showErrors = true;
+			$scope.errors.showServerError = true;
+			$scope.errors.errorMessages.push(''+error.status+' '+error.data);
+			$scope.loadingSite=false;   
 		});
 	}
 
-	$rootScope.updateAuthors = function () {
-		$rootScope.errors.errorMessages=[];
-		DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.authors, controller:'authors', action:'update'},
-		$rootScope.loadingSite=true,
+	$scope.updateAuthors = function () {
+		$scope.errors.errorMessages=[];
+		DAO.update({appName: $scope.appConfig.appName, token: $scope.appConfig.token, instance:$scope.authors, controller:'authors', action:'update'},
+		$scope.loadingSite=true,
 		function (result) {
-			$rootScope.authorss = result;
-			$rootScope.flags.save = true;
-			$rootScope.loadingSite=false;
+			$scope.authorss = result;
+			$scope.flags.save = true;
+			$scope.loadingSite=false;
 			window.location.href = "#/authors/list"
 		},
 		function (error) {
-			$rootScope.flags.save = false;
-			$rootScope.errors.showErrors = true;
-			$rootScope.errors.showServerError = true;
-			$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
-			$rootScope.loadingSite=false;
+			$scope.flags.save = false;
+			$scope.errors.showErrors = true;
+			$scope.errors.showServerError = true;
+			$scope.errors.errorMessages.push(''+error.status+' '+error.data);
+			$scope.loadingSite=false;
 		});
 	}
 
-	$rootScope.editAuthors = function (authors){
-		$rootScope.errors.errorMessages=[];
-		DAO.get({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.authors, id: authors.id, controller:'authors', action:'show'},
-		$rootScope.loadingSite=true,
+	$scope.editAuthors = function (authors){
+		$scope.errors.errorMessages=[];
+		DAO.get({appName: $scope.appConfig.appName, token: $scope.appConfig.token, instance:$scope.authors, id: authors.id, controller:'authors', action:'show'},
+		$scope.loadingSite=true,
 		function (result) {
-			$rootScope.authors = result;
-			$rootScope.flags.save = true;
-			$rootScope.loadingSite=false;
-			window.location.href = "#/authors/edit"
+			$scope.authors = result;
+			$scope.flags.save = true;
+			$scope.loadingSite=false;
+			 window.location.href = "#/authors/edit"
 		},
 		function (error) {
-			$rootScope.errors.showErrors = true;
-			$rootScope.errors.showServerError = true;
-			$rootScope.errors.errorMessages.push('Error: '+error.status+' '+error.data);
-			$rootScope.loadingSite=false;
+			$scope.errors.showErrors = true;
+			$scope.errors.showServerError = true;
+			$scope.errors.errorMessages.push('Error: '+error.status+' '+error.data);
+			$scope.loadingSite=false;
 		});
 	}
 
-	$rootScope.confirmDeleteAuthors = function () {
-		$rootScope.errors.errorMessages=[];
-		DAO.delete({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.authors, id: $rootScope.authors.id, controller:'authors', action:'delete'},
-		$rootScope.loadingSite=true,
+	$scope.confirmDeleteAuthors = function () {
+		$scope.errors.errorMessages=[];
+		DAO.delete({appName: $scope.appConfig.appName, token: $scope.appConfig.token, instance:$scope.authors, id: $scope.authors.id, controller:'authors', action:'delete'},
+		$scope.loadingSite=true,
 		function (result) {
-			//$rootScope.authorss = result;
-			$rootScope.flags.save = true;
-			$rootScope.loadingSite=false;
+			//$scope.authorss = result;
+			$scope.flags.save = true;
+			$scope.loadingSite=false;
 			window.location.href = "#/authors/list"
 		},
 		function (error) {
-			$rootScope.errors.showErrors = true;
-			$rootScope.errors.showServerError = true;
-			$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
-			$rootScope.loadingSite=false;
+			$scope.errors.showErrors = true;
+			$scope.errors.showServerError = true;
+			$scope.errors.errorMessages.push(''+error.status+' '+error.data);
+			$scope.loadingSite=false;
 		});
 	}
 }

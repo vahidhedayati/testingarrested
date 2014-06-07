@@ -21,7 +21,7 @@
     
     <div>
     <p></p>
-        <a class="btn btn-primary btn-primary" data-ng-click="newBooks()"><span class="glyphicon glyphicon-plus"></span><g:message code="default.new.label" args="['books']" default="New books"/></a>
+        <a class="btn btn-primary btn-primary" data-ng-click="newBooks()"><span class="glyphicon glyphicon-plus"></span><g:message code="default.new.label" args="['books','BB']" default="New books"/></a>
         <a class="btn btn-primary btn-primary" onclick="window.location.href = '#/books/list'"  title="${message(code: 'default.list.label',args:['Books'], default: 'List')}"><span class="glyphicon glyphicon-align-justify"></span> 	<g:message code="default.list.label" args="['Books']" default="List"/></a>
         <a class="btn btn-primary btn-success" data-ng-hide="books.id"  ng-disabled="booksForm.$invalid" title="${message(code: 'default.save.label',args:['Books'], default: 'Save')}" ng-enabled="!booksForm.$invalid" data-ng-click="manualSaveBooks()"><span class="glyphicon glyphicon-floppy-disk"></span> <g:message code="default.save.label" args="['Books']" default="Save"/></a>
         <a class="btn btn-primary btn-success" data-ng-show="books.id"  ng-disabled="booksForm.$invalid" title="${message(code: 'default.update.label',args:['Books'], default: 'Update')}" ng-enabled="!booksForm.$invalid" data-ng-click="manualSaveBooks()"><span class="glyphicon glyphicon-floppy-disk"></span> <g:message code="default.update.label" args="['Books']" default="Update"/></a>

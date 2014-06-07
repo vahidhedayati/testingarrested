@@ -4,7 +4,7 @@ import grails.converters.JSON
 import grails.converters.XML
 
 class ArrestedController {
-
+	def grailsApplication
     def renderNotFound(id, className){
         withFormat{
             xml {

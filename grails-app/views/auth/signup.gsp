@@ -5,31 +5,27 @@
 </div>
 
 <div data-ng-controller="UserCtrl"  data-ng-hide="appConfig.token!=''">
-
 <div class="container" >
     <div class="row">
         <div class="col-md-6 col-md-offset-2" >
             <div class="panel panel-default">
                 <div class="panel-body">
-                 <g:set var="lang" value="${session.'org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE' ?: org.springframework.web.servlet.support.RequestContextUtils.getLocale(request).toString().substring(0,2)}"/>
-				<nav id="Navbar" class="navbar  navbar-inverse" role="navigation" >
-				<ul class="nav navbar-nav">
-					<li class="dropdown controller">
-                    	<a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">
-                         ${lang.toString()}
-                         </a>
-                       	 <ul class="dropdown-menu dropdown-menu-dark" role="menu">
-                         	<li><a class="fa fa-language icon-color" title="English" data-ng-model="lang" data-ng-click="setLang('en')">
-                               <g:message code="language.en" default="en"/>
-                            </a></li>
-                            <li><a class="fa fa-language icon-color" title="German"  data-ng-model="lang" data-ng-click="setLang('de')">
-                               <g:message code="language.de" default="de"/>
-                             </a></li>
-                         </ul>
-                      </li>
-                      <li class="controller">
-						<div id="h2Header"><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/> </div>
-					</li>
+                <g:set var="lang" value="${session.'org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE' ?: org.springframework.web.servlet.support.RequestContextUtils.getLocale(request).toString().substring(0,2)}"/>			
+   				<nav id="Navbar" class="navbar  navbar-inverse" role="navigation" >
+				<ul class="nav navbar-nav">							
+				<li class="dropdown controller">
+   					<a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">
+					${lang.toString()}
+    				</a>
+  	 				<ul class="dropdown-menu dropdown-menu-dark" role="menu" data-ng-controller="UserCtrl" data-ng-init="getAllLocales()" >
+      					<li ng-repeat="c in locales" ng-bind-html-unsafe="c.value"><a class="fa fa-language icon-color" title="{{c.text}}" data-ng-model="lang" data-ng-click="setLang(c.value)">
+          					<g:message code="language.{{c.text}}" default="{{c.text}}"/>
+         				</a></li>
+   					</ul>
+				</li>
+                <li class="controller">
+					<div id="h2Header"><g:message code="default.welcome.title" args="[meta(name:'app.name')]"/> </div>
+				</li>
 				</ul>
 				</nav>
                     <h5 class="text-center">

@@ -21,7 +21,7 @@
     
     <div>
     <p></p>
-        <a class="btn btn-primary btn-primary" data-ng-click="newNumbers()"><span class="glyphicon glyphicon-plus"></span><g:message code="default.new.label" args="['numbers']" default="New numbers"/></a>
+        <a class="btn btn-primary btn-primary" data-ng-click="newNumbers()"><span class="glyphicon glyphicon-plus"></span><g:message code="default.new.label" args="['numbers','BB']" default="New numbers"/></a>
         <a class="btn btn-primary btn-primary" onclick="window.location.href = '#/numbers/list'"  title="${message(code: 'default.list.label',args:['Numbers'], default: 'List')}"><span class="glyphicon glyphicon-align-justify"></span> 	<g:message code="default.list.label" args="['Numbers']" default="List"/></a>
         <a class="btn btn-primary btn-success" data-ng-hide="numbers.id"  ng-disabled="numbersForm.$invalid" title="${message(code: 'default.save.label',args:['Numbers'], default: 'Save')}" ng-enabled="!numbersForm.$invalid" data-ng-click="manualSaveNumbers()"><span class="glyphicon glyphicon-floppy-disk"></span> <g:message code="default.save.label" args="['Numbers']" default="Save"/></a>
         <a class="btn btn-primary btn-success" data-ng-show="numbers.id"  ng-disabled="numbersForm.$invalid" title="${message(code: 'default.update.label',args:['Numbers'], default: 'Update')}" ng-enabled="!numbersForm.$invalid" data-ng-click="manualSaveNumbers()"><span class="glyphicon glyphicon-floppy-disk"></span> <g:message code="default.update.label" args="['Numbers']" default="Update"/></a>

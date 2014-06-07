@@ -31,7 +31,7 @@ body {
   position: absolute;
   font-size: 0.8em;
   width: 250px;
-  margin-left: -22px;
+  margin-left: -25px;
   margin-top: -5px;
 }
 #h1Header {

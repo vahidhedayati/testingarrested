@@ -46,9 +46,41 @@ function NumbersCtrl(DAO, $scope, $filter, ngTableParams)
 					});
       	}
     });
-	
-	//Required for dependency lookup 
+	// @deprecated
 	$scope.getAllNumbers = function () {
+		//get all
+		$scope.errors.errorMessages=[];
+		 DAO.query({appName: $scope.appConfig.appName, token: $scope.appConfig.token, controller: 'numbers', action: 'list'},	
+		 	$scope.loadingSite=true,
+		 	function (result) {
+			 	$scope.tableParams = new ngTableParams({
+			 		page: 1,            // show first page
+			 		count: 10,           // count per page
+			 		sorting: {
+			 			id : 'desc' // initial sorting
+			 		}
+			 	}, {
+			 		total: result.length,
+			 		getData: function($defer, params) {
+			 			$scope.numberss  = params.sorting() ? $filter('orderBy')(result, params.orderBy()): id;
+			 			//params.total(putIt.length);
+			 			$defer.resolve($scope.numberss.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+			 			$scope.numberss=($scope.numberss.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+			 		}
+			 	});
+		        $scope.loadingSite=false;   
+		    },
+		    function (error) {
+		        $scope.errors.showErrors = true;
+		        $scope.errors.showServerError = true;
+		        $scope.errors.errorMessages.push(''+error.status+' '+error.data);
+		        $scope.loadingSite=false;
+		     });
+		       
+	};
+	 
+	/*
+	$scope.getAllOldNumbers = function () {
 		//get all
 		$scope.errors.errorMessages=[];
 		DAO.query({appName: $scope.appConfig.appName, token: $scope.appConfig.token, controller: 'numbers', action: 'list'},
@@ -65,13 +97,12 @@ function NumbersCtrl(DAO, $scope, $filter, ngTableParams)
 			$scope.loadingSite=false;
 		});
 	};
-	 
-	
+	 */
 	$scope.newNumbers = function () {
 		$scope.loadingSite=true;
 		$scope.numbers = {};
 		$scope.loadingSite=false;
-		window.location.href = "#/numbers/create"
+		window.location.href = "#/numbers/create"		
 	}
 
 	$scope.manualSaveNumbers = function () {
@@ -132,7 +163,7 @@ function NumbersCtrl(DAO, $scope, $filter, ngTableParams)
 			$scope.numbers = result;
 			$scope.flags.save = true;
 			$scope.loadingSite=false;
-			 window.location.href = "#/numbers/edit"
+			window.location.href = "#/numbers/edit"
 		},
 		function (error) {
 			$scope.errors.showErrors = true;

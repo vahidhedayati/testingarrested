@@ -1,9 +1,6 @@
 'use strict';
 function UserCtrl($rootScope,$scope, DAO){
 	
-	
-	$scope.clock = { now: new Date() };
-	
     if(!$rootScope.appConfig){
         $rootScope.appConfig = {appName:'testingarrested', token:''};
         $rootScope.user = {username:'', passwordHash:''};
@@ -29,31 +26,6 @@ function UserCtrl($rootScope,$scope, DAO){
        return $rootScope.selectedController===name;
       }
     };
-    	 
-    
-
-    var updateClock = function() {
-    	var s = "";
-    	var cu = new Date();
-    	var x = new Array("Sunday", "Monday", "Tuesday","Wednesday","Thursday", "Friday","Saturday");
-    	var day = cu.getDay();
-    	var today= x[day];
-    	s +=today +" [ ";
-    	s += cu.getDate() +"/";
-    	s += cu.getMonth() +"/";
-    	s += cu.getFullYear() +"  ";
-    	s += cu.getHours() +":";
-    	s += cu.getMinutes() +":";
-    	s += cu.getSeconds() +" ";
-    	//s += cu.getMilliseconds()+"] ";
-    	s +=cu.toString().match(/\(([A-Za-z\s].*)\)/)[1];
-    	s += "] "
-    	$scope.clock.now=s;  
-    };
-    setInterval(function() {
-    	$scope.$apply(updateClock);
-    }, 1000);
-    updateClock();
     
     $rootScope.setLang= function(lang){
     	$rootScope.errors.errorMessages=[];
@@ -63,6 +35,7 @@ function UserCtrl($rootScope,$scope, DAO){
             	$rootScope.user = result;
             	$rootScope.loadingSite=false;
             	window.location.href="/testingarrested/"
+            	
         },
         function(error){
             $rootScope.errors.showErrors = true;
@@ -72,6 +45,22 @@ function UserCtrl($rootScope,$scope, DAO){
         });
     };
  
+    $rootScope.getAllLocales = function(){
+    	$rootScope.errors.errorMessages=[];
+    	DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'auth', action: 'listLocale'},
+    	$rootScope.loadingSite=true,
+    	function(result){
+            	$rootScope.locales = result;
+            	$rootScope.loadingSite=false;
+        },
+        function(error){
+            $rootScope.errors.showErrors = true;
+            $rootScope.errors.showServerError = true;
+            $rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
+            $rootScope.loadingSite=false;
+        });
+    };
+    
     $rootScope.signup = function(){
     	$rootScope.errors.errorMessages=[];
         DAO.save({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller:'arrestedUser', action:'save' , username:$rootScope.user.username, passwordHash:$rootScope.user.passwordHash, passwordConfirm:$rootScope.user.passwordConfirm},

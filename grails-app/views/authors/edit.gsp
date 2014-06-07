@@ -21,7 +21,7 @@
     
     <div>
     <p></p>
-        <a class="btn btn-primary btn-primary" data-ng-click="newAuthors()"><span class="glyphicon glyphicon-plus"></span><g:message code="default.new.label" args="['authors']" default="New authors"/></a>
+        <a class="btn btn-primary btn-primary" data-ng-click="newAuthors()"><span class="glyphicon glyphicon-plus"></span><g:message code="default.new.label" args="['authors','BB']" default="New authors"/></a>
         <a class="btn btn-primary btn-primary" onclick="window.location.href = '#/authors/list'"  title="${message(code: 'default.list.label',args:['Authors'], default: 'List')}"><span class="glyphicon glyphicon-align-justify"></span> 	<g:message code="default.list.label" args="['Authors']" default="List"/></a>
         <a class="btn btn-primary btn-success" data-ng-hide="authors.id"  ng-disabled="authorsForm.$invalid" title="${message(code: 'default.save.label',args:['Authors'], default: 'Save')}" ng-enabled="!authorsForm.$invalid" data-ng-click="manualSaveAuthors()"><span class="glyphicon glyphicon-floppy-disk"></span> <g:message code="default.save.label" args="['Authors']" default="Save"/></a>
         <a class="btn btn-primary btn-success" data-ng-show="authors.id"  ng-disabled="authorsForm.$invalid" title="${message(code: 'default.update.label',args:['Authors'], default: 'Update')}" ng-enabled="!authorsForm.$invalid" data-ng-click="manualSaveAuthors()"><span class="glyphicon glyphicon-floppy-disk"></span> <g:message code="default.update.label" args="['Authors']" default="Update"/></a>
