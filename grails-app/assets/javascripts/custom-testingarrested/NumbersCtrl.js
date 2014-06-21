@@ -71,7 +71,7 @@ function NumbersCtrl(DAO, $scope, $filter, ngTableParams)
 		$scope.loadingSite=true;
 		$scope.numbers = {};
 		$scope.loadingSite=false;
-		window.location.href = "#/numbers/create"
+		window.location.href = "#/numbers/create"		
 	}
 
 	$scope.manualSaveNumbers = function () {
@@ -132,7 +132,7 @@ function NumbersCtrl(DAO, $scope, $filter, ngTableParams)
 			$scope.numbers = result;
 			$scope.flags.save = true;
 			$scope.loadingSite=false;
-			 window.location.href = "#/numbers/edit"
+			window.location.href = "#/numbers/edit"
 		},
 		function (error) {
 			$scope.errors.showErrors = true;

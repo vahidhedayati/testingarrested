@@ -71,7 +71,7 @@ function AuthorsCtrl(DAO, $scope, $filter, ngTableParams)
 		$scope.loadingSite=true;
 		$scope.authors = {};
 		$scope.loadingSite=false;
-		window.location.href = "#/authors/create"
+		window.location.href = "#/authors/create"		
 	}
 
 	$scope.manualSaveAuthors = function () {
@@ -132,7 +132,7 @@ function AuthorsCtrl(DAO, $scope, $filter, ngTableParams)
 			$scope.authors = result;
 			$scope.flags.save = true;
 			$scope.loadingSite=false;
-			 window.location.href = "#/authors/edit"
+			window.location.href = "#/authors/edit"
 		},
 		function (error) {
 			$scope.errors.showErrors = true;

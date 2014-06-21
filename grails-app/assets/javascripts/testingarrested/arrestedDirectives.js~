@@ -54,31 +54,11 @@ testingarrested.directive('loadingContainer', function () {
  };
 });
 
-/*
- * Creating a service alternative method 
- *testingarrested.factory('LangService', function($q, $http) {
-	var service = {
-	 getLang: function() {
-		var d = $q.defer();
-		$http.get('auth/userLocation')
-		.success(function(data, status) {
-			d.resolve(data);
-		}).error(function(data, status) {
-			d.reject(data);
-		});
-		return d.promise;
-      },
-      getLang2: function() {
-    	  var d = $q.defer();
-    	  $http.post('auth/userLocation', {})
-    	  .success(function(data, status) {
-    		  d.resolve(data);
-    	  }).error(function(data, status) {
-    		  d.reject(data);
-    	  });
-    	  return d.promise;
-      }
-   }
-   return service;
- });
- */
+angular.module('testingarrested').factory('LangService',["$http","$rootScope", function($http,$rootScope) {
+   return {
+	getLang: function() {
+	  return $http.get('auth/getLocale').then(function(r) {$rootScope.userLocale= r.data.lang;});
+	}
+  }
+}]);
+

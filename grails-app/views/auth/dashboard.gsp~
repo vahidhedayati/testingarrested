@@ -1,0 +1,25 @@
+<div data-ng-show="errors.showErrors" class="red">
+	<div ng-repeat="error in errors.errorMessages">
+		<strong></strong> <span ng-bind="error"></span>
+	</div>
+</div>
+
+
+<div data-ng-controller="UserCtrl"  data-ng-show="appConfig.token!=''">
+<div class="container" >
+   <div class="row">
+        <div class="col-md-6 col-md-offset-2" >
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  <h1 id="h1Header"><g:message code="default.dashboard.title" args="['{{user.username}}']" default="{{user.username}} Dashboard"/></h1></div>
+                  1 -->    {{myLang}}
+                  <div  data-ng-controller="UserCtrl" data-ng-init="dashboard()">
+                  2 -->    {{myLang1}} | {{myLang2}} | {{myLang}}  |---|{{myLang3}} {{myLang4}}
+                  </div>
+           </div>
+         </div>
+   </div>
+ </div>
+</div>
+ 
+         

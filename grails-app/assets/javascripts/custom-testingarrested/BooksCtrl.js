@@ -71,7 +71,7 @@ function BooksCtrl(DAO, $scope, $filter, ngTableParams)
 		$scope.loadingSite=true;
 		$scope.books = {};
 		$scope.loadingSite=false;
-		window.location.href = "#/books/create"
+		window.location.href = "#/books/create"		
 	}
 
 	$scope.manualSaveBooks = function () {
@@ -132,7 +132,7 @@ function BooksCtrl(DAO, $scope, $filter, ngTableParams)
 			$scope.books = result;
 			$scope.flags.save = true;
 			$scope.loadingSite=false;
-			 window.location.href = "#/books/edit"
+			window.location.href = "#/books/edit"
 		},
 		function (error) {
 			$scope.errors.showErrors = true;

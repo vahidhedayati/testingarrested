@@ -4,6 +4,7 @@ testingarrested.config([
     '$routeProvider',
     function($routeProvider) {
         $routeProvider.
+            when('/dashboard', {templateUrl: '/testingarrested/auth/dashboard', controller: 'UserCtrl'}).
             when('/login', {templateUrl: '/testingarrested/auth/showLogin', controller: 'UserCtrl'}).
             when('/signup', {templateUrl: '/testingarrested/auth/showSignup', controller: 'UserCtrl'}).
             when('/updatepassword', {templateUrl: '/testingarrested/auth/showUpdatePassword', controller: 'UserCtrl'}).

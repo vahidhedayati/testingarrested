@@ -5,6 +5,7 @@
 //= require angular-resource/angular-resource.min
 //= require angular-table/ng-table
 //= require testingarrested/index
+//= require testingarrested/arrestedServices
 //= require testingarrested/services
 //= require testingarrested/arrestedDirectives
 //= require_tree custom-testingarrested

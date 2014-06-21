@@ -1,13 +1,15 @@
 'use strict';
-function UserCtrl($rootScope,$scope, DAO){
+function UserCtrl($rootScope,$scope,LangService,$cacheFactory,$http, DAO){
 	
     if(!$rootScope.appConfig){
+    	
         $rootScope.appConfig = {appName:'testingarrested', token:''};
         $rootScope.user = {username:'', passwordHash:''};
         $rootScope.errors = {selectedController:'', loadingSite: false, forgotPassword:false, showErrors:false, errorMessages:[],showMessage:false, showFunctionError:false, showServerError:false, showPasswordError:false};
     }
 
     function initializeVariables(){
+    	
         $rootScope.appConfig = {appName:'testingarrested', token:''};
         $rootScope.user = {username:'', passwordHash:''};
         $rootScope.errors = {selectedController:'', loadingSite: false, forgotPassword:false, showErrors:false, errorMessages:[],showMessage:false, showFunctionError:false, showServerError:false, showPasswordError:false};
@@ -25,6 +27,13 @@ function UserCtrl($rootScope,$scope, DAO){
       if ($rootScope.selectedController) {
        return $rootScope.selectedController===name;
       }
+    };
+    
+    $rootScope.dashboard=function() { 
+    	$cacheFactory.get('$http').removeAll();
+    	$scope.myLang1='';
+    	$scope.myLang2='aaaa';
+    	$scope.myLang3=LangService.getLang($http);
     };
     
     $rootScope.setLang= function(lang){
