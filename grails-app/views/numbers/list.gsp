@@ -21,9 +21,7 @@
     				<button ng-click="tableParams.sorting({})" class="btn btn-default">Clear sorting</button> 
 					<div loading-container="tableParams.settings().$loading">
                     <table class="table"  ng-table="tableParams" show-filter="true">
-                     
-                        <tr  data-ng-repeat="instance in numberss"   data-ng-click="editNumbers(instance)">
-                        	
+                        <tr  data-ng-repeat="instance in numberss"  data-ng-click="editNumbers(instance)">
                             
                             	
                              		<td data-sortable="'firstNumber'" filter="{'firstNumber':'text'}"  data-title="'firstNumber'"  >
@@ -32,7 +30,6 @@
                             </td>
                             
                         </tr>
-                      
                     </table>
                     </div>
                     

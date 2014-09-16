@@ -1,24 +1,24 @@
 'use strict';
-function NumbersCtrl(DAO, $scope, $filter, ngTableParams)
+function NumbersCtrl(DAO, $rootScope, $scope, $filter, ngTableParams)
 {
-	if ($scope.appConfig) {
-		if (!$scope.appConfig.token!='') {
+	if ($rootScope.appConfig) {
+		if (!$rootScope.appConfig.token!='') {
 			window.location.href = "#/login"
 		}
 	}
 
-	$scope.flags = {save: false};
-	$scope.errors = {loadingSite: false, showErrors: false, showServerError: false,errorMessages:[]};
-	$scope.errorValidation = function(){
-	   $scope.errors = {loadingSite: true};
+	$rootScope.flags = {save: false};
+	$rootScope.errors = {loadingSite: false, showErrors: false, showServerError: false,errorMessages:[]};
+	$rootScope.errorValidation = function(){
+	   $rootScope.errors = {loadingSite: true};
 	};
 	
-	if(!$scope.numbers){
-		$scope.filter = ""
-		$scope.numberss = [];
-		$scope.numbers = {};
+	if(!$rootScope.numbers){
+		$rootScope.filter = ""
+		$rootScope.numberss = [];
+		$rootScope.numbers = {};
 	}
-
+	
 	$scope.tableParams = new ngTableParams({
         page: 1,            // show first page
         count: 10,           // count per page
@@ -48,115 +48,115 @@ function NumbersCtrl(DAO, $scope, $filter, ngTableParams)
     });
 	
 	//Required for dependency lookup 
-	$scope.getAllNumbers = function () {
+	$rootScope.getAllNumbers = function () {
 		//get all
-		$scope.errors.errorMessages=[];
-		DAO.query({appName: $scope.appConfig.appName, token: $scope.appConfig.token, controller: 'numbers', action: 'list'},
-		$scope.loadingSite=true,
+		$rootScope.errors.errorMessages=[];
+		DAO.query({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, controller: 'numbers', action: 'list'},
+		$rootScope.loadingSite=true,
 		function (result) {
-			$scope.numberss = result;
-			$scope.loadingSite=false;   
+			$rootScope.numberss = result;
+			$rootScope.loadingSite=false;   
 			
 		},
 		function (error) {
-			$scope.errors.showErrors = true;
-			$scope.errors.showServerError = true;
-			$scope.errors.errorMessages.push(''+error.status+' '+error.data);
-			$scope.loadingSite=false;
+			$rootScope.errors.showErrors = true;
+			$rootScope.errors.showServerError = true;
+			$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
+			$rootScope.loadingSite=false;
 		});
 	};
 	 
 	
-	$scope.newNumbers = function () {
-		$scope.loadingSite=true;
-		$scope.numbers = {};
-		$scope.loadingSite=false;
+	$rootScope.newNumbers = function () {
+		$rootScope.loadingSite=true;
+		$rootScope.numbers = {};
+		$rootScope.loadingSite=false;
 		window.location.href = "#/numbers/create"		
 	}
 
-	$scope.manualSaveNumbers = function () {
-		$scope.loadingSite=true;
-		$scope.flags.save = false;
-		if ($scope.numbers.id == undefined)
+	$rootScope.manualSaveNumbers = function () {
+		$rootScope.loadingSite=true;
+		$rootScope.flags.save = false;
+		if ($rootScope.numbers.id == undefined)
 		{
-			$scope.saveNumbers();
+			$rootScope.saveNumbers();
 		}
 		else
 		{
-			$scope.updateNumbers();
+			$rootScope.updateNumbers();
 		}
 	}
 
-	$scope.saveNumbers = function () {
-		$scope.errors.errorMessages=[];
-		DAO.save({appName: $scope.appConfig.appName, token: $scope.appConfig.token, instance:$scope.numbers, controller:'numbers', action:'save'},
+	$rootScope.saveNumbers = function () {
+		$rootScope.errors.errorMessages=[];
+		DAO.save({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.numbers, controller:'numbers', action:'save'},
 		function (result) {
-			$scope.numbers = result;
-			$scope.flags.save = true;
-			$scope.loadingSite=false;
+			$rootScope.numbers = result;
+			$rootScope.flags.save = true;
+			$rootScope.loadingSite=false;
 
 		},
 		function (error) {
-			$scope.flags.save = false;
-			$scope.errors.showErrors = true;
-			$scope.errors.showServerError = true;
-			$scope.errors.errorMessages.push(''+error.status+' '+error.data);
-			$scope.loadingSite=false;   
+			$rootScope.flags.save = false;
+			$rootScope.errors.showErrors = true;
+			$rootScope.errors.showServerError = true;
+			$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
+			$rootScope.loadingSite=false;   
 		});
 	}
 
-	$scope.updateNumbers = function () {
-		$scope.errors.errorMessages=[];
-		DAO.update({appName: $scope.appConfig.appName, token: $scope.appConfig.token, instance:$scope.numbers, controller:'numbers', action:'update'},
-		$scope.loadingSite=true,
+	$rootScope.updateNumbers = function () {
+		$rootScope.errors.errorMessages=[];
+		DAO.update({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.numbers, controller:'numbers', action:'update'},
+		$rootScope.loadingSite=true,
 		function (result) {
-			$scope.numberss = result;
-			$scope.flags.save = true;
-			$scope.loadingSite=false;
+			$rootScope.numberss = result;
+			$rootScope.flags.save = true;
+			$rootScope.loadingSite=false;
 			window.location.href = "#/numbers/list"
 		},
 		function (error) {
-			$scope.flags.save = false;
-			$scope.errors.showErrors = true;
-			$scope.errors.showServerError = true;
-			$scope.errors.errorMessages.push(''+error.status+' '+error.data);
-			$scope.loadingSite=false;
+			$rootScope.flags.save = false;
+			$rootScope.errors.showErrors = true;
+			$rootScope.errors.showServerError = true;
+			$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
+			$rootScope.loadingSite=false;
 		});
 	}
 
-	$scope.editNumbers = function (numbers){
-		$scope.errors.errorMessages=[];
-		DAO.get({appName: $scope.appConfig.appName, token: $scope.appConfig.token, instance:$scope.numbers, id: numbers.id, controller:'numbers', action:'show'},
-		$scope.loadingSite=true,
+	$rootScope.editNumbers = function (numbers){
+		$rootScope.errors.errorMessages=[];
+		DAO.get({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.numbers, id: numbers.id, controller:'numbers', action:'show'},
+		$rootScope.loadingSite=true,
 		function (result) {
-			$scope.numbers = result;
-			$scope.flags.save = true;
-			$scope.loadingSite=false;
+			$rootScope.numbers = result;
+			$rootScope.flags.save = true;
+			$rootScope.loadingSite=false;
 			window.location.href = "#/numbers/edit"
 		},
 		function (error) {
-			$scope.errors.showErrors = true;
-			$scope.errors.showServerError = true;
-			$scope.errors.errorMessages.push('Error: '+error.status+' '+error.data);
-			$scope.loadingSite=false;
+			$rootScope.errors.showErrors = true;
+			$rootScope.errors.showServerError = true;
+			$rootScope.errors.errorMessages.push('Error: '+error.status+' '+error.data);
+			$rootScope.loadingSite=false;
 		});
 	}
 
-	$scope.confirmDeleteNumbers = function () {
-		$scope.errors.errorMessages=[];
-		DAO.delete({appName: $scope.appConfig.appName, token: $scope.appConfig.token, instance:$scope.numbers, id: $scope.numbers.id, controller:'numbers', action:'delete'},
-		$scope.loadingSite=true,
+	$rootScope.confirmDeleteNumbers = function () {
+		$rootScope.errors.errorMessages=[];
+		DAO.delete({appName: $rootScope.appConfig.appName, token: $rootScope.appConfig.token, instance:$rootScope.numbers, id: $rootScope.numbers.id, controller:'numbers', action:'delete'},
+		$rootScope.loadingSite=true,
 		function (result) {
-			//$scope.numberss = result;
-			$scope.flags.save = true;
-			$scope.loadingSite=false;
+			//$rootScope.numberss = result;
+			$rootScope.flags.save = true;
+			$rootScope.loadingSite=false;
 			window.location.href = "#/numbers/list"
 		},
 		function (error) {
-			$scope.errors.showErrors = true;
-			$scope.errors.showServerError = true;
-			$scope.errors.errorMessages.push(''+error.status+' '+error.data);
-			$scope.loadingSite=false;
+			$rootScope.errors.showErrors = true;
+			$rootScope.errors.showServerError = true;
+			$rootScope.errors.errorMessages.push(''+error.status+' '+error.data);
+			$rootScope.loadingSite=false;
 		});
 	}
 }
