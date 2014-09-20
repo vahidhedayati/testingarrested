@@ -62,6 +62,13 @@
 		<small class="error" ng-show="!authorsForm.surName.$pristine && authorsForm.surName.$invalid"><g:message code="default.invalid.label" args="['surName']" default=" Invalid surName : "/> </small></div></div>
         </div>
         
+        <div class="form-group">
+            <label class="control-label" for="testDate">
+                testDate 
+            </label>
+            <input type="date" name="testDate" precision="null" data-ng-model='authors.testDate' />
+        </div>
+        
         
     </div>
     </div>

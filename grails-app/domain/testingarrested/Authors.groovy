@@ -2,6 +2,7 @@ package testingarrested
 
 class Authors {
 
+	Date testDate
 	String firstName
 	String surName
 	String emailAddress

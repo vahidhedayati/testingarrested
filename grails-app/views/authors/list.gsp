@@ -41,6 +41,12 @@
                             	{{instance.surName}}
                             </td>
                             
+                            	
+                            		<td data-sortable="'testDate'"  data-title="'testDate'"  >
+                            	
+                            	{{instance.testDate}}
+                            </td>
+                            
                         </tr>
                     </table>
                     </div>

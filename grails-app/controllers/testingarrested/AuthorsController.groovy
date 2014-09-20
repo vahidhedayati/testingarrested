@@ -3,9 +3,11 @@ package testingarrested
 import grails.converters.JSON
 import grails.converters.XML
 import arrested.ArrestedController
-
+import java.text.SimpleDateFormat
 class AuthorsController extends ArrestedController {
 
+    def grailsApplication
+    
     static allowedMethods = [show: "GET", list: "GET", save: "POST", update: "PUT", delete: "DELETE"]
 	def listing() { 
 		withFormat {
@@ -55,11 +57,21 @@ class AuthorsController extends ArrestedController {
 		if (request.JSON.instance) {
 			def data = request.JSON.instance
 			Authors instance = new Authors() 
-						if(data.emailAddress) instance.emailAddress = data.emailAddress
 						
-						if(data.firstName) instance.firstName = data.firstName
+						  if(data.emailAddress) instance.emailAddress = data.emailAddress 
 						
-						if(data.surName) instance.surName = data.surName
+						
+						
+						  if(data.firstName) instance.firstName = data.firstName 
+						
+						
+						
+						  if(data.surName) instance.surName = data.surName 
+						
+						
+						 
+						  if(data.testDate) instance.testDate = setDate(data.testDate)
+						
 						
 
             if(instance.save(flush: true)){
@@ -93,6 +105,8 @@ class AuthorsController extends ArrestedController {
                             if(data.firstName) instance.firstName = data.firstName
                             
                             if(data.surName) instance.surName = data.surName
+                            
+                            if(data.testDate) instance.testDate = data.testDate
                             if(instance.save(flush: true)){
                     withFormat {
                         xml {
@@ -132,5 +146,9 @@ class AuthorsController extends ArrestedController {
         else{
 			renderMissingParam("${message(code: 'default.id.missing.label', default: 'id missing')}")
         }
+    }
+    private setDate (String d) {
+      String dFormat=grailsApplication?.config.arrested.dateFormat ?: 'dd/MM/yyyy'
+      return (new SimpleDateFormat(dFormat)).parse(d)
     }
 }
