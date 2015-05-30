@@ -1,6 +1,76 @@
 
 ## You can watch this video to help understand what you are about to do : [arrested website video](https://www.youtube.com/watch?v=popG4gucZ0Y)
 
+#### How to upgrade to any other grails
+
+```
+me:~$ git clone https://github.com/vahidhedayati/testingarrested
+
+Cloning into 'testingarrested'...
+
+remote: Counting objects: 927, done.
+
+remote: Total 927 (delta 0), reused 0 (delta 0), pack-reused 927
+
+Receiving objects: 100% (927/927), 2.27 MiB | 273.00 KiB/s, done.
+
+Resolving deltas: 100% (491/491), done.
+
+Checking connectivity... done.
+
+me:~$ cd testingarrested
+
+me:~/testingarrested$ cat application.properties 
+
+#Grails Metadata file
+
+#Tue May 27 20:14:40 BST 2014
+
+app.grails.version=2.4.0
+
+app.name=testingarrested
+
+app.version=0.1
+
+me:~/testingarrested$ vi application.properties 
+
+me:~/testingarrested$ cat application.properties 
+
+#Grails Metadata file
+
+#Tue May 27 20:14:40 BST 2014
+
+app.grails.version=2.5.0
+
+app.name=testingarrested
+
+app.version=0.1
+
+me:~/testingarrested$ cd ..
+
+me:~$ grails -version
+
+Grails version: 2.5.0
+
+| Created Grails Application at /home/mx1/Documents/g5/someapp
+
+me:~$ cd testingarrested
+
+me:~/testingarrested$ vi grails-app/conf/BuildConfig.groovy 
+
+
+added 
+compile ':arrested:1.39'
+
+
+now run-app has started:
+
+
+So all I did was update application.properties everything is the same besides BuildConfig.groovy which was from another default app created under grails 2.5.0 with the new plugin added to it for this project
+
+
+```
+
 ### For screen shots check out [wiki](https://github.com/vahidhedayati/testingarrested/wiki)
 
 Step 1: create a grails application
